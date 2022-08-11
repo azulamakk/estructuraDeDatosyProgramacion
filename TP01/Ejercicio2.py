@@ -16,16 +16,20 @@ listaDatos = [
     ["15435", "gmagal@itba.edu.ar", "Magallanes", "Gustavo"]
 ]
 
+extensionLista = len(listaDatos)
+
 def mostrarFichas(desde, hasta):
-    if desde < 0 or desde > len(listaDatos) or hasta < 0 or hasta > len(listaDatos) or desde > hasta:
+    if desde < 0 or desde > extensionLista or hasta < 0 or hasta > extensionLista or desde > hasta:
         print("Nada que ver")
         exit()
     else:
+        diferencia = desde - hasta
         while desde <= hasta:
             n = 0
             campo = ""
-            while n < len(listaCampos[0]):
+            for n in diferencia:
                 campo = str(listaCampos[n]) + ": " + str(listaDatos[desde][n]) + " " + campo
+                n += 1
             print(campo)
             desde += 1
 
