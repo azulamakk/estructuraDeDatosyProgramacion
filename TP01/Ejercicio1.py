@@ -14,8 +14,6 @@ def pedir_registro() :
         DNI=str(input("ingrese DNI: "))
         
     Codigo=(str(input("Empleado: "))).upper()
-    # while len(Codigo)!=5:
-    #     Codigo=(str(input("Empleado: "))).upper()
     for i in range(0,3):
         while ord(Codigo[i])<65 or ord(Codigo[i])>90:
             Codigo=(str(input("Empleado: "))).upper()
@@ -28,7 +26,6 @@ def pedir_registro() :
         Tipo=(str(input("Tipo: "))).upper()
 
     Item=DNI+Codigo+Tipo
-    #Datos.append(Item)
     print("El numero de tramite es: ",Item)
     return Item
 

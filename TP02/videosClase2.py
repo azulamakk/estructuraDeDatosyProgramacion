@@ -25,12 +25,12 @@ frase = "Anita lava la tina"
 # lista = frase.split()
 # print(lista)
 
-# fecha = "11.03/2022"
-# listaFecha = fecha.split("/")
-# print(listaFecha)
+fecha = "11.03/2022"
+listaFecha = fecha.split("/")
+print(listaFecha)
 
-# frase1 = ".".join(listaFecha)
-# print(frase1)
+frase1 = ".".join(listaFecha)
+print(frase1)
 # print(type(frase1))
 
 # print(frase.isdigit())
