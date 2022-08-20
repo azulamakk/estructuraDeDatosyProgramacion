@@ -13,6 +13,7 @@ class empleado(persona):
 class manager(empleado):
     def __init__(self, nombre, ident, edad, sexo, cargo, salario, legajo):
         empleado.__init__(self, nombre, ident, edad,sexo,cargo, salario,legajo)
+        persona.__init__(self,nombre,ident,edad,sexo)
 
 if __name__ == "main":
     azul=empleado("azul", 123456, 20, "F", "Gerente", 500000, 1121)   
