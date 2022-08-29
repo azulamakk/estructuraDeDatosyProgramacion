@@ -8,3 +8,6 @@ for i in range(len(listaNombres)):
     listaSaludos.append("Hola {}".format(listaNombres[i]))
 print(listaSaludos)
 
+listaNueva=list(map(lambda dato: 'Hola '))
+
+#Terminar

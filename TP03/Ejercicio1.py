@@ -1,8 +1,8 @@
 # Realizar una función anónima que tenga como parámetro z y 
 # regrese el valor de z al cuadrado. Realice elllamado de la función anónima correctamente y visualice la respuesta obtenida
 
-def elevado(z):
-    return z*z
+square = lambda x: str(x) + ' elevado al cuadrado es igual a'
 
-z=2
-print("{} elevado al cuadrado es {}".format(z,elevado(z)))
+print(square)
+
+#Terminar

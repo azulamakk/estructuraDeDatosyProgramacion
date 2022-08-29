@@ -9,17 +9,28 @@
 # - Método que permita determinar que materias dicta un profesor.
 # Una vez expuestos los diseños de las diferentes empresas, se escogerá un solo diseño, el cual deberá serimplementado por las empresas
 
+from materias import materias
+from alumnos import alumnos
+from alumnos import listadoAlumnos
+from materias import listadoMaterias
 
-class alumnos():
-    def __init__(self, nombre, apellido, tipoDocumento, nroDocuemnto, legajo, nacionalidad, planDeEstudio):
-        self.nombre=nombre
-        self.apellido=apellido
-        self.tipoDocumento=tipoDocumento
-        self.nroDocumento=nroDocuemnto
-        self.legajo=legajo
-        self.nacionalidad=nacionalidad
-        self.planDeEstudio=planDeEstudio
-        
+class planDeEstudios():
+    def __init__(self, codigo, creditosTotales, carrera):
+        self.codigo=codigo
+        self.creditosTotales=creditosTotales
+        self.carrera=carrera
+
+#def alumnosDeUnaMateria(codigoMateria):
+    # resultadoBusqueda=[]
+    # for i in range(len(listadoMaterias)):
+    #     legajoDeAlumnoInscripto= listadoMaterias[len(listadoMaterias)-1]
+    #     if codigoMateria == listadoMaterias[i]:
+    #         for j in range(len(listadoAlumnos)): 
+    #             if alumnos.legajoAlumno == legajoDeAlumnoInscripto:
+    #             resultadoBusqueda.append(listadoAlumnos[j])
+
+#print(resultadoBusqueda)
+
+def materiasDeUnProfesor(legajoProfesor):
     
-
-
+    return
