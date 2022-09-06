@@ -13,3 +13,4 @@ class materias(profesores):
         self.departamento=departamento
         profesores.__init__(self, legajoProfesor)
         alumnos.__init__(self, legajoAlumno)
+
