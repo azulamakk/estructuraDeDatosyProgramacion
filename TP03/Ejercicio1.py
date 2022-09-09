@@ -3,6 +3,4 @@
 
 square = lambda x: str(x) + ' elevado al cuadrado es igual a'
 
-print(square)
-
-#Terminar
+print(square(6))
