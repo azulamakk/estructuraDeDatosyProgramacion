@@ -1,30 +1,23 @@
-
-
-
-class alumnos():
-    listadoAlumnos=[]
-    listaLegajos=[]
-    def __init__(self, nombre, apellido, tipoDocumento, nroDocuemnto, legajoAlumno, nacionalidad, planDeEstudio):
-        self.nombre=nombre
-        self.apellido=apellido
-        self.tipoDocumento=tipoDocumento
-        self.nroDocumento=nroDocuemnto
-        self.legajoAlumno=int(input('Ingrese el legajo del alumno: '))
-        self.nacionalidad=nacionalidad
-        self.planDeEstudio=planDeEstudio
-        while self.legajoAlumno in alumnos.listaLegajos:
-            print('El legajo ingresado ya se encuentra en el sistema, intriduzca otro')
+class Alumnos():
+    listaAlumnos = []
+    listaLegajos = []
+    def __init__( self ):
+        self.nombre   = input('Ingrese el nombre del alumno: ')
+        self.legajo   = int(input('Ingrese el legajo del alumno: '))
+        self.materias = input('Ingrese las materias que cursa el alumno: ').split(',')
+        while self.legajo in Alumnos.listaLegajos:
+            print('El legajo ingresado ya se encuentra en el sistema, introduzca otro')
             self.legajo = int(input('Ingrese el legajo del alumno: '))
         else:
-            alumnos.listaLegajos.append(self.legajo)
-            alumnos.listadoAlumnos.append(self)
-
-    @classmethod
-    def listadoAlumnos(self):
-        return alumnos.listadoAlumnos
-
+            Alumnos.listaLegajos.append(self.legajo)
+            Alumnos.listaAlumnos.append(self)
+            
+    @classmethod #-- si usamos el classmethod no tenemos que pasarle la clase cuando llamamos a la funcion-- porque es una funcion directa de la clase y no sobre el objeto
+    def listaDeAlumnos( self ):
+        return Alumnos.listaAlumnos
+    
     def mostrarAlumnos(self):
         detalleAlumnos = {}
-        for alumno in alumnos.listadoAlumnos():
-            detalleAlumnos[alumno.legajoAlumno] = alumno.materias
+        for alumno in Alumnos.listaDeAlumnos():
+            detalleAlumnos[alumno.legajo] = alumno.materias
         return detalleAlumnos
