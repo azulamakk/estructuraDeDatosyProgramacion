@@ -21,3 +21,4 @@ def moverCeros(vector):
 
 
 print(moverCeros(vector))
+print(type(vector))
