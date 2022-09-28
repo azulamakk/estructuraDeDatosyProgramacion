@@ -3,7 +3,7 @@
 # sin importar el orden de los elementos.
 
 vectores =('i', [121, 144, 19, 161, 19, 144, 19, 11])
-vector = ('i',[121, 14641, 20736, 361, 25921, 361, 20739, 361])
+vector = ('i',[121, 14641, 20736, 361, 25921, 361, 20736, 361])
 
 numerosOriginales=vectores[1]
 numerosCuadrados=vector[1]
