@@ -37,11 +37,11 @@ def agregarMateria():
     return materia
 
 
-def legajoExiste(legajoIngresado):
-    for profesor in listaProfesores.legajo:
-        if legajoIngresado == profesor.legajo:
-            return True
-    return False
+# def legajoExiste(legajoIngresado):
+#     for profesor in listaProfesores:
+#         if legajoIngresado == profesor.legajo:
+#             return True
+#     return False
 
 def codigoExiste(legajoIngresado):
     for materia in listaMaterias:

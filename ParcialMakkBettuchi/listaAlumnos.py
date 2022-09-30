@@ -43,11 +43,11 @@ def agregarAlumno():
 
     return alumno
 
-def codigoExiste(legajoIngresado):
-    for materia in listaMaterias:
-        if legajoIngresado == materia.codigo:
-            return True
-    return False
+# def codigoExiste(legajoIngresado):
+#     for materia in listaMaterias:
+#         if legajoIngresado == materia.codigo:
+#             return True
+#     return False
 
 def quitarAlumno(legajoIngresado):
     for alumno in listaAlumnos:
