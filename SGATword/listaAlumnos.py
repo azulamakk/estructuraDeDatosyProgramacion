@@ -36,12 +36,6 @@ def legajoExiste(legajoIngresado):
             return True
     return False
 
-def legajoExiste(legajoIngresado):
-    for alumno in listaAlumnos:
-        if legajoIngresado == alumno.legajo:
-            return True
-    return False
-
 def listarAlumnos():
     for alumno in listaAlumnos:
         print(alumno)

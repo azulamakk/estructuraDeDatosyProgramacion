@@ -5,12 +5,12 @@ from listaMaterias import *
 
 #Primero se cargan los profesores, despues las materias y al final los alumnos
 opcionIngresada= input('''
-1. Cargar alumno
-2. Listar alumnos
-3. Cargar Profesor
-4. Listar Profesores
-5. Cargar Materias
-6. Listar Materias
+1. Cargar Profesor
+2. Listar Profesores
+3. Cargar Materias
+4. Listar Materias
+5. Cargar alumno
+6. Listar alumnos
 7. Ver Profesores de un Alumno
 8. Ver Materias de un Profesor
 9. Finalizar
@@ -23,20 +23,20 @@ opcionIngresada=int(opcionIngresada)
 
 while opcionIngresada != 9:
     if opcionIngresada == 1:
+        agregarProfesor()
+    elif opcionIngresada == 2:
+        listarProfesores()
+    elif opcionIngresada == 3:
+        materia = agregarMateria() #Agregamos una materia
+        agregarMateriaAProfesor(materia.profesor, materia.codigo)
+    elif opcionIngresada == 4:
+        listarMaterias()
+    elif opcionIngresada == 5:
         alumno = agregarAlumno()
         for materia in alumno.materias:
             agregarAlumnoAMateria(alumno.legajo, materia)
-    elif opcionIngresada==2:
+    elif opcionIngresada==6:
         listarAlumnos()
-    elif opcionIngresada == 3:
-        agregarProfesor()
-    elif opcionIngresada == 4:
-        listarProfesores()
-    elif opcionIngresada == 5:
-        materia = agregarMateria() #Agregamos una materia
-        agregarMateriaAProfesor(materia.profesor, materia.codigo)
-    elif opcionIngresada == 6:
-        listarMaterias()
     elif opcionIngresada == 7:   
         legajoIngresado=input('Ingrese el legajo del alumno: ')
         while legajoIngresado.isnumeric() == False:
