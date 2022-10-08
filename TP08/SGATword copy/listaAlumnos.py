@@ -19,7 +19,7 @@ def agregarAlumno():
     materia=input('Por favor ingrese las materias que esta cursando. Presione enter cuando haya finalizado: ')
 
     while materia != '':
-        if materia.isnumeric() == False or codigoExiste(int(materia))==False:
+        if materia.isnumeric() == False:
             print('Ingrese un codigo de materia valido y no repetido: ')
             return
         materia=int(materia)
@@ -31,7 +31,7 @@ def agregarAlumno():
     materiaAyudantia = input('Por favor ingresar las materias en la que es ayudante: ')
 
     while materiaAyudantia != '':
-        if materiaAyudantia.isnumeric() == False or codigoExiste(int(materiaAyudantia))==False:
+        if materiaAyudantia.isnumeric() == False:
             print('Ingrese un codigo de materia valido y no repetido: ')
             return
         materiaAyudantia=int(materiaAyudantia)

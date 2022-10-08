@@ -54,24 +54,6 @@ def quitarProfesores(legajoIngresado):
                     print('Profesor no puede ser eliminado. No pueden quedar materias sin profesor. Revise la materia {}'.format(materia))
             listaProfesores.pop(profesor)
 
-def obtenerAyudantesXProfesor(materias): #Recibe una lista
-    ayudantesDeProfesor=[]
-    for alumno in listaAlumnos:
-        if alumno.materia == materias.codigo:
-            ayudantesDeProfesor.append(alumno)
-
-
-
-
-# def obtenerAyudantesDeProfesor(legajoProfesor):
-#     listadoAyudantesXProfesor=[]  
-#     for profesor in listaProfesores:
-#         if profesor.legajo == legajoProfesor:
-#             materias= profesor.materias
-#             for materia in listaMaterias:
-#                 if materia.codigo == materias:
-#                     for ayudantes in materias.ayudantes:
-#                         listadoAyudantesXProfesor.append(ayudantes.legajo) 
 
 
                 
