@@ -25,7 +25,7 @@
 
 # y=math.pi
 
-class persona():
+class Persona():
     def __init__(self, nombre, ident, edad, sexo):
         self.nombre=nombre
         self.ident=ident
@@ -40,7 +40,7 @@ class persona():
     def mayorEdad(self):
         return self.edad>21
     
-azul=persona("Azul", 123456, 20, "F")
+azul=Persona("Azul", 123456, 20, "F")
 azul.edad=21
 print(azul)
 print(azul.mayorEdad)

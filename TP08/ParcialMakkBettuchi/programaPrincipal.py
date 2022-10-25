@@ -1,5 +1,5 @@
 
-
+from operator import le
 from listaAlumnos import *
 from listaProfesores import *
 from listaMaterias import *
