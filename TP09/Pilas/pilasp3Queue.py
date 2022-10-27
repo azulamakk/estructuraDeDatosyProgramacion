@@ -4,7 +4,7 @@
 from queue import Queue
 
 # Inicializar la pila
-stack =Queue(maxsize=0)
+stack =Queue(maxsize=0) #No tiene techo
 
 stack.put_nowait('8')
 stack.put_nowait('28')

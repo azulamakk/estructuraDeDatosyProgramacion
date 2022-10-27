@@ -13,16 +13,16 @@ class Cola():
     def __init__(self):
         self.headvalue=None
         self.len=0
-        self.bottonvalue=None
+        self.bottomvalue=None
     
     def encolar(self, nodo:Nodo):
         nodo=Nodo(nodo)
         if (self.len==0):
             self.headvalue=nodo
-            self.bottonvalue=nodo
+            self.bottomvalue=nodo
         else:
-            self.bottonvalue
-            nodo.prox=self.headvalue
+            self.bottomvalue
+            nodo.next=self.headvalue
             self.headvalue=nodo
         
         self.len+=1
@@ -33,9 +33,9 @@ class Cola():
         else:
             nodo=self.headvalue
             for i in range(self.len-2):
-                nodo=nodo.prox
-            self.bottonvalue=nodo
-            nodo.prox=None
+                nodo=nodo.next
+            self.bottomvalue=nodo
+            nodo.next=None
         
     def __str__(self):
         nodo=self.headvalue
@@ -45,20 +45,20 @@ class Cola():
         else:
             while(nodo!=None):
                 cadena+=str(nodo.dato)+'\t'
-                nodo=nodo.prox
+                nodo=nodo.next
             return cadena
 
 if __name__=='__main__':
 
     cola=Cola()
-    cola.encolar(2)
-    cola.encolar(4)
-    cola.encolar(6)
+    cola.encolar(str(2))
+    cola.encolar(str(4))
+    cola.encolar(str(6))
     print(cola)
     print('Cabeza: ', cola.headvalue)
-    print('Valor de abajo: ', cola.bottonvalue)
+    print('Valor de abajo: ', cola.bottomvalue)
 
     cola.desencolar()
     print(cola)
 
-    print('Valor de abajo: ', cola.bottonvalue)
+    print('Valor de abajo: ', cola.bottomvalue)

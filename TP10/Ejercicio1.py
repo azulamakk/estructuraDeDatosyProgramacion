@@ -1,63 +1,27 @@
-from nodo import *
+# Crear una clase persona sino lo ha hecho, la cual tiene como atributos el nombre (string), un id(int) y laedad(int), 
+# a partir de la cual se defina un Conjunto (set) de personas dentro de una función main().Se deben crear 4 personas 
+# las cuales se deberán añadir al Conjunto. Una vez añadidas 
+# las 4 personas alConjunto se debe visualizar el Conjunto total usando :el método __str__ ( de la clase persona)
 
-class Cola:
-    def __init__(self):
-        self.head=None
-        self.tail=None
-        self.len=0
+class Persona:
+    def __init__(self, nombre, id, leaedad):
+        self.nombre=str(nombre)
+        self.id=int(id)
+        self.leaedad=int(leaedad)
     
-    def encolar(self, nodo:Nodo): #Para agregar elementos al final
-        if self.len==0:
-            self.head=nodo
-            self.tail=nodo
-        else:
-            nodoParaMoverse=Nodo()
-            nodoParaMoverse=self.head
-            while nodoParaMoverse.next!=None:
-                nodoParaMoverse=nodoParaMoverse.next
-            nodoParaMoverse.next=nodo
-        self.len+=1
+    def __str__(self, conjunto):
+        return conjunto
 
-    def desencolar(self):
-        nodo=Nodo()
-        nodo=self.head
-        self.head=nodo.next # Elimino el primero
-        self.len-=1
+conjunto={}
+persona1=Persona('aaa', 1111, 20)
+persona2=Persona('bbb', 2222, 20)
+persona3=Persona('ccc', 3333, 20)
+persona4=Persona('ddd', 4444, 20)
+conjunto.update(persona1)
+conjunto.update(persona2)
+conjunto.update(persona3)
+conjunto.update(persona4)
 
-    def esVacia(self):
-        if self.len==0:
-            return "Cola vacia"
-        else:
-            return "Cola no vacia"
-        
-    def __str__(self):
-        nodo=self.head
-        cadena=""
-        if self.len==0:
-            return "Lista vacia"
-        else: 
-            while nodo!=None:
-                cadena+=str(nodo.dato)+'\t'
-                nodo=nodo.next
-            return cadena
-            
-    def longitud(self):
-        return self.len
-
-cola1=Cola()
-print(cola1.esVacia())
-nodo1=Nodo(3)
-cola1.encolar(nodo1)
-print(cola1)
-print(cola1.esVacia())
-nodo2=Nodo(6)
-cola1.encolar(nodo2)
-print(cola1)
-nodo1=Nodo(9)
-cola1.encolar(nodo1)
-print(cola1)
-cola1.desencolar()
-print(cola1)
-print(cola1.longitud())
-
+if __name__=='__main__':
+    persona=Persona()
 

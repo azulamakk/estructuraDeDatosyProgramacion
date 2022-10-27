@@ -1,0 +1,31 @@
+Punto 1 y 2: ok
+agrega codigo materia y varios profesores dictan una materia
+Punto 3:
+- Agregar Profesores ok : Al validar dice intentelo nuevamente permite el ingreso de un valor pero sale al menu. Debería decir el mensaje y salir 
+- Agrega materias:
+ No funcionaba al recorrer la lista se equivocaron y se movian solo por los legajos, al corregirlo funciona ok
+escrita por ustedes for profesor in listaProfesores.legajo:
+correcta: for profesor in listaProfesores:
+- Al visualizar materias en el str usaron un print que no funciona porque no es lo esperado por este metodo debian usar return y devolver la cadena con la informacion. Al arreglarlo no muestra los profesores aunque ya los pidio, esto sucede porque cuando crea la materia no entran los profesores en el init. Esto es el init de materia que usted hizo:
+def _init_(self, codigo, nombre, creditos):
+- Agregar Alumno : mal, comete el mismo error al recorrer la lista y verificar si el alumno esta.
+- Pide las materias al estudiante y no las agrega a la lista de las materias por estudiante materiasCursada, la cual siempre es vacia
+- Al tratar de agregar al alumno las materias nunca lo podra hacer porque la lista de materias siempre sera vacia y por tanto el codigo siguiente nunca se ejecuta:
+for materia in alumno.materias:
+      agregarAlumnoAMateria(alumno.legajo, materia)
+- Eliminar profesor no funciona porque nunca le agrego materias
+- Eliminar estudiante tampoco funciona porque nunca le agregó materias
+Punto 4:
+Debia crear la lista de ayudantes, usando el concepto de herencia que no lo hizo. Crea la lista sin tener en cuenta lo pedido ,no visualiza la lista creada.
+Punto 5:
+- No podra verse porque nunca agrega materias a la lista del alumno y no hizo listas enlazadas
+Punto 6:
+- cargar notas
+Punto 7:
+No hizo graficas
+Punto 8:
+No hizo graficas
+Punto 9:
+Devuelve una lista vacia con las materias del profesor, por tanto no podra cargarle los ayudantes y al querer buscar los alumnos en la lista de alumnos usa una variable que no existe no crea correctamente lo pedido
+
+Nota: 4/10 -nota minima de aprobacion: 5-

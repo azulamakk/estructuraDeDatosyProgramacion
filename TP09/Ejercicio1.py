@@ -1,13 +1,7 @@
 # Implemente la clase Pila, como una secuencia de nodos anidados. 
 # En esta implementación el constructor dela clase lista almacena la dirección al nodo cima.Los métodos de la clase Pila a realizar son: 
 # apilar, desapilar, esVacia, visualizar Pila
-
-class Nodo:
-    def __init__(self, dato):
-        self.dato=dato
-        self.next=None
-    def __str__(self):
-        return self.dato
+from nodo import *
 
 class Pila:
     def __init__(self):
@@ -25,7 +19,7 @@ class Pila:
         if (self.esVacia()):
             self.headvalue=nodo
         else:
-            nodo.prox=self.headvalue
+            nodo.next=self.headvalue
             self.headvalue=nodo
         self.len+=1
     
@@ -34,18 +28,18 @@ class Pila:
             print('No hay elementos por desapilar')
         else:
             nodo=self.headvalue
-            self.headvalue=nodo.prox
+            self.headvalue=nodo.next
             self.len-=1
         
     def __str__(self):
-        noso=self.headvalue
+        nodo=self.headvalue
         cadena=''
         if self.len==0:
             return 'Lista vacia'
         else:
             while (nodo!=None):
                 cadena+=str(nodo.dato)+'\t'
-                nodo=nodo.prox
+                nodo=nodo.next
             return cadena
     
     def esVacia(self):

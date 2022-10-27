@@ -1,7 +1,7 @@
 import sys
 import os.path
 
-sys.path.append('/Users/azulmakk/Desktop/Estructura de Datos/TP03/claseTeorica1208.py')
+sys.path.append('/Users/azulmakk/Desktop/Estructura de Datos')
 from TP03.claseTeorica1208 import *
 
 # Primera forma de crear un diccionario
@@ -55,3 +55,28 @@ print(diccionario1.items())
 
 for keys, values in diccionario1:
     print(keys, '------->', values)
+
+# Metodos
+# get()
+print(diccionario1.get(11))
+print(diccionario1.get(11, 'La clave no existe en el diccionario'))
+
+# setdefault()
+valor=diccionario1(11, 'empiezo a existir')
+print(valor)
+
+print(diccionario1.get(11))
+
+# Eliminar clave - valor del diccionario
+# Metodolo del
+del diccionario['ninfa']
+print(len(diccionario))
+print(diccionario.get('ninfa'))
+
+# Metodo pop
+valor=diccionario1.pop(10)
+print(valor)
+print(len(diccionario1))
+
+diccionario.clear()
+print(diccionario)
