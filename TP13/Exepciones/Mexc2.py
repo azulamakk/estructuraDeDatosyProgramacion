@@ -1,8 +1,8 @@
 def divide(x,y):
     try:
         resultado=x/y
-    except ZeroDivisionError:
-        print("Division por Cero")
+    except TypeError:
+        print("Ingrese caracteres validos")
     else:
         print(resultado)
     finally:

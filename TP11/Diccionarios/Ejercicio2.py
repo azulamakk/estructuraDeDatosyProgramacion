@@ -1,0 +1,19 @@
+# Realizar una función que dada una lista de palabras y un diccionario que contiene cuantos puntos vale cada
+# letra, devolver la palabra cuyo puntaje sea máximo.El puntaje total, 
+# se calcula sumando los puntajes de cada una de las letras que la componen 
+# (de manera similar a la del juego Scrabble'’).Las letras que no están en el diccionario otorgan 1 punto cada una.
+# Las letras que sí están en el diccionario otorgan el valor indicado en el diccionario
+
+puntajesYLetras=dict()
+puntajesYLetras={'a':2,'n':3,'f': 5,'z':5}
+
+palabras=['cono','mazazo','fanzine','fhan','marsupial']
+
+for i in range(len(palabras)):
+    puntajeTotal=[]
+    for j in range(len(palabras[i])):
+        for t in range(len(puntajesYLetras)):
+            if palabras[i][j]==puntajesYLetras[t][0]:
+                puntajeTotal[i]+=puntajesYLetras[t][1]
+
+print(puntajeTotal)
