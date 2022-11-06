@@ -19,8 +19,8 @@ import csv
 # Crear archivo con columnas
 
 with open('/Users/azulmakk/Desktop/Estructura de Datos/TP13/archivoEjemploCSV.csv','w', newline='') as csvFile:
-    encabezados=['NOMBRE', ('APELLIDO', 'RESOLTADO')]
-    writer=csv.DictWriter(csvFile, fieldNames=encabezados)
+    encabezados=['NOMBRE', 'APELLIDO', 'RESULTADO']
+    writer=csv.DictWriter(csvFile, fieldnames=encabezados)
     writer.writeheader()
     writer.writerow(
         {'NOMBRE':'Ninfa',
