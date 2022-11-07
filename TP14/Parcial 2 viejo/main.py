@@ -7,7 +7,7 @@ from opcion3 import *
 from opcion4 import *
 from opcion5 import *
 from opcion6 import *
-from opcion7 import *
+from punto9y10 import *
 
 start = time.process_time()
 
@@ -94,7 +94,7 @@ def menuPrincipal(opcionIngresada):
             exit()
 
     if opcionIngresada == 9:
-        print('Opcion elegida: 9')
+        ladoIzquierdo()
         if ingresoNuevo()==True:
             opcionElegida=int(ingresoOpcion())
             menuPrincipal(opcionElegida)
@@ -102,7 +102,7 @@ def menuPrincipal(opcionIngresada):
             exit()
 
     if opcionIngresada == 10:
-        print('Opcion elegida: 10')
+        ladoDerecho()
         if ingresoNuevo()==True:
             opcionElegida=int(ingresoOpcion())
             menuPrincipal(opcionElegida)

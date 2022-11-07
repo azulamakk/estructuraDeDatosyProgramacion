@@ -1,4 +1,22 @@
 import csv
+import datetime
+
+def parseDate(date, time):
+    try:    
+        dateParts = date.split("/")
+        if len(dateParts) < 3:
+            return None
+
+        [month, day, year] = dateParts
+        timeParts = time.split(":")
+        if len(timeParts) < 2:
+            return None
+
+        [hour, minute] = timeParts
+
+        return datetime.datetime(int(year), int(month), int(day), int(hour), int(minute))
+    except:
+        return None
 
 listaVentas=[]
 class Ventas:
@@ -13,14 +31,13 @@ class Ventas:
         self.quantity= quantity
         self.tax5 = tax5
         self.total = total 
-        self.date = date
-        self.time = time
+        self.date = parseDate(date, time)
         self.payment = payment 
         self.grossMarginPercentage = grossMarginPercentage
         self.grossIncome = grossIncome
         self.rating = rating
     def __str__(self):
-        return str((self.invoiceID, self.branch, self.city, self.customerType, self.gender, self.productLine, self.unitPrice, self.quantity, self.tax5, self.total, self.date, self.time, self.payment, self.grossMarginPercentage, self.grossIncome, self.rating))
+        return str((self.invoiceID, self.branch, self.city, self.customerType, self.gender, self.productLine, self.unitPrice, self.quantity, self.tax5, self.total, self.date, self.payment, self.grossMarginPercentage, self.grossIncome, self.rating))
 
 
 with open('/Users/azulmakk/Desktop/Estructura de Datos/TP14/Parcial 2 viejo/supermarket_sales - Sheet1.csv') as csvFile:
@@ -37,3 +54,12 @@ for venta in listaVentas:
     if venta.branch not in listaSucursales:
         listaSucursales.append(venta.branch)
 tuplaSucursales=tuple(listaSucursales)
+
+listaCiudades = []
+for venta in listaVentas:
+    if venta.city not in listaCiudades:
+        listaCiudades.append(venta.city)
+tuplaCiudades=tuple(listaCiudades)
+
+
+parseDate("asd/12/12", "ho:21")

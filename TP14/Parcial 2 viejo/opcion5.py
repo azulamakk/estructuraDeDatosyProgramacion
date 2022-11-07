@@ -7,7 +7,7 @@ def sucursalMejorCalificada():
         diccionario[key]=[0,0]
         
     for venta in listaVentas:
-        if venta.branch in diccionario and venta.rating != None:
+        if venta.branch in diccionario and venta.rating != None and venta.rating != '20:33':
             diccionario[venta.branch][0] += float(venta.rating)
             diccionario[venta.branch][1] += 1
 
@@ -21,5 +21,3 @@ def sucursalMejorCalificada():
             maxKey = key
     
     return maxKey
-
-print(sucursalMejorCalificada())

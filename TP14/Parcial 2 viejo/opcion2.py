@@ -1,19 +1,20 @@
 import csv
 from ventas import *
+from punto9y10 import *
 
 def cargarVentaManual():
-  
+    
     invoiceID = input('Ingrese Invoice ID')
     branch = input('Ingrese branch')
     city = input('Ingrese ciudad')
     customerType = input('Ingrese tipo de cliente')
-    gender = input('Ingrese genero')
+    gender = str(input('Ingrese genero'))
     productLine = input('Ingrese linea del producto')
     unitPrice = float(input('Ingrese precio unitario'))
     quantity= int(input('Ingrese cantidad'))
     total = quantity * unitPrice
     tax5 = total * 0.05
-    date = input('Ingrese fecha')
+    date = IngresoFechayHora()
     time = input('Ingrese hora')
     payment = input('Ingrese pago')
     grossMarginPercentage = input('Ingrese porcentaje de margen grueso')

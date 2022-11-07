@@ -16,4 +16,3 @@ def porcentajeXGenero():
     porcentajeHombres = str(cantTotHombres/cantTotCompras*100)
     return 'el porcentaje de ventas realizadas por mujeres es {}% y el porcentaje de ventas realizadas por hombres es {}%'.format(str(porcentajeMujeres), str(porcentajeHombres))
 
-print(porcentajeXGenero())
