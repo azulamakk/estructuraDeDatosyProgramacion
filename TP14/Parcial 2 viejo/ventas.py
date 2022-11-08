@@ -48,17 +48,17 @@ class Ventas:
 with open('/Users/azulmakk/Desktop/Estructura de Datos/TP14/Parcial 2 viejo/supermarket_sales - Sheet1.csv') as csvFile:
     reader=csv.DictReader(csvFile)
     i=1
-    try:
-        for linea in reader:
+
+    for linea in reader:
+        try:
             i+=1
             linea = Ventas(linea['Invoice ID'], linea['Branch'], linea['City'], linea['Customer type'], linea['Gender'], linea['Product line'],
                     linea['Unit price'], linea['Quantity'], linea['Tax 5%'], linea['Total'], linea['Date'], linea['Time'], linea['Payment'], 
                     linea['gross margin percentage'],  linea['gross income'], linea['Rating'])
-
             listaVentas.append(linea)
-    except:
-        print('Linea {} no pudo ser cargada correctamente'.format(i))
-
+        except:
+            print('Linea {} no pudo ser cargada correctamente'.format(i))
+        
 listaSucursales=[]
 for venta in listaVentas:
     if venta.branch not in listaSucursales:
