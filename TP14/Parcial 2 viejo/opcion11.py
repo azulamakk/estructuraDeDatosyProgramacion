@@ -1,4 +1,4 @@
-from punto9y10 import *
+from opcion9y10 import *
 from ventas import *
 from datetime import datetime
 
@@ -9,11 +9,3 @@ def antiguosARecientes():
             nodoVenta = NodoArbol(venta.date, venta)
             raiz.agregarnodos(nodoVenta)        
     print(raiz)
-
-#     raiz = arbol(minValue)
-#     for venta in listaVentas:
-#         if venta.date != None:
-#             nodoVenta = NodoArbol(venta.date)
-#             raiz.agregarnodo(nodoVenta)
-
-#     print(raiz.inorder())
