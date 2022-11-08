@@ -1,24 +1,22 @@
 from ventas import *
+import datetime
 
 def IngresoFechayHora():
-    try:
-        diaFecha= obtenerInt('Ingrese un dia: ', 0, 31)
+    diaFecha= obtenerInt('Ingrese un dia: ', 0, 31)
 
-        mesFecha= obtenerInt('Ingrese un mes: ', 0, 12)
+    mesFecha= obtenerInt('Ingrese un mes: ', 0, 12)
 
-        anioFecha= obtenerInt('Ingrese un año: ', 2019, 2022)
+    anioFecha= obtenerInt('Ingrese un año: ', 2019, 2022)
 
-        horaFecha= obtenerInt('Ingrese una hora: ', 0, 23)
+    horaFecha= obtenerInt('Ingrese una hora: ', 0, 23)
 
-        minutosFecha= obtenerInt('Ingrese un minuto: ', 0, 59)
+    minutosFecha= obtenerInt('Ingrese un minuto: ', 0, 59)
 
-        fecha = datetime.datetime(anioFecha, mesFecha, diaFecha, horaFecha, minutosFecha)
-        print(fecha)
-        return fecha
-    except:
-        'Hubo un error en la informacion'
-    
+    fecha = datetime.datetime(anioFecha, mesFecha, diaFecha, horaFecha, minutosFecha)
+    print(fecha)
     return fecha
+    # except:
+    #     'Hubo un error en la informacion'
 
 def obtenerInt(mensaje, minimo, maximo):
     try:    
@@ -36,8 +34,9 @@ def obtenerInt(mensaje, minimo, maximo):
 
 class NodoArbol:
     #constructor
-    def __init__(self, dato=None):
+    def __init__(self, dato=None, datoAsociado = None):
         self.dato=dato
+        self.datoAsociado=datoAsociado
         self.derecho=None
         self.izquierdo=None
 
@@ -62,13 +61,31 @@ class NodoArbol:
         if self.derecho != None:
             valorDer = str(self.derecho)
         
-        return valorIzq + str(self.dato) + valorDer
+        return valorIzq + str(self.datoAsociado) + '\n' + valorDer
+
+    def reversestr(self):
+        valorIzq = ""
+        if self.izquierdo != None:
+            valorIzq = str(self.izquierdo.reversestr())
+        
+        valorDer = ""
+        if self.derecho != None:
+            valorDer = str(self.derecho.reversestr())
+        
+        return valorDer + str(self.datoAsociado) + '\n' + valorIzq
+    # def inorderTraversal(self, raiz):
+    #     res = []
+    #     if raiz:
+    #         res = self.inorderTraversal(raiz.izquierdo)
+    #         res.append(raiz.dato)
+    #         res = res + self.inorderTraversal(raiz.derecho)
+    #     return res    
 
 
 def armarArbol(raiz):
     for venta in listaVentas:
         if venta.date != None:
-            nodoVenta = NodoArbol(venta.date)
+            nodoVenta = NodoArbol(venta.date, venta)
             raiz.agregarnodos(nodoVenta)
 
 

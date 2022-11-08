@@ -9,11 +9,13 @@ puntajesYLetras={'a':2,'n':3,'f': 5,'z':5}
 
 palabras=['cono','mazazo','fanzine','fhan','marsupial']
 
-for i in range(len(palabras)):
-    puntajeTotal=[]
-    for j in range(len(palabras[i])):
-        for t in range(len(puntajesYLetras)):
-            if palabras[i][j]==puntajesYLetras[t][0]:
-                puntajeTotal[i]+=puntajesYLetras[t][1]
+listaAcumulado=[]
 
-print(puntajeTotal)
+for palabra in palabras:
+    acumulado=0
+    for j in range(len(palabra)):
+        if palabra[j] in puntajesYLetras:
+            acumulado += puntajesYLetras[palabra[j]]
+    listaAcumulado.append(acumulado)
+
+print(listaAcumulado)
