@@ -4,33 +4,33 @@
 # pedirán hasta que la nota introducida sea negativa.En el programa principal se pedirá el número de alumnos que vamos a introducir y
 # mostrará la lista de alumnos y la nota media obtenida por cada uno de ellos
 
-listaAlumnos=[]
+# listaAlumnos=[]
 
-class Alumnos():
-    def __init__(self, nombre, notas):
-        self.nombre = nombre
-        self.notas = notas
+# class Alumnos():
+#     def __init__(self, nombre, notas):
+#         self.nombre = nombre
+#         self.notas = notas
     
-    def __str__(self):
-        return str((self.nombre, self.notas))
+#     def __str__(self):
+#         return str((self.nombre, self.notas))
 
-def diccionarioAlumnos(lista):
-    nombre = input('Insertar nombre')
-    listaNotas = []
-    notas = int('Insertar notas')
-    if notas != None:
-        listaNotas.append(notas)
-    if isinstance(notas, int) == False:
-        notas = input('Ingrese notas validas: ')
-    alumno=Alumnos(nombre, listaNotas)
-    listaAlumnos.append(alumno)
+# def diccionarioAlumnos():
+#     nombre = input('Insertar nombre')
+#     listaNotas = []
+#     notas = int('Insertar notas')
+#     if notas != None:
+#         listaNotas.append(notas)
+#     if isinstance(notas, int) == False:
+#         notas = input('Ingrese notas validas: ')
+#     alumno=Alumnos(nombre, listaNotas)
+#     listaAlumnos.append(alumno)
 
-    for i in range(len(listaAlumnos)):
-        diccionario = dict.fromkeys(listaAlumnos[i][0], listaAlumnos[i][1])    
+#     for i in range(len(listaAlumnos)):
+#         diccionario = dict.fromkeys(listaAlumnos[i][0], listaAlumnos[i][1])    
 
-    return diccionario
+#     return diccionario
     
-print(diccionarioAlumnos())
-azul = Alumnos('azul', [10,20,5])
-print(azul)
-listaAlumnos.append(azul)
+# print(diccionarioAlumnos())
+# azul = Alumnos('azul', [10,20,5])
+# print(azul)
+# listaAlumnos.append(azul)

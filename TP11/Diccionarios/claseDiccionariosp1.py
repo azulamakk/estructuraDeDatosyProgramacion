@@ -53,8 +53,8 @@ print(diccionario1.values())
 # Todos los items del diccionario
 print(diccionario1.items())
 
-for keys, values in diccionario1:
-    print(keys, '------->', values)
+# for keys, values in diccionario1:
+#     print(keys, '------->', values)
 
 # Metodos
 # get()
