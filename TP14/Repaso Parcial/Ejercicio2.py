@@ -16,12 +16,22 @@ class Alumno():
 
 diccionario = dict()
 
-def guardarClaseDiccionario(nombre, notas):
+def cargarManualmente():
+    nombre = input('Ingrese el nombre')
+    notas = []
+    nota = int(input('Ingrese notas. Cuando desee finalizar ingrese un numero negativo'))
+    while nota > 0: 
+        notas.append(nota)
+        nota = int(input('Ingrese otra nota'))
+    return nombre, notas
+
+def guardarClaseDiccionario(diccionario, nombre, notas):
     alumno = Alumno(nombre, notas)
-    diccionario.update(alumno.nombre, alumno.notas)
+    diccionario[alumno.nombre]=alumno.notas
     return diccionario
 
-print(guardarClaseDiccionario('Azul', [10, 10, 10]))
-# guardarClaseDiccionario('Tatu', [10, 20])
+print(guardarClaseDiccionario(diccionario,'Azul', [10, 10, 10]))
 
-# print(diccionario)
+print(guardarClaseDiccionario(diccionario,'Tatu', [10, 20]))
+
+print(guardarClaseDiccionario(diccionario,'aaaa', [1, 1, 1, 1]))

@@ -16,6 +16,24 @@ def IngresoFechayHora():
     print(fecha)
     return fecha
 
+def IngresoSoloFecha():
+    diaFecha= obtenerInt('Ingrese un dia: ', 0, 31)
+
+    mesFecha= obtenerInt('Ingrese un mes: ', 0, 12)
+
+    anioFecha= obtenerInt('Ingrese un año: ', 2019, 2022)
+    fecha = datetime.date(anioFecha, mesFecha, diaFecha)
+    return fecha
+
+def IngresoSoloHora():
+    horaFecha= obtenerInt('Ingrese una hora: ', 0, 23)
+
+    minutosFecha= obtenerInt('Ingrese un minuto: ', 0, 59)
+
+    hora = datetime.time(horaFecha, minutosFecha)
+    
+    return hora
+
 def obtenerInt(mensaje, minimo, maximo):
     try:    
         numero = int(input(mensaje))

@@ -41,9 +41,12 @@ def cargarVentaManual():
             while isinstance(payment, str) == False:
                 payment = input('Tipo de dato incorrecto. Ingrese tipo de pago')
 
-            total = quantity * unitPrice
+            total = int(quantity) * float(unitPrice)
             tax5 = total * 0.05
-            date = IngresoFechayHora()
+
+            date = IngresoSoloFecha()
+
+            time = IngresoSoloHora() 
 
             grossMarginPercentage = float(input('Ingrese margen burto de ganancia'))
             while isinstance(grossMarginPercentage, float) == False:
@@ -60,8 +63,8 @@ def cargarVentaManual():
         except:
             print('Hubo un error de carga, lo vas a hacer nuevamente\n')
 
-    cargaManual=Ventas(invoiceID, branch, city, customerType, gender, productLine, unitPrice, quantity, 
-    tax5, total, date, payment, grossMarginPercentage, grossIncome, rating)
+    cargaManual=Ventas(invoiceID, branch, city, customerType, gender, productLine, unitPrice, quantity, tax5, 
+    total, date, time, payment, grossMarginPercentage, grossIncome, rating)
     
     field_names = ['Invoice ID','Branch','City','Customer type','Gender',
     'Product line', 'Unit price','Quantity','Tax 5%', 'Total','Date',
