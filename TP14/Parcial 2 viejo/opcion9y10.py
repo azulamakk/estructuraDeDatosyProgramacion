@@ -15,8 +15,6 @@ def IngresoFechayHora():
     fecha = datetime.datetime(anioFecha, mesFecha, diaFecha, horaFecha, minutosFecha)
     print(fecha)
     return fecha
-    # except:
-    #     'Hubo un error en la informacion'
 
 def obtenerInt(mensaje, minimo, maximo):
     try:    
@@ -73,14 +71,6 @@ class NodoArbol:
             valorDer = str(self.derecho.reversestr())
         
         return valorDer + str(self.datoAsociado) + '\n' + valorIzq
-    # def inorderTraversal(self, raiz):
-    #     res = []
-    #     if raiz:
-    #         res = self.inorderTraversal(raiz.izquierdo)
-    #         res.append(raiz.dato)
-    #         res = res + self.inorderTraversal(raiz.derecho)
-    #     return res    
-
 
 def armarArbol(raiz):
     for venta in listaVentas:

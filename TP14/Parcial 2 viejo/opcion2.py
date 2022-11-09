@@ -1,6 +1,6 @@
 import csv
 from ventas import *
-from punto9y10 import *
+from opcion9y10 import *
 
 def cargarVentaManual():
     while True:

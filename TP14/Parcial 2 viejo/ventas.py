@@ -22,7 +22,7 @@ listaVentas=[]
 class Ventas:
     def __init__(self, invoiceID, branch, city, customerType, gender, productLine, unitPrice, quantity, tax5, total, date, time, payment, grossMarginPercentage, grossIncome, rating):
         
-        self.invoiceID = invoiceID
+        self.invoiceID = str(invoiceID)
         self.branch = str(branch)
         self.city = str(city)
         self.customerType = str(customerType)
@@ -38,27 +38,27 @@ class Ventas:
         self.grossIncome = float(grossIncome)
         self.rating = float(rating)
 
-    def __eq__(self, other):
-        return self.invoiceID == other.invoiceID
-
     def __str__(self):
         return str((self.invoiceID, self.branch, self.city, self.customerType, self.gender, self.productLine, self.unitPrice, self.quantity, self.tax5, self.total, self.date, self.payment, self.grossMarginPercentage, self.grossIncome, self.rating))
 
-
 with open('/Users/azulmakk/Desktop/Estructura de Datos/TP14/Parcial 2 viejo/supermarket_sales - Sheet1.csv') as csvFile:
     reader=csv.DictReader(csvFile)
-    i=1
-
+    i=0
+    setIDS=set()
     for linea in reader:
         try:
             i+=1
-            linea = Ventas(linea['Invoice ID'], linea['Branch'], linea['City'], linea['Customer type'], linea['Gender'], linea['Product line'],
-                    linea['Unit price'], linea['Quantity'], linea['Tax 5%'], linea['Total'], linea['Date'], linea['Time'], linea['Payment'], 
-                    linea['gross margin percentage'],  linea['gross income'], linea['Rating'])
-            listaVentas.append(linea)
+            if linea['Invoice ID'] not in setIDS:
+                setIDS.add(linea['Invoice ID'])
+                linea = Ventas(linea['Invoice ID'], linea['Branch'], linea['City'], linea['Customer type'], linea['Gender'], linea['Product line'],
+                        linea['Unit price'], linea['Quantity'], linea['Tax 5%'], linea['Total'], linea['Date'], linea['Time'], linea['Payment'], 
+                        linea['gross margin percentage'],  linea['gross income'], linea['Rating'])
+                listaVentas.append(linea)
+            else:
+                print('Venta {} ya fue cargada previamente'.format(linea['Invoice ID']))
         except:
             print('Linea {} no pudo ser cargada correctamente'.format(i))
-        
+
 listaSucursales=[]
 for venta in listaVentas:
     if venta.branch not in listaSucursales:

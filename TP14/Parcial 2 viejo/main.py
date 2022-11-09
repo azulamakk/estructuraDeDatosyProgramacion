@@ -7,7 +7,7 @@ from opcion3 import *
 from opcion4 import *
 from opcion5 import *
 from opcion6 import *
-from punto9y10 import *
+from opcion9y10 import *
 from opcion11 import *
 from opcion12 import *
 
