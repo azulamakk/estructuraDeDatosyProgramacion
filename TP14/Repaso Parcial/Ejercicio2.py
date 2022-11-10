@@ -29,9 +29,3 @@ def guardarClaseDiccionario(diccionario, nombre, notas):
     alumno = Alumno(nombre, notas)
     diccionario[alumno.nombre]=alumno.notas
     return diccionario
-
-print(guardarClaseDiccionario(diccionario,'Azul', [10, 10, 10]))
-
-print(guardarClaseDiccionario(diccionario,'Tatu', [10, 20]))
-
-print(guardarClaseDiccionario(diccionario,'aaaa', [1, 1, 1, 1]))

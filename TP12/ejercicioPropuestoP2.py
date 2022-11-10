@@ -1,7 +1,5 @@
 # 2 + 5 * (8 + 4)
 
-from turtle import st
-
 expresion='2 + 5 * (8 + 4)'
 
 class Nodo:
@@ -65,12 +63,15 @@ class Pila:
             return aSacar
 
     def estaVacia(self):
-        if self.tope==None:
+        if self.tope == None:
             return True
         else: 
             return False
 
     def mostrarTope(self):
+        if self.estaVacia():
+            return None
+
         return self.tope.headvalue
 
 def armarArbol(posfija):
