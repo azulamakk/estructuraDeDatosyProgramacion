@@ -21,7 +21,7 @@ class NodoArbol:
             else:
                 self.izquierdo.agregarnodos(nodo)
     
-    def __str__(self):
+    def __str__(self): # menor a mayor
         valorIzq = ""
         if self.izquierdo != None:
             valorIzq = str(self.izquierdo)
@@ -32,7 +32,7 @@ class NodoArbol:
         
         return valorIzq + str(self.datoAsociado) + '\n' + valorDer
 
-    def reversestr(self):
+    def reversestr(self): # mayor a menor
         valorIzq = ""
         if self.izquierdo != None:
             valorIzq = str(self.izquierdo.reversestr())
