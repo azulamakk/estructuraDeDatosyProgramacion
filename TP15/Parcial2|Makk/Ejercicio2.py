@@ -31,7 +31,6 @@ def resolverArbol(nodo):
         elif operador == '/':
             return valorIzquierdo / valorDerecho
 
-print(resolverArbol(raiz)) 
 
 class NodoPila:
     def __init__(self, headvalue, prox=None):
@@ -124,3 +123,8 @@ def infijaAPosfija(infija):
         posfija.append(stack.sacarDePila())
 
     return posfija
+
+infija = '1+2*(3+5)'
+posfija = infijaAPosfija(infija)
+arbol = armarArbol(posfija)
+print(resolverArbol(arbol))
