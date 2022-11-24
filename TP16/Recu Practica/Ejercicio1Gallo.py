@@ -23,14 +23,6 @@ class Libro:
             Calificacion: {}
         '''.format(self.titulo, self.autor, self.ISBN, self.promedio)
     
-    # def calcularPromedio(self):
-    #     cantCalificaciones = self.calificaciones.longitud
-    #     sumaCalificaciones = 0
-    #     for calificacion in self.calificaciones:
-    #         sumaCalificaciones += calificacion.dato
-    #     promedio = sumaCalificaciones / cantCalificaciones
-    #     return promedio
-    
 class Resena:
     def __init__(self, ISBN, comentador, resena, calificacion):
         self.comentador = comentador
@@ -49,14 +41,18 @@ libros = [
     Libro("El perfume", "Patrick Süskind", 123456785),
     Libro("El nombre de la rosa", "Umberto Eco", 123456786)    
 ]
+def agregarResena(resena):
+    for libro in libros:
+        if libro.ISBN == resena.ISBN:
+            libro.agregarResena(resena)
 
 # Cargar resenas en libros
-libros[0].agregarResena(Resena(123456789, "Juan", "Muy bueno", 5))
-libros[0].agregarResena(Resena(123456789, "Pedro", "Muy bueno", 5))
-libros[0].agregarResena(Resena(123456789, "Maria", "Muy bueno", 5))
-libros[1].agregarResena(Resena(987654321, "Jose", "Muy bueno", 5))
-libros[1].agregarResena(Resena(987654321, "Maria", "Malo", 1.5))
-libros[1].agregarResena(Resena(987654321, "Jose", "Malo", 1.5))
+agregarResena(Resena(123456789, "Juan", "Muy bueno", 5))
+agregarResena(Resena(123456789, "Pedro", "Muy bueno", 5))
+agregarResena(Resena(123456789, "Maria", "Muy bueno", 5))
+agregarResena(Resena(987654321, "Jose", "Muy bueno", 5))
+agregarResena(Resena(987654321, "Maria", "Malo", 1.5))
+agregarResena(Resena(987654321, "Jose", "Malo", 1.5))
 
 print('''
 1. Visualizar libros disponibles
@@ -94,3 +90,94 @@ def mostrarMejoresCalificados(cantidad):
         
 menuPrincial(opcionIngresada)
 
+# class Nodo:
+#     def __init__(self, dato, prox = None):
+#         self.dato = dato
+#         self.prox = prox
+
+# class ListaEnlazadaOrdenada:
+#     def __init__(self):
+#         self.nodoInicial = None
+#         self.longitud = 0
+
+#     def agregar(self, dato):
+#         nodo = Nodo(dato)
+
+#         if self.esta_vacia():
+#             self.nodoInicial = nodo
+#             self.longitud = 1
+#             return True
+
+#         if dato > self.nodoInicial.dato:
+#             nodo.prox = self.nodoInicial
+#             self.nodoInicial = nodo
+#             self.longitud += 1
+#             return True            
+
+        
+#         nodoActual = self.nodoInicial
+#         while nodoActual.prox != None and nodoActual.prox.dato > dato:
+#             if nodoActual.dato == dato:
+#                 return False # No meter repetidos
+
+#             nodoActual = nodoActual.prox
+
+#         # dato > nodoActual.prox.dato && dato < nodoActual.dato
+#         nodo.prox = nodoActual.prox
+#         nodoActual.prox = nodo
+#         self.longitud += 1
+#         return True
+    
+#     def eliminar(self, dato):
+#         if self.esta_vacia():
+#             return
+
+#         if self.nodoInicial.dato == dato:
+#             self.nodoInicial = self.nodoInicial.prox
+#             self.longitud -= 1
+        
+#         if self.longitud <= 1:
+#             return
+
+#         nodoPrevio = self.nodoInicial
+#         nodoActual = nodoPrevio.prox
+#         while nodoActual != None:
+#             if nodoActual.dato == dato:
+#                 nodoPrevio.prox = nodoActual.prox
+#                 self.longitud -= 1
+
+#             nodoPrevio = nodoActual
+#             nodoActual = nodoActual.prox
+
+#     def tiene_elemento(self, dato):
+#         nodoActual = self.nodoInicial
+#         while nodoActual != None:
+#             if nodoActual.dato == dato:
+#                 return True
+
+#             nodoActual = nodoActual.prox
+
+#         return False
+
+#     def esta_vacia(self):
+#         return self.longitud == 0
+
+#     def __str__(self):
+#         toReturn = ''
+#         nodoActual = self.nodoInicial
+#         while nodoActual != None:
+#             toReturn += str(nodoActual.dato) + ', '
+#             nodoActual = nodoActual.prox
+#         return toReturn
+
+
+
+# listaOrdenada = ListaEnlazadaOrdenada()
+# listaOrdenada.agregar(5)
+# listaOrdenada.agregar(3)
+# listaOrdenada.agregar(1)
+# listaOrdenada.agregar(2)
+# listaOrdenada.agregar(4)
+# listaOrdenada.agregar(6)
+
+# print(listaOrdenada)
