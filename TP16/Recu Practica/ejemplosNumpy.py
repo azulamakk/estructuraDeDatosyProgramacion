@@ -2,8 +2,8 @@
 import numpy as np 
 
 # Crear vector
-vector=np.array(1,2,3,5)
-print(vector)
+# vector=np.array(1,2,3,5)
+# print(vector)
 
 # Crear matrices
 matriz=np.array([(1,2,3), (4,5,6)])
