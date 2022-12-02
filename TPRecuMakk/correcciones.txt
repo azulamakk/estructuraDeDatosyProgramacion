@@ -1,0 +1,29 @@
+Ej1:
+
+-Método armartablero se usa como de clase pero se le pasa self (como parámetro?)
+
+-No contempla adversario
+
+-No valida posiciones de barcos, podrian ser invalidas o superponerse
+
+-Método atacar dice que hundiste un barco aunque el barco tenga dos posiciones y le hayas pegado solo a una
+
+
+
+Ej2:
+
+-No verifica unicidad de codigo de producto
+
+-Funciones sueltas, no garupa en clase kiosco su funcionalidad
+
+-Cada venta puede vender solo un producto?
+
+
+
+Ej3: 
+
+-Pilotos tendrian que poder tener mas de una licencia
+
+-Copilotos no esta diferenciado, entonces pueden tener licencias también, lo que no corresponde
+
+-No se valida dni único

@@ -1,0 +1,30 @@
+Nota: 7 
+
+Ej1:
+
+try de constructor de cliente redundante, nada ahi puede tirar excepción
+Carga de clientes desde archivo no se podria hacer, puesto que si existen dos clientes con dni o cbu repetidos ahi, por em motivo que fuese, el programa quedaría colgado en el input de cualquiera de los datos
+Utiliza set de cbu y diccionario de clientes por cbu, para que el set?
+Cuidado con escribir a archivos con un path absoluto, así como está solo funciona en tu computadora y mientras exista esa carpeta, tratá de usar path relativos
+Bien elegido tupla para representar transacción en tu solución, pero las transacciones conceptualmente pertenecen a la cuenta y deberían ser propiedades de las mismas.
+Si ibas a recorrer como lo hiciste en la línea 112-114, estas recorriendo como si fuese un diccionario con clave CBUcliente y valor listado de transacciones pero elegiste un set.
+Algunos casos del menú tiran excepciones no controladas con las opciones.
+Guardado de datos en archivo no es en formato conveniente. Como cargas de ahi? Y datos de cuenta?
+Balance puede ser negativo? Además, no lo calcula.
+Cargar transacción y luego pedir ver transacciones explota.
+Ej2
+
+Crea un arbol de expresiones, no de numeros
+No chequea que el arbol sea bst
+Ej3:
+
+Aparente error de interpretación del enunciado, no se contempla rol del cocinero, no se usa cola de pedidos, no modela usando clases
+Ej4:
+
+La clase debe tener una propiedad correspondiente al precio total de la orden
+Pedido invalido si un producto pedido no existe, no es verificado
+No existe mecanismo para calcular precio promedio de todas las ordenes
+setIDs debería ser o una propiedad de la clase, o recibirlo como argumento en el constructor.
+
+
+Suma 0,75 por puntos extra en clase.

@@ -32,4 +32,4 @@ class BatallaNaval:
 juego1=BatallaNaval(1, 1, 1, 2, 4,4)
 juego1.atacar(1,1)
 juego1.atacar(1,2)
-juego1.atacar(4,3)
+juego1.atacar(4,4)

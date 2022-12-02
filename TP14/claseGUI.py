@@ -1,15 +1,15 @@
-from PyQt5.QtCore import Qt
-from PyQt5.QtWidgets import *
+from PyQt5.QtCore import *
+from PyQt5.QtWidgets import QMainWindow, QMessageBox, QHBoxLayout, QLabel, QTextEdit, QPushButton, QWidget, QApplication
 import sys
 
 # Defino mi ventana
 class MiVentanaPrincipal(QMainWindow):
-    def botonCambiarTIitulo_click(self):
+    def botonCambiarTitulo_click(self):
         nuevoTitulo = self.campoTextoNombreVentana.toPlainText()
         self.setWindowTitle(nuevoTitulo)
         self.campoTextoNombreVentana.clear()
 
-    def botonMostrarCreditos_click(self):
+    def botonMostrarError_click(self):
         msg = QMessageBox()
         msg.setIcon(QMessageBox.Critical)
         msg.setText('Error')
@@ -17,6 +17,13 @@ class MiVentanaPrincipal(QMainWindow):
         msg.setWindowTitle('Error')
         msg.exec()
 
+    def campoTextoNombreVentana_textChanged(self):
+        texto = self.campoTextoNombreVentana.toPlainText()
+        if len(texto) == 0:
+            self.botonCambiarTitulo.setEnabled(False)
+        else:
+            self.botonCambiarTitulo.setEnabled(True)
+    
     def __init__(self):
         super().__init__()
 
@@ -32,27 +39,28 @@ class MiVentanaPrincipal(QMainWindow):
         layoutPrincipal.addWidget(labelSaludo)
 
         layoutCambioDeNombre = QHBoxLayout()
-        layoutCambioDeNombre.addWidget(Qlabel('Ingrese nuevo nombre de la ventana'))
+        layoutCambioDeNombre.addWidget(QLabel('Ingrese nuevo nombre de la ventana'))
         self.campoTextoNombreVentana=QTextEdit() # Por default ocupa la mayor cantidad de espacio posible
-        layoutCambioDeNombre.addWidget(campoTextoNombreVentana)
+        self.campoTextoNombreVentana.textChanged.connect(self.campoTextoNombreVentana_textChanged)
+        layoutCambioDeNombre.addWidget(self.campoTextoNombreVentana)
+        # self.campoTextoNombreVentana.textChanged()
 
         layoutPrincipal.addLayout(layoutCambioDeNombre)
 
-        botonCambiarTitulo = QPushButton()
-        botonCambiarTitulo.setText('Cambiar titulo a ventana')
-        botonCambiarTitulo.clicked.connect(self.botonCambiarTIitulo_click)
-        layoutPrincipal.addWidget(botonCambiarTitulo)
+        self.botonCambiarTitulo = QPushButton()
+        self.botonCambiarTitulo.setText('Mostrar creditos')
+        self.botonCambiarTitulo.clicked.connect(self.botonCambiarTitulo_click)
+        layoutPrincipal.addWidget(self.botonCambiarTitulo)
 
-        botonCambiarTitulo = QPushButton()
-        botonCambiarTitulo.setText('Mostrar creditos')
-        botonCambiarTitulo.clicked.connect(self.botonMostrarCreditos_click)
-        layoutPrincipal.addWidget(botonMostrarCreditos)
-
+        self.botonMostrarError = QPushButton()
+        self.botonMostrarError.setText('Mostrar error general')
+        self.botonMostrarError.clicked.connect(self.botonMostrarError_click)
+        layoutPrincipal.addWidget(self.botonMostrarError)
         # Establezco que mi widget que contiene al layout es el widget principal de la ventana, para que se muestre
         widgetLayout = QWidget()
         widgetLayout.setLayout(layoutPrincipal)
         self.setCentralWidget(widgetLayout)
-
+        
 # Creo mi app y la muestro
 app = QApplication(sys.argv) # Siempre ponemos esta linea
 window = MiVentanaPrincipal()
