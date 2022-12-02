@@ -27,3 +27,5 @@ Ej3:
 -Copilotos no esta diferenciado, entonces pueden tener licencias también, lo que no corresponde
 
 -No se valida dni único
+
+Nota: 5,3 -aprobado, necesitaba 5,3-
