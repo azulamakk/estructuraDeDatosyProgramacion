@@ -3,7 +3,7 @@ from datetime import datetime
 import matplotlib.pyplot as plt
 
 def cargar_datos():
-    with open("/Users/azulmakk/Desktop/Estructura de Datos/TPFinalViejo/bandas-inscriptas.txt","r") as file:
+    with open("TP18/bandas-inscriptas.txt","r") as file:
         for line in file:
             line = line.split(";")
             if line[0] != "NOMBRE_DEL_SOLISTA_DE_LA_BANDA": #evitamos la primer fila
@@ -303,21 +303,3 @@ def opcion14():
                 print(banda.solista,file=filetxt)
     print("\n¡El archivo txt fue creado con éxito!\n")
     return
-
-        
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

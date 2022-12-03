@@ -11,7 +11,7 @@ class miVentana(QMainWindow):
         super().__init__()
 
         self.setWindowTitle("Proyecto Final - Estructura de datos y programación") # titulo de ventana
-        self.setGeometry(6000,8000,700,350) # posición y tamaño
+        self.setGeometry(8000,8000,600,600) # posición y tamaño
         self.setWindowIconText("M y P")
         self.setStyleSheet("background-color: pink;")
 
