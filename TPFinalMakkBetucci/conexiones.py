@@ -1,4 +1,4 @@
-class Conexiones:
+class Conexion:
     def __init__(self, direccionIP:int, direccionMAC:int, fecha, hora, activa:int):
         self.direccionIP = direccionIP
         self.direccionMAC = direccionMAC

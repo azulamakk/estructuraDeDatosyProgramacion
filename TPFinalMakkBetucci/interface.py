@@ -82,9 +82,10 @@ class miVentana(QMainWindow):
         self.campoTextoOpcion.clear()
         opcionIndicada = int(opcionIndicada)
         if opcionIndicada == 1:
-            leerArchivoMunicipio()
+            return
+            # leerArchivoMunicipio()
         elif opcionIndicada == 2:
-            leerArchivoRouters()
+            return
         # elif opcionIndicada == 3:
         #     opcion3()
         # elif opcionIndicada == 4:

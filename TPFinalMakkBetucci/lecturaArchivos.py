@@ -45,14 +45,18 @@ with open('TPFinalMakkBetucci/routers.csv') as csvFile:
         except:
             print('Linea {} no pudo ser cargada correctamente'.format(i))
 
-
-def leerArchivoRouters():
-    return
-    # archivo = open("routers.csv", "r")
-    # listaRouters = []
-    # for linea in archivo:
-    #     linea = linea.strip()
-    #     linea = linea.split(",")
-    #     listaRouters.append(linea)
-    # archivo.close()
-    # return listaRouters
+listaConexiones = []
+# with open('TPFinalMakkBetucci/conexiones.csv') as csvFile:
+#     reader=csv.DictReader(csvFile)
+#     i=0
+#     for linea in reader:
+#         try:
+#             i+=1        
+#             if linea['id'] not in Conexion.conexionIDRegistrados:
+#                 Conexion.conexionIDRegistrados.add(linea['id'])
+#                 linea = Conexion(linea['id'], linea['router_id'],linea['router_id_2'],linea['latencia'])
+#                 listaConexiones.append(linea)
+#             else:
+#                 print('Conexion {} ya fue cargada previamente'.format(linea['id']))
+#         except:
+#             print('Linea {} no pudo ser cargada correctamente'.format(i))
