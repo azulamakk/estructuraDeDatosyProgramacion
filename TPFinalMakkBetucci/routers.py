@@ -31,15 +31,15 @@ class Router():
     #Metodo para agregar las conexiones extraidas a los routers asociados entre direccionIP-routerID
     #Llamar a esta funcion cuando se esten leyendo las conexiones del csv, para saber si appendearlas a la lista
     #de conexiones del router o mandarla a la cola de espera
-    def agregarConexion(conexion):
-        for conexion.direccionIP in Conexion.conexionIDRegistrados.keys():
-            for router in Router.diccionarioRouter.keys():
-                if router == conexion.direccionIP:
-                    if len(router.conexiones) <= 20: #si el router tiene menos de 20 conexiones, agregar la conexion
-                        router.conexiones.append(conexion)
-                    else:
-                        Router.colaConexionesPendiente.put_nowait() #agrego la conexion a la cola de pendientes
-
+    # def agregarConexion(conexion):
+    #     for conexion.direccionIP in Conexion.conexionIDRegistrados.keys():
+    #         for router in Router.diccionarioRouter.keys():
+    #             if router == conexion.direccionIP:
+    #                 if len(router.conexiones) <= 20: #si el router tiene menos de 20 conexiones, agregar la conexion
+    #                     router.conexiones.append(conexion)
+    #                 else:
+    #                     Router.colaConexionesPendiente.put_nowait() #agrego la conexion a la cola de pendientes
+    
     def __str__(self):
         return self.identificador
 

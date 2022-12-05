@@ -68,5 +68,3 @@ class Municipio():
 
     def __str__(self):
         return self.municipio
-
-# def verificacionIDMunicipio():
