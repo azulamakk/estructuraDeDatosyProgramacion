@@ -1,6 +1,6 @@
 from municipios import *
 from conexiones import *
-import queue as Queue
+from queue import Queue
 
 
 class Router():
@@ -39,7 +39,7 @@ class Router():
     #                     router.conexiones.append(conexion)
     #                 else:
     #                     Router.colaConexionesPendiente.put_nowait() #agrego la conexion a la cola de pendientes
-    
+
     def __str__(self):
         return self.identificador
 

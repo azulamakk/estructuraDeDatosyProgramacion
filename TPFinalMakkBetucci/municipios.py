@@ -41,7 +41,7 @@ class Departamento():
         return self.departamento
 
 class Municipio():
-    diccionarioMunicipios: dict[str,'Municipio'] = dict()
+    # diccionarioMunicipios: dict[str,'Municipio'] = dict()
     
     def __init__(self, provinciaID:str, provincia:str, departamentoID:int, departamento:str, municipioID:str, municipio:str):
         self.provinciaID = provinciaID
