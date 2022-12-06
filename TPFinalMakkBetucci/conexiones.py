@@ -1,6 +1,30 @@
 from queue import Queue
 from routers import *
 
+from collections import deque
+
+class Queue:
+    def __init__(self):
+        self.items = deque()
+    
+    def encolar(self, item):
+        self.items.append(item)
+    
+    def desencolar(self):
+        return self.items.popleft()
+    
+    def primero(self):
+        return self.items[0]
+    
+    def estaVacia(self):
+        return len(self.items) == 0
+        
+    def tamano(self):
+        return len(self.items)
+        
+    def __str__(self):
+        return str(self.items)
+     
 class Conexion:
     #Iniciamos la cola de conexiones pendientes
     colaConexionesPendientes = Queue()
