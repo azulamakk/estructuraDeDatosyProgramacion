@@ -5,6 +5,7 @@ class Provincia():
     def __init__(self, provinciaID:str, provincia:str):
         self.provinciaID = provinciaID
         self.provincia = provincia
+        
         self.diccionarioDptos: dict[str, 'Departamento'] = dict()
 
         if self.provinciaID == None:
