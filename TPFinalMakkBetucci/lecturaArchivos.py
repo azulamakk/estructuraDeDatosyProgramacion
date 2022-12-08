@@ -3,33 +3,46 @@ from municipios import *
 from conexiones import *
 import csv
 from geopy.geocoders import Nominatim
+import json
 
-pathMunicipios = ''
+
 
 #Lectura del csv municipios
-def leerArchivoMunicipio(pathMunicipios):
+def cargarProvinciasyDptos(pathMunicipios):
+    prefijos_json = {}
+    with open('TPFinalMakkBetucci/prefijos.json') as json_file:
+        prefijos_json = json.load(json_file)
     with open(pathMunicipios, encoding= 'unicode_escape') as csvFile:
         reader=csv.DictReader(csvFile)
         i=0
         for linea in reader:
             try:
                 i+=1
-                    #Se crea el objeto Provincia
-                linea = Provincia(linea['provincia_id'], linea['provincia'])
-                    #Se crea el objeto Departamento
-                linea = Departamento(linea['provincia_id'], linea['provincia'],linea['id_departamento'],linea['departamento'])
-                    # print('Municipio {} ya fue cargado previamente'.format(linea['municipio_id']))
+
+                #Se crea el objeto Provincia
+                Provincia(linea['provincia_id'], linea['provincia'])
+
+                #Se crea el objeto Departamento
+                Departamento(linea['provincia_id'], linea['provincia'],linea['id_departamento'], linea['departamento'])
+
+                #Se crea el objeto Municipio
+                prefijo = prefijos_json[linea['provincia_id']]
+                if linea['municipio_id'] != '' and linea['municipio_id'][:3] == prefijo:
+                    Municipio(linea['provincia_id'], linea['provincia'], linea['id_departamento'], linea['departamento'], linea['municipio_id'], linea['municipio'])
             except:
                 print('Linea {} no pudo ser cargada correctamente'.format(i))
 
+
 listaMunicipios = []
+cargarProvinciasyDptos('TPFinalMakkBetucci/municipios.csv')
 
 
-def leerArchivoRouter():
-#Lectura del csv routers
-    with open('TPFinalMakkBetucci/routers.csv', encoding= 'unicode_escape') as csvFile:
+
+def leerArchivoRouter(pathRouters):
+    #Lectura del csv routers
+    with open(pathRouters, encoding='unicode_escape') as csvFile:
         geolocator = Nominatim(user_agent="geoapiExercises")
-        reader=csv.DictReader(csvFile)
+        reader=csv.DictReader(csvFile, delimiter=';')
         i=0
         for linea in reader:
             try:
@@ -48,41 +61,50 @@ def leerArchivoRouter():
                     latitude = int(linea['latitud'].replace('.',''))
                     longitude = int(linea['longitud'].replace('.', ''))
                     if latitude == 0 and longitude == 0:
-                        raise Exception("Coordenadas invalidas")
-                    latitude = str(latitude / 1_000_000)
-                    longitude = str(longitude / 1_000_000)
+                        # raise Exception("Coordenadas invalidas")
+                        municipio = ''
+                    else:
+                        latitude = str(latitude / 1_000_000)
+                        longitude = str(longitude / 1_000_000)
 
-                    location = geolocator.reverse(latitude+","+longitude)
+                        location = geolocator.reverse(latitude+","+longitude)
 
-                    address = location.raw['address']
-                    municipio = address.get('county', '')   
-                    # departamento = address.get('state_district', '')
-                    # provincia = address.get('state', '')
+                        address = location.raw['address']
+                        municipio = address.get('county', '')   
 
                     #Se crea el objeto Municipio
-                    linea = Municipio(linea['provincia_id'], linea['provincia'], linea['id_departamento'], linea['departamento'],
+
+                    Municipio(linea['provincia_id'], prov.provincia, linea['id_departamento'], depto.departamento,
                         linea['municipio_id'], municipio)
-                    listaMunicipios.append(linea)
+
+                    # listaMunicipios.append(linea)
                 if linea['id'] not in Router.diccionarioRouter.keys():
-                    linea = Router(linea['id'], linea['identificador'],linea['ubicacion'],linea['latitud'],linea['longitud'],
+                    Router(linea['id'], linea['identificador'],linea['ubicacion'],linea['latitud'],linea['longitud'],
                         linea['municipio_id'], linea['provincia_id'], linea['id_departamento'])
                 else:
                     print('Router {} ya fue cargado previamente'.format(linea['id']))
             except Exception as e:
-                # print(e)
+                print(e)
                 print('Linea {} no pudo ser cargada correctamente'.format(i))
 
-def leerArchivoConexiones():
+# leerArchivoRouter('TPFinalMakkBetucci/routers.csv')
+def leerArchivoConexiones(pathConexiones):
     #Lectura del csv conexiones y carga de conexiones al diccionario de conexiones y a los routers
-    with open('TPFinalMakkBetucci/conexiones.csv') as csvFile:
+    with open(pathConexiones, encoding='unicode_escape') as csvFile:
         reader=csv.DictReader(csvFile)
         i=0
         for linea in reader:
             try:
                 i+=1        
-                if linea['Direccion IP'] not in Conexion.conexionIDRegistrados.keys():
-                    conexion = Conexion(linea['Direccion IP'],linea['MAC Address'],linea['Fecha'],linea['Hora'],linea['Activa'])
-                else:
-                    print('Conexion {} ya fue cargada previamente'.format(linea['Direccion IP']))
+                conexion = Conexion(linea['Direccion IP'],linea['MAC Address'],linea['Fecha'],linea['Hora'],linea['Activa'])
+                if linea['Direccion IP'] in Router.diccionarioRouter and linea['Activa'] == '1':
+                    router = Router.diccionarioRouter[linea['Direccion IP']]
+                    if conexion.direccionMAC not in router.conexiones:
+                        router.conexiones[conexion.direccionMAC] = conexion
+                    else:
+                        print('Conexion {} ya fue cargada previamente'.format(conexion.direccionMAC))
             except:
                 print('Linea {} no pudo ser cargada correctamente'.format(i))
+
+leerArchivoRouter('TPFinalMakkBetucci/routers.csv')
+leerArchivoConexiones('TPFinalMakkBetucci/conexiones.csv')

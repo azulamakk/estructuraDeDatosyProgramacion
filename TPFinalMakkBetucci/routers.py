@@ -1,5 +1,5 @@
 from municipios import *
-from conexiones import *
+from conexiones import Conexion
 from queue import Queue
 
 
@@ -7,23 +7,28 @@ class Router():
     diccionarioRouter: dict[str,'Router'] = dict()
     
     def __init__(self, routerID:int, identificador:str, ubicacion, latitud:float, longitud:float, municipioID:str, provinciaID:str, departamentoID:int):
+        if provinciaID not in Provincia.diccionarioProv:
+            raise Exception("Provincia no registrada")
+        
+        prov = Provincia.diccionarioProv[provinciaID]
+        if departamentoID not in prov.diccionarioDptos:
+            raise Exception("Departamento no registrado")
+        
+        depto = prov.diccionarioDptos[departamentoID]
+        if municipioID not in depto.diccionarioMunicipios:
+            raise Exception("Municipio no registrado")
+        
         self.routerID = routerID
         self.identificador = identificador
         self.ubicacion = ubicacion
         self.latitud = latitud
         self.longitud = longitud
-        self.municipioID = municipioID
         self.provinciaID = provinciaID
         self.departamentoID = departamentoID
-        self.conexiones = []
-        self.colaConexionesPendiente = Queue()
+        self.municipioID = municipioID
 
-        if self.provinciaID not in Provincia.diccionarioProv:
-            raise Exception("Provincia no registrada")
-        if self.departamentoID not in Provincia.diccionarioProv[self.provinciaID].diccionarioDptos:
-            raise Exception("Departamento no registrado")
-        if self.municipioID not in Provincia.diccionarioProv[self.provinciaID].diccionarioDptos[self.departamentoID].diccionarioMunicipios:
-            raise Exception("Municipio no registrado")
+        self.conexiones = dict()
+        self.colaConexionesPendientes: Queue[Conexion] = Queue()
         
         if self.routerID not in Router.diccionarioRouter:
             Router.diccionarioRouter[self.routerID] = self        
@@ -31,14 +36,24 @@ class Router():
     #Metodo para agregar las conexiones extraidas a los routers asociados entre direccionIP-routerID
     #Llamar a esta funcion cuando se esten leyendo las conexiones del csv, para saber si appendearlas a la lista
     #de conexiones del router o mandarla a la cola de espera
-    # def agregarConexion(conexion):
-    #     for conexion.direccionIP in Conexion.conexionIDRegistrados.keys():
-    #         for router in Router.diccionarioRouter.keys():
-    #             if router == conexion.direccionIP:
-    #                 if len(router.conexiones) <= 20: #si el router tiene menos de 20 conexiones, agregar la conexion
-    #                     router.conexiones.append(conexion)
-    #                 else:
-    #                     Router.colaConexionesPendiente.put_nowait() #agrego la conexion a la cola de pendientes
+    def agregarConexion(self, conexion: Conexion):
+        if len(self.conexiones) <= 20:
+            self.conexiones[conexion.direccionMAC] = conexion
+        else:
+            self.colaConexionesPendientes.put_nowait(conexion)
+
+    def quitarConexion(self, direccionMAC: int):
+        if direccionMAC in self.conexiones:
+            del self.conexiones[direccionMAC]
+
+            if not self.colaConexionesPendientes.empty(): 
+                # Si tenia alguna conexion pendiente la agrego
+                aAgregar = self.colaConexionesPendientes.get_nowait()
+
+                self.conexiones[aAgregar.direccionMAC] = aAgregar
+        else:
+            raise Exception("Conexion no registrada")
+
 
     def __str__(self):
         return self.identificador

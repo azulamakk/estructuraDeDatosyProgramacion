@@ -1,43 +1,25 @@
-from queue import Queue
 from routers import *
 
-from collections import deque
-
-class Queue:
-    def __init__(self):
-        self.items = deque()
-    
-    def encolar(self, item):
-        self.items.append(item)
-    
-    def desencolar(self):
-        return self.items.popleft()
-    
-    def primero(self):
-        return self.items[0]
-    
-    def estaVacia(self):
-        return len(self.items) == 0
-        
-    def tamano(self):
-        return len(self.items)
-        
-    def __str__(self):
-        return str(self.items)
-     
 class Conexion:
-    #Iniciamos la cola de conexiones pendientes
-    colaConexionesPendientes = Queue()
-    #Diccionario con todas las conexiones extraidas del csv conexiones
-    conexionIDRegistrados = dict()
+    # Set con macs registradas en todos los routers
+    macsRegistradas = set()
 
-    def __init__(self, direccionIP:str, direccionMAC:int, fecha, hora, activa:int):
+    # TODO: Agregar arbol historico de conexiones
+
+
+    def __init__(self, direccionIP: str, direccionMAC: int, fecha, hora, activa: int, routerID: str):
         self.direccionIP = direccionIP
         self.direccionMAC = direccionMAC
         self.fecha = fecha
         self.hora = hora
         self.activa = activa
+        self.routerID = routerID
 
-        #Agrego la conexion al diccionario de conexiones
-        if self.direccionIP not in Conexion.conexionIDRegistrados:
-            Conexion.conexionIDRegistrados[self.direccionIP] = self
+        #Agrego la mac al set de macs activas
+        if self.activa == 1 and self.direccionMAC not in Conexion.macsRegistradas:
+            Conexion.macsRegistradas.add(self.direccionMAC)
+        
+        # TODO: Agregar a conexiones historicas
+
+
+        

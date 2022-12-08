@@ -2,17 +2,20 @@
 class Provincia():
     diccionarioProv: dict[str, 'Provincia'] = dict()
 
-    def __init__(self, provinciaID:str, provincia:str):
+    def __init__(self, provinciaID: str, provincia: str):
+        if provinciaID == None:
+            raise Exception("Provincia no posee identificador")
+        
+        if provinciaID in Provincia.diccionarioProv:
+            return
+            # raise Exception("Provincia ya registrada")
+
         self.provinciaID = provinciaID
         self.provincia = provincia
-        
+
         self.diccionarioDptos: dict[str, 'Departamento'] = dict()
 
-        if self.provinciaID == None:
-            raise Exception("Provincia no posee identificador")
-
-        if self.provinciaID not in Provincia.diccionarioProv:
-            Provincia.diccionarioProv[self.provinciaID] = self
+        Provincia.diccionarioProv[self.provinciaID] = self
 
     def __str__(self):
         return self.provincia
