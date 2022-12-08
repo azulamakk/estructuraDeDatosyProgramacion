@@ -1,6 +1,6 @@
 from PyQt5 import QtCore, QtGui, QtWidgets
 from PyQt5.QtWidgets import QApplication
-from ventanasSecundarias import Ui_FormMunis, Ui_FormRouter, Ui_FormVerConexProv, ListboxWidget
+from ventanasSecundarias import Ui_FormMunis, Ui_FormAgregarRouter, Ui_FormRouter, Ui_FormVerConexPorUbicacion, ListboxWidget, Ui_FormVerConexEntreFechas
 
 class Ui_MainWindow(object):
     def setupUi(self, MainWindow):
@@ -36,12 +36,15 @@ class Ui_MainWindow(object):
         self.labelSaludo.setObjectName("labelSaludo")
         self.verticalLayout.addWidget(self.labelSaludo)
         self.label = QtWidgets.QLabel(self.verticalLayoutWidget)
+
+        
         font = QtGui.QFont()
         font.setFamily("Calibri")
         font.setPointSize(12)
         self.label.setFont(font)
         self.label.setObjectName("label")
         self.verticalLayout.addWidget(self.label)
+
         MainWindow.setCentralWidget(self.centralwidget)
         self.menubar = QtWidgets.QMenuBar(MainWindow)
         self.menubar.setGeometry(QtCore.QRect(0, 0, 621, 21))
@@ -71,23 +74,90 @@ class Ui_MainWindow(object):
         elif opcionIndicada == 3:
             self.botonSeleccionarOpcion.clicked.connect(self.verConexionesPorProvincia)
             return
-        
+        elif opcionIndicada == 4:
+            self.botonSeleccionarOpcion.clicked.connect(self.verConexionesPorDepartamento)
+            return
+        elif opcionIndicada == 5:
+            self.botonSeleccionarOpcion.clicked.connect(self.verConexionesPorMunicipio)
+            return
+        elif opcionIndicada == 6:
+            self.botonSeleccionarOpcion.clicked.connect(self.verConexionesEntreFechas)
+            return
+        elif opcionIndicada == 7:
+            self.botonSeleccionarOpcion.clicked.connect(self.agregarRouter)
+            return
+        elif opcionIndicada == 8:
+            self.botonSeleccionarOpcion.clicked.connect(self.eliminarRouter)
+            return
+        elif opcionIndicada == 9:
+            self.botonSeleccionarOpcion.clicked.connect(self.agregarConexion)
+            return
+        elif opcionIndicada == 10:
+            self.botonSeleccionarOpcion.clicked.connect(self.eliminarConexion)
+            return
+        elif opcionIndicada == 11:
+            self.botonSeleccionarOpcion.clicked.connect(lambda: QApplication.quit()) 
+            print('\n---PROGRAMA FINALIZADO---\n')
+
     #Cargar archivo municipios
     def ventanaLeerArchivoMuni(self):
         demo = Ui_FormMunis()
         demo.show()
-
+    
     #Cargar archivo routers
     def ventanaLeerArchivoRouters(self):
         demo = Ui_FormRouter()
         demo.show()
-
+    
     #Ver N° de conexiones por provincia dada 
     def verConexionesPorProvincia(self):
         self.Form = QtWidgets.QWidget()
-        self.ui = Ui_FormVerConexProv()
+        self.ui = Ui_FormVerConexPorUbicacion()
+        self.ui.setupUi(self.Form,'provincia')
+        self.Form.show()
+    
+    #Ver N° de conexiones por departamento dado 
+    def verConexionesPorDepartamento(self):
+        self.Form = QtWidgets.QWidget()
+        self.ui = Ui_FormVerConexPorUbicacion()
+        self.ui.setupUi(self.Form,'departamento')
+        self.Form.show()
+    
+    #Ver N° de conexiones por municipio dado 
+    def verConexionesPorMunicipio(self):
+        self.Form = QtWidgets.QWidget()
+        self.ui = Ui_FormVerConexPorUbicacion()
+        self.ui.setupUi(self.Form,'municipio')
+        self.Form.show()
+    
+    #Filtrar y mostrar la # de conexiones entre dos fechas dadas
+    def verConexionesEntreFechas(self):
+        self.Form = QtWidgets.QMainWindow()
+        self.ui = Ui_FormVerConexEntreFechas()
         self.ui.setupUi(self.Form)
         self.Form.show()
+        return
+
+    #Agregar un router (validar los datos)
+    def agregarRouter(self):
+        self.Form = QtWidgets.QWidget()
+        self.ui = Ui_FormAgregarRouter()
+        self.ui.setupUi(self.Form)
+        self.Form.show()
+    
+    #Eliminar un router
+    def eliminarRouter(self):
+        return
+
+    #Agregar una conexion (validar los datos)
+    def agregarConexion(self):
+        return
+
+    #Eliminar una conexion
+    def eliminarConexion(self):
+        return
+
+    ##### Crear un file de auxiliares para estas funciones falopas #####
 
     #Funcion para cancelar la opcion de apretar el boton en caso de que no se escriba nada o no se ingrese una opcion numerica entre 1 y 11 (inclusive)
     def botonSeleccionar_enable(self):
@@ -112,6 +182,7 @@ class Ui_MainWindow(object):
         self.ingreseOpcionLabel.setText(_translate("MainWindow", "Ingrese una opción:"))
         self.labelSaludo.setText(_translate("MainWindow", "Bienvenidos al Sistema de Información de País Digital"))
         self.label.setText(_translate("MainWindow", "1. Leer archivo de municipios\n2. Leer archivo de puntos de acceso\n3. Ver N° de conexiones por provincia dada\n4. Ver N° de conexiones por departamento dado\n5. Ver N° de conexiones por municipio dado\n6. Ver N° de conexiones totales en el pais entre 2 fechas\n7. Agregar un router\n8. Dar de baja un router\n9. Agregar conexiones\n10. Quitar conexiones\n11. Salir"))
+
 
     #Main
 if __name__ == "__main__":

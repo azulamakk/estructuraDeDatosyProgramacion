@@ -1,14 +1,15 @@
 from PyQt5 import QtCore, QtGui, QtWidgets, QtGui
-from PyQt5.QtWidgets import QLabel, QWidget, QListWidget,QListWidgetItem, QHBoxLayout, QMainWindow,QPushButton,QApplication
+from PyQt5.QtWidgets import QCalendarWidget, QLabel, QWidget, QListWidget,QListWidgetItem, QHBoxLayout, QMainWindow,QPushButton,QApplication
 import sys,os
-from PyQt5.QtCore import Qt,QUrl,QRect
+from PyQt5.QtCore import Qt,QUrl,QRect,QDateTime
 from PyQt5.QtGui import QFont
+import datetime
+import calendar
 
-#importo la funcion leerCSVMunicipios del modulo lecturaArchivos porque no quiero que se lea siempre, sino cuando llame a la funcion nada mas
 from lecturaArchivos import leerArchivoMunicipio
-
 #aca importar las funciones del menu que vamos a ejecutar
 
+# Clase auxiliar
 class Ui_FormRouters(object):
     def setupUi(self, Form):
         Form.setObjectName("Form")
@@ -33,6 +34,7 @@ class Ui_FormRouters(object):
         self.labelCargarArchivoMuni.setText(_translate("Form", "Arrastre o adjunte archivo router:"))
         self.botonCargarArchivoMuni.setText(_translate("Form", "Cargar archivo"))
 
+# Clase auxiliar
 class ListboxWidget(QListWidget):  
     def __init__(self,parent=None):
         super().__init__(parent)
@@ -65,6 +67,7 @@ class ListboxWidget(QListWidget):
         else: #si falla
             event.ignore()
 
+# Esta clase es para ejecutar la opcion 1
 class Ui_FormMunis(QMainWindow):
     def __init__(self):
         super().__init__()
@@ -104,11 +107,11 @@ class Ui_FormMunis(QMainWindow):
         self.setCentralWidget(widgetLayout)
 
     def getSelectedItem(self):
-        #selecciono el archivo csv de municipios que quiero leer mediante la ejecucion de la funcion "leerArchivoMunicipio", para ello le paso el path que tengo en la listbox
         item = QListWidgetItem(self.lstbox_.currentItem())
-        pathMunicipio = item.text()
-        leerArchivoMunicipio(pathMunicipio)
+        pathMuni = item.text()
+        leerArchivoMunicipio(pathMuni)
 
+# Esta clase es para ejecutar la opcion 2
 class Ui_FormRouter(QMainWindow):
     def __init__(self):
         super().__init__()
@@ -151,28 +154,158 @@ class Ui_FormRouter(QMainWindow):
         item = QListWidgetItem(self.lstbox_.currentItem())
         return item.text()
 
-class Ui_FormVerConexProv(object):
-    def setupUi(self, Form):
+# Esta clase es para ejecutar la opcion 6
+class Ui_FormVerConexEntreFechas(object):
+
+    def setupUi(self,MainWindow):
+        MainWindow.setObjectName("MainWindow")
+        MainWindow.resize(800, 500)
+        self.centralwidget = QtWidgets.QWidget(MainWindow)
+        self.centralwidget.setObjectName("centralwidget")
+
+        self.verticalLayoutWidget = QtWidgets.QWidget(self.centralwidget)
+        self.verticalLayoutWidget.setGeometry(30, 30, 690, 400)
+        self.verticalLayoutWidget.setObjectName("verticalLayoutWidget")
+
+        self.verticalLayout = QtWidgets.QVBoxLayout(self.verticalLayoutWidget)
+        self.verticalLayout.setContentsMargins(0, 0, 0, -300)
+        self.verticalLayout.setObjectName("verticalLayout")
+
+        self.horizontalLayout = QtWidgets.QHBoxLayout()
+        self.horizontalLayout.setContentsMargins(0, 0, -300, -100)
+        self.horizontalLayout.setObjectName("horizontalLayout")
+
+        # Label de seleccionar fecha inicio
+        self.labelIngresoFechaInicio = QtWidgets.QLabel(self.verticalLayoutWidget)
+        font = QtGui.QFont()
+        font.setFamily("Calibri")
+        font.setPointSize(12)
+        self.labelIngresoFechaInicio.setFont(font)
+        self.labelIngresoFechaInicio.setObjectName("label")
+        self.labelIngresoFechaInicio.setText("Ingrese fecha de inicio:")
+        self.horizontalLayout.addWidget(self.labelIngresoFechaInicio)
+
+        # Objeto calendario para seleccionar la fecha inicio
+        self.calendarInicio = QCalendarWidget(self.verticalLayoutWidget)
+        self.horizontalLayout.addWidget(self.calendarInicio)
+        self.calendarInicio.setGridVisible(True)
+
+        # Boton para seleccionar la fecha inicio
+        self.botonSeleccionarFechaInicio = QtWidgets.QPushButton(self.verticalLayoutWidget)
+        self.botonSeleccionarFechaInicio.setObjectName("botonSeleccionarFechaInicio")
+        self.botonSeleccionarFechaInicio.setText("Seleccionar")
+        self.horizontalLayout.addWidget(self.botonSeleccionarFechaInicio)
+
+        self.verticalLayout.addLayout(self.horizontalLayout)
+
+        self.horizontalLayout_2 = QtWidgets.QHBoxLayout()
+        self.horizontalLayout_2.setContentsMargins(0, 0, -300, -100)
+        self.horizontalLayout_2.setObjectName("horizontalLayout_2")
+
+        # Label de seleccionar fecha fin
+        self.labelFechaFin = QtWidgets.QLabel(self.verticalLayoutWidget)
+        font = QtGui.QFont()
+        font.setFamily("Calibri")
+        font.setPointSize(12)
+        self.labelFechaFin.setFont(font)
+        self.labelFechaFin.setObjectName("label")
+        self.labelFechaFin.setText("Ingrese fecha de fin:")
+        self.horizontalLayout_2.addWidget(self.labelFechaFin)
+
+        # Objeto calendario para seleccionar fecha fin
+        self.calendarFechaFin = QCalendarWidget(self.verticalLayoutWidget)
+        self.horizontalLayout_2.addWidget(self.calendarFechaFin)
+        self.calendarFechaFin.setGridVisible(True)
+
+        # Boton para seleccionar la fecha fin
+        self.botonSeleccionarFechaFin = QtWidgets.QPushButton(self.verticalLayoutWidget)
+        self.botonSeleccionarFechaFin.setObjectName("botonSeleccionarFechaFin")
+        self.botonSeleccionarFechaFin.setText("Seleccionar")
+        self.horizontalLayout_2.addWidget(self.botonSeleccionarFechaFin)
+
+        self.verticalLayout.addLayout(self.horizontalLayout_2)
+        MainWindow.setCentralWidget(self.centralwidget)
+    
+        ## Boton de ingreso de rango de fechas
+        self.botonIngresoRangoFechas = QtWidgets.QPushButton(self.verticalLayoutWidget)
+        self.botonIngresoRangoFechas.setObjectName("botonIngresoRangoFechas")
+        self.botonIngresoRangoFechas.setText("Ingresar rango de fechas")
+        self.verticalLayout.addWidget(self.botonIngresoRangoFechas)
+
+        #### Acciones ####
+
+        # PD: abria que validar que "fecha fin > fecha inicio" 
+        
+        # Console log de las fechas elegidas
+        
+        self.botonSeleccionarFechaInicio.clicked.connect(lambda: self.asignarFechaInicio())
+        self.botonSeleccionarFechaFin.clicked.connect(lambda: self.asignarFechaFin())
+
+
+        # Se ejecuta la funcion que muestra las conexiones entre las dos fechas seleccionadas
+        self.botonIngresoRangoFechas.clicked.connect(lambda: self.mostrarConexionesEntreFechas(self.fechaInicio,self.fechaFin))
+
+    def asignarFechaInicio(self):
+        self.fechaInicio = QDateTime(self.calendarInicio.selectedDate()).toPyDateTime()
+
+    def asignarFechaFin(self):
+        self.fechaFin = QDateTime(self.calendarFechaFin.selectedDate()).toPyDateTime()
+
+    def mostrarConexionesEntreFechas(self,fechaInicio,fechaFin):
+        print('Fecha desde: ',fechaInicio)
+        print('Fecha hasta: ',fechaFin)
+        print('\n')
+        print("Aca se ejecuta la funcion que muestra las conexiones entre las dos fechas")
+        return
+
+# Esta clase es para ejecutar la opcion 3,4 y 5
+class Ui_FormVerConexPorUbicacion(object):
+    def setupUi(self, Form, ubicacion):
         Form.setObjectName("Form")
         Form.resize(559, 323)
         self.pushButton = QtWidgets.QPushButton(Form)
         self.pushButton.setGeometry(QtCore.QRect(380, 150, 71, 31))
         self.pushButton.setObjectName("pushButton")
-        self.label = QtWidgets.QLabel(Form)
-        self.label.setGeometry(QtCore.QRect(40, 160, 151, 16))
-        font = QtGui.QFont()
-        font.setFamily("Calibri")
-        font.setPointSize(12)
-        self.label.setFont(font)
-        self.label.setObjectName("label")
+
         self.textEdit = QtWidgets.QTextEdit(Form)
         self.textEdit.setGeometry(QtCore.QRect(210, 150, 141, 31))
         self.textEdit.setObjectName("textEdit")
 
-        self.retranslateUi(Form)
+        _translate = QtCore.QCoreApplication.translate
+        Form.setWindowTitle(_translate("Form", "Form"))
+        self.pushButton.setText(_translate("Form", "Seleccionar"))
         QtCore.QMetaObject.connectSlotsByName(Form)
 
-        self.pushButton.clicked.connect(self.mostrarConexionesPorProvincia)
+        if ubicacion == 'provincia':
+            self.label = QtWidgets.QLabel(Form)
+            self.label.setGeometry(QtCore.QRect(40, 160, 151, 16))
+            font = QtGui.QFont()
+            font.setFamily("Calibri")
+            font.setPointSize(12)
+            self.label.setFont(font)
+            self.label.setObjectName("label")
+            self.label.setText(_translate("Form", "Ingrese una provincia:"))
+            self.pushButton.clicked.connect(self.mostrarConexionesPorProvincia)
+        elif ubicacion == 'departamento':
+            self.label = QtWidgets.QLabel(Form)
+            self.label.setGeometry(QtCore.QRect(20, 160, 180, 16))
+            font = QtGui.QFont()
+            font.setFamily("Calibri")
+            font.setPointSize(12)
+            self.label.setFont(font)
+            self.label.setObjectName("label")
+            self.label.setText(_translate("Form", "Ingrese un departamento:"))
+            self.pushButton.clicked.connect(self.mostrarConexionesPorDepartamento)
+        elif ubicacion == 'municipio':
+            self.label = QtWidgets.QLabel(Form)
+            self.label.setGeometry(QtCore.QRect(20, 160, 180, 16))
+            font = QtGui.QFont()
+            font.setFamily("Calibri")
+            font.setPointSize(12)
+            self.label.setFont(font)
+            self.label.setObjectName("label")
+            self.label.setText(_translate("Form", "Ingrese un municipio:"))
+            self.pushButton.clicked.connect(self.mostrarConexionesPorDepartamento)
 
     #Aca ejecutar la funcion importada que muestra las conexiones por provincia
     #Pensar como "importar" los resultados de esa funcion a una ventana nueva
@@ -180,9 +313,104 @@ class Ui_FormVerConexProv(object):
         print("Aca se ejecuta la funcion que muestra las conexiones en la provincia dada")
         return
 
-    def retranslateUi(self, Form):
+    def mostrarConexionesPorDepartamento(self):
+        print("Aca se ejecuta la funcion que muestra las conexiones en el departamento dado")
+        return
+
+# Esta clase es para ejecutar la opcion 7
+class Ui_FormAgregarRouter(object):
+    def setupUi(self, Form):
+        Form.setObjectName("Form")
+        Form.resize(559, 323)
+        self.pushButton = QtWidgets.QPushButton(Form)
+        self.pushButton.setGeometry(QtCore.QRect(400, 150, 71, 31))
+        self.pushButton.setObjectName("pushButton")
+
+        self.textEdit = QtWidgets.QTextEdit(Form)
+        self.textEdit.setGeometry(QtCore.QRect(240, 150, 120, 31))
+        self.textEdit.setObjectName("textEdit")
+
         _translate = QtCore.QCoreApplication.translate
         Form.setWindowTitle(_translate("Form", "Form"))
         self.pushButton.setText(_translate("Form", "Seleccionar"))
-        self.label.setText(_translate("Form", "Ingrese una provincia:"))
+        QtCore.QMetaObject.connectSlotsByName(Form)
 
+
+        self.label = QtWidgets.QLabel(Form)
+        self.label.setGeometry(QtCore.QRect(40, 160, 250, 16))
+        font = QtGui.QFont()
+        font.setFamily("Calibri")
+        font.setPointSize(12)
+        self.label.setFont(font)
+        self.label.setObjectName("label")
+        self.label.setText(_translate("Form", "Ingrese router ID a agregar:"))
+        self.pushButton.clicked.connect(lambda: self.funcionAgregarRouter(self.textEdit.toPlainText()))
+
+    def funcionAgregarRouter(self,texto):
+        print(texto)
+
+
+
+# def IngresoFechayHora():
+#     diaFecha= obtenerInt('Ingrese un dia: ', 0, 31)
+
+#     mesFecha= obtenerInt('Ingrese un mes: ', 0, 12)
+
+#     anioFecha= obtenerInt('Ingrese un año: ', 2019, 2022)
+
+#     horaFecha= obtenerInt('Ingrese una hora: ', 0, 23)
+
+#     minutosFecha= obtenerInt('Ingrese un minuto: ', 0, 59)
+
+#     fecha = datetime.datetime(anioFecha, mesFecha, diaFecha, horaFecha, minutosFecha)
+#     print(fecha)
+#     return fecha
+
+# def IngresoSoloFecha():
+#     diaFecha= obtenerInt('Ingrese un dia: ', 0, 31)
+
+#     mesFecha= obtenerInt('Ingrese un mes: ', 0, 12)
+
+#     anioFecha= obtenerInt('Ingrese un año: ', 2019, 2022) #revisar que año de inicio dejamos
+#     fecha = datetime.date(anioFecha, mesFecha, diaFecha)
+#     return fecha
+
+# def IngresoSoloHora():
+#     horaFecha= obtenerInt('Ingrese una hora: ', 0, 23)
+
+#     minutosFecha= obtenerInt('Ingrese un minuto: ', 0, 59)
+
+#     hora = datetime.time(horaFecha, minutosFecha)
+    
+#     return hora
+
+# def obtenerInt(mensaje, minimo, maximo):
+#     try:    
+#         numero = int(input(mensaje))
+
+#         if numero < minimo or numero > maximo:
+#             print('Numero de fecha incorrecto. Intente de nuevo')
+#             return obtenerInt(mensaje, minimo, maximo)
+#         else:
+#             return numero
+
+#     except ValueError or TypeError:
+#         print('Dato de tipo erroneo')
+#         return obtenerInt(mensaje, minimo, maximo)
+
+# def parseDate(date, time):
+#     try:    
+#         dateParts = date.split("/")
+#         if len(dateParts) < 3:
+#             return None
+
+#         [month, day, year] = dateParts
+#         timeParts = time.split(":")
+#         if len(timeParts) < 2:
+#             return None
+
+#         [hour, minute] = timeParts
+
+#         return datetime.datetime(int(year), int(month), int(day), int(hour), int(minute))
+#     except:
+#         return None
