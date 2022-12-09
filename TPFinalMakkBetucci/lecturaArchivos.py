@@ -5,8 +5,6 @@ import csv
 from geopy.geocoders import Nominatim
 import json
 
-
-
 #Lectura del csv municipios
 def cargarProvinciasyDptos(pathMunicipios):
     prefijos_json = {}
@@ -35,8 +33,6 @@ def cargarProvinciasyDptos(pathMunicipios):
 
 listaMunicipios = []
 cargarProvinciasyDptos('TPFinalMakkBetucci/municipios.csv')
-
-
 
 def leerArchivoRouter(pathRouters):
     #Lectura del csv routers

@@ -1,5 +1,5 @@
 from PyQt5 import QtCore, QtGui, QtWidgets, QtGui
-from PyQt5.QtWidgets import QCalendarWidget, QLabel, QWidget, QListWidget,QListWidgetItem, QHBoxLayout, QMainWindow,QPushButton,QApplication
+from PyQt5.QtWidgets import QMessageBox, QCalendarWidget, QLabel, QWidget, QListWidget,QListWidgetItem, QHBoxLayout, QMainWindow,QPushButton,QApplication
 import sys,os
 import time
 import threading
@@ -102,6 +102,7 @@ class Ui_FormMunis(QMainWindow):
         self.botonCargarArchivoMuni.setText("Cargar archivo")
         self.botonCargarArchivoMuni.setGeometry(350, 200, 200, 150)
         self.botonCargarArchivoMuni.clicked.connect(lambda: self.getSelectedItem())
+        self.layoutPrincipal.addWidget(self.botonCargarArchivoMuni)
 
         self.backButton = QPushButton()
         self.backButton.setGeometry(QtCore.QRect(380, 100, 71, 31))
@@ -110,16 +111,24 @@ class Ui_FormMunis(QMainWindow):
         self.layoutPrincipal.addWidget(self.backButton)
         self.backButton.clicked.connect(lambda: self.close())
 
-        self.layoutPrincipal.addWidget(self.botonCargarArchivoMuni)
-
         widgetLayout = QWidget()
         widgetLayout.setLayout(self.layoutPrincipal)
         self.setCentralWidget(widgetLayout)
 
     def getSelectedItem(self):
-        item = QListWidgetItem(self.lstbox_.currentItem())
-        pathMuni = item.text()
-        lecturaArchivos.cargarProvinciasyDptos(pathMuni)
+        if len(self.lstbox_) == 0:
+            print('Por favor arrastre un archivo')
+            msg = QMessageBox()
+            msg.setText("Error")
+            msg.setInformativeText("Por favor arrastre un archivo")
+            msg.exec_()
+        else:
+            item = QListWidgetItem(self.lstbox_.currentItem())
+            pathMuni = item.text()
+            lecturaArchivos.cargarProvinciasyDptos(pathMuni)
+            msg = QMessageBox()
+            msg.setInformativeText("Archivo cargado correctamente")
+            msg.exec_()
 
 # Esta clase es para ejecutar la opcion 2
 class Ui_FormRouter(QMainWindow):
@@ -164,9 +173,19 @@ class Ui_FormRouter(QMainWindow):
         self.setCentralWidget(widgetLayout)
 
     def getSelectedItem(self):
-        item = QListWidgetItem(self.lstbox_.currentItem())
-        pathRouter = item.text()
-        lecturaArchivos.leerArchivoRouter(pathRouter)
+        if len(self.lstbox_) == 0:
+            msg = QMessageBox()
+            msg.setText("Error")
+            msg.setInformativeText("Por favor arrastre un archivo")
+            msg.exec_()
+        else:
+            item = QListWidgetItem(self.lstbox_.currentItem())
+            pathRouter = item.text()
+            lecturaArchivos.leerArchivoRouter(pathRouter)
+            #lecturaArchivos.leerArchivoConexiones('conexiones.csv')
+            msg = QMessageBox()
+            msg.setInformativeText("Archivo cargado correctamente")
+            msg.exec_()
 
 # Esta clase es para ejecutar la opcion 3,4 y 5
 class Ui_FormVerConexPorUbicacion(QtWidgets.QMainWindow):   
@@ -271,12 +290,14 @@ class Ui_FormVerConexPorUbicacion(QtWidgets.QMainWindow):
         # con el atributo provinciaID del router. Si coinciden entonces imprimo las conexiones que tiene ese router ID (imprimo las direcciones IP)
         
         for provincia in municipios.Provincia.diccionarioProv.items():
-            if provincia.provinciaID == textoFinal:
+            if provincia[0] == textoFinal:
                 for router in routers.Router.diccionarioRouter.keys():
-                    if provincia.provinciaID == routers.Router.diccionarioRouter[router].provinciaID:
+                    #print(routers.Router.diccionarioRouter[router].provinciaID)
+                    if provincia[0] == routers.Router.diccionarioRouter[router].provinciaID:
                         for conexion in routers.Router.diccionarioRouter[router].conexiones.items():
                             #Esto hace un print del resultado de la funcion en un text box y lo imprime con un delay de 0.1 segundos
-                            self.valueChanged.emit(conexion)
+                            print('Prueba')
+                            self.valueChanged.emit(conexion[0]) #imprime la direccion IP de la conexion (es la key de la tupla item)
                             time.sleep(0.1)
 
     def mostrarConexionesPorDepartamento(self):
@@ -306,7 +327,6 @@ class Ui_FormVerConexPorUbicacion(QtWidgets.QMainWindow):
                         for conexion in routers.Router.diccionarioRouter[router].conexiones.items():
                             self.valueChanged.emit(conexion)
                             time.sleep(0.1)
-
 
 # Esta clase es para ejecutar la opcion 6
 class Ui_FormVerConexEntreFechas(QMainWindow):
@@ -421,7 +441,7 @@ class Ui_FormVerConexEntreFechas(QMainWindow):
     def mostrarConexionesEntreFechas(self,fechaInicio,fechaFin):
         print('Fecha desde: ',fechaInicio)
         print('Fecha hasta: ',fechaFin)
-        print('\n')
+        print('/n')
         print("Aca se ejecuta la funcion que muestra las conexiones entre las dos fechas")
         
 # Esta clase es para ejecutar la opcion 7

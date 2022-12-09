@@ -22,7 +22,6 @@ class Ui_MainWindow(QtWidgets.QMainWindow):
         self.ingreseOpcionLabel.setFont(font)
         self.ingreseOpcionLabel.setObjectName("ingreseOpcionLabel")
         self.textEditIngresoOpcion = QtWidgets.QTextEdit(self.centralwidget)
-        self.textEditIngresoOpcion.textChanged.connect(self.botonSeleccionar_enable)
         self.textEditIngresoOpcion.setGeometry(QtCore.QRect(250, 290, 171, 31))
         self.textEditIngresoOpcion.setObjectName("textEditIngresoOpcion")
         self.verticalLayoutWidget = QtWidgets.QWidget(self.centralwidget)
@@ -59,53 +58,57 @@ class Ui_MainWindow(QtWidgets.QMainWindow):
         self.retranslateUi(MainWindow)
         QtCore.QMetaObject.connectSlotsByName(MainWindow)
 
+        self.botonSeleccionarOpcion.setEnabled(False)
         self.textEditIngresoOpcion.textChanged.connect(self.capturarOpcion)
 
     def capturarOpcion(self):
-        
-        opcionIndicada = self.textEditIngresoOpcion.toPlainText()
-        #self.textEditIngresoOpcion.clear()
-        opcionIndicada = int(opcionIndicada)
 
-        if opcionIndicada == 1:
-            self.botonSeleccionarOpcion.clicked.connect(self.ventanaLeerArchivoMuni)
-            return
-        elif opcionIndicada == 2:
-            self.botonSeleccionarOpcion.clicked.connect(self.ventanaLeerArchivoRouters)
-            return
-        elif opcionIndicada == 3:
-            self.botonSeleccionarOpcion.clicked.connect(self.verConexionesPorProvincia)
-            return
-        elif opcionIndicada == 4:
-            self.botonSeleccionarOpcion.clicked.connect(self.verConexionesPorDepartamento)
-            return
-        elif opcionIndicada == 5:
-            self.botonSeleccionarOpcion.clicked.connect(self.verConexionesPorMunicipio)
-            return
-        elif opcionIndicada == 6:
-            self.botonSeleccionarOpcion.clicked.connect(self.verConexionesEntreFechas)
-            return
-        elif opcionIndicada == 7:
-            self.botonSeleccionarOpcion.clicked.connect(self.agregarRouter)
-            return
-        elif opcionIndicada == 8:
-            self.botonSeleccionarOpcion.clicked.connect(self.eliminarRouter)
-            return
-        elif opcionIndicada == 9:
-            self.botonSeleccionarOpcion.clicked.connect(self.agregarConexion)
-            return
-        elif opcionIndicada == 10:
-            self.botonSeleccionarOpcion.clicked.connect(self.eliminarConexion)
-            return
-        elif opcionIndicada == 11:
-            self.botonSeleccionarOpcion.clicked.connect(lambda: QApplication.quit()) 
-            print('\n---PROGRAMA FINALIZADO---\n')
+        texto = self.textEditIngresoOpcion.toPlainText()
+        if len(texto) != 0:
+            if texto.isnumeric() == True:
+                try:
+                    opcionIndicada = int(texto)
+                    if opcionIndicada in range(1,12):
+                        self.botonSeleccionarOpcion.setEnabled(True)
+                    else:
+                        self.botonSeleccionarOpcion.setEnabled(False)
+                except:
+                    self.botonSeleccionarOpcion.setEnabled(False)
+        else:
+            self.botonSeleccionarOpcion.setEnabled(False)
+        
+        if texto.isnumeric() == True:
+            opcionIndicada = int(texto)
+            if opcionIndicada == 1:
+                self.botonSeleccionarOpcion.clicked.connect(self.ventanaLeerArchivoMuni)
+            elif opcionIndicada == 2:
+                self.botonSeleccionarOpcion.clicked.connect(self.ventanaLeerArchivoRouters)
+            elif opcionIndicada == 3:
+                self.botonSeleccionarOpcion.clicked.connect(self.verConexionesPorProvincia)
+            elif opcionIndicada == 4:
+                self.botonSeleccionarOpcion.clicked.connect(self.verConexionesPorDepartamento)
+            elif opcionIndicada == 5:
+                self.botonSeleccionarOpcion.clicked.connect(self.verConexionesPorMunicipio)
+            elif opcionIndicada == 6:
+                self.botonSeleccionarOpcion.clicked.connect(self.verConexionesEntreFechas)
+            elif opcionIndicada == 7:
+                self.botonSeleccionarOpcion.clicked.connect(self.agregarRouter)
+            elif opcionIndicada == 8:
+                self.botonSeleccionarOpcion.clicked.connect(self.eliminarRouter)
+            elif opcionIndicada == 9:
+                self.botonSeleccionarOpcion.clicked.connect(self.agregarConexion)
+            elif opcionIndicada == 10:
+                self.botonSeleccionarOpcion.clicked.connect(self.eliminarConexion)
+            elif opcionIndicada == 11:
+                self.botonSeleccionarOpcion.clicked.connect(lambda: QApplication.quit()) 
+                print('\n---PROGRAMA FINALIZADO---\n')
+
 
     #Cargar archivo municipios
     def ventanaLeerArchivoMuni(self):
         demo = Ui_FormMunis()
         demo.show()
-    
+
     #Cargar archivo routers
     def ventanaLeerArchivoRouters(self):
         demo = Ui_FormRouter()
@@ -171,19 +174,19 @@ class Ui_MainWindow(QtWidgets.QMainWindow):
 ##### Crear un file de auxiliares para estas funciones falopas #####
 
     #Funcion para cancelar la opcion de apretar el boton en caso de que no se escriba nada o no se ingrese una opcion numerica entre 1 y 11 (inclusive)
-    def botonSeleccionar_enable(self):
-        texto = self.textEditIngresoOpcion.toPlainText()
-        if len(texto) != 0:
-            try:
-                opcionIndicada = int(texto)
-                if opcionIndicada in range(1,12):
-                    self.botonSeleccionarOpcion.setEnabled(True)
-                else:
-                    self.botonSeleccionarOpcion.setEnabled(False)
-            except:
-                self.botonSeleccionarOpcion.setEnabled(False)
-        else:
-            self.botonSeleccionarOpcion.setEnabled(False)
+    # def botonSeleccionar_enable(self):
+    #     texto = self.textEditIngresoOpcion.toPlainText()
+    #     if len(texto) != 0:
+    #         try:
+    #             opcionIndicada = int(texto)
+    #             if opcionIndicada in range(1,12):
+    #                 self.botonSeleccionarOpcion.setEnabled(True)
+    #             else:
+    #                 self.botonSeleccionarOpcion.setEnabled(False)
+    #         except:
+    #             self.botonSeleccionarOpcion.setEnabled(False)
+    #     else:
+    #         self.botonSeleccionarOpcion.setEnabled(False)
 
     #Funcion falopa que le cambia el text a algunos objetos
     def retranslateUi(self, MainWindow):

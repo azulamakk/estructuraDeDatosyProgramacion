@@ -11,9 +11,7 @@ class Conexion:
     def __init__(self, direccionIP: str, direccionMAC: int, fecha, hora, activa: int, routerID: str):
         self.direccionIP = direccionIP
         self.direccionMAC = direccionMAC
-        # self.fecha = fecha
-        # self.hora = hora
-        self.fecha = datetime.strptime(fecha + " " + hora, "%d/%m/%Y %H:%M:%S")
+        self.fechaYHora = datetime.strptime(fecha + " " + hora, "%d/%m/%Y %H:%M:%S")
         self.activa = activa
         self.routerID = routerID
 
@@ -25,9 +23,7 @@ class Conexion:
 
     # Para orden en lista
     def __lt__(self, other: 'Conexion'):
-        return self.fecha < other.fecha
+        return self.fechaYHora < other.fechaYHora
     
     def __str__(self):
-        return f"{self.fecha}"
-
-    
+        return f"{self.fechaYHora} - {self.direccionIP} - {self.direccionMAC} - {self.activa} - {self.routerID} '\n'"

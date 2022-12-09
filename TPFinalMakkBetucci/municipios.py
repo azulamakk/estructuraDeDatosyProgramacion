@@ -1,4 +1,3 @@
-
 class Provincia():
     diccionarioProv: dict[str, 'Provincia'] = dict()
 
@@ -28,7 +27,6 @@ class Departamento():
         self.departamento = departamento
 
         self.diccionarioMunicipios: dict[str, 'Municipio'] = dict()
-
 
         if self.departamentoID == None:
             raise Exception("Departamento no posee identificacion")
