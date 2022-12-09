@@ -67,11 +67,11 @@ def leerArchivoRouter(pathRouters):
                         latitude = str(latitude / 1_000_000)
                         longitude = str(longitude / 1_000_000)
 
-                        location = geolocator.reverse(latitude+","+longitude)
+                        # location = geolocator.reverse(latitude+","+longitude)
 
-                        address = location.raw['address']
-                        municipio = address.get('county', '')   
-
+                        # address = location.raw['address']
+                        # municipio = address.get('county', '')  
+                        municipio = ''
                     #Se crea el objeto Municipio
 
                     Municipio(linea['provincia_id'], prov.provincia, linea['id_departamento'], depto.departamento,
@@ -90,21 +90,24 @@ def leerArchivoRouter(pathRouters):
 # leerArchivoRouter('TPFinalMakkBetucci/routers.csv')
 def leerArchivoConexiones(pathConexiones):
     #Lectura del csv conexiones y carga de conexiones al diccionario de conexiones y a los routers
-    with open(pathConexiones, encoding='unicode_escape') as csvFile:
-        reader=csv.DictReader(csvFile)
+    with open(pathConexiones, encoding='utf-8-sig') as csvFile:
+        reader=csv.DictReader(csvFile, delimiter=';')
         i=0
         for linea in reader:
             try:
                 i+=1        
-                conexion = Conexion(linea['Direccion IP'],linea['MAC Address'],linea['Fecha'],linea['Hora'],linea['Activa'])
+                conexion = Conexion(linea['Direccion IP'],linea['MAC Address'],linea['Fecha'],linea['Horario'],linea['Activa'],linea['Direccion IP'])
                 if linea['Direccion IP'] in Router.diccionarioRouter and linea['Activa'] == '1':
                     router = Router.diccionarioRouter[linea['Direccion IP']]
                     if conexion.direccionMAC not in router.conexiones:
                         router.conexiones[conexion.direccionMAC] = conexion
                     else:
                         print('Conexion {} ya fue cargada previamente'.format(conexion.direccionMAC))
-            except:
+            except Exception as e:
+                print(e)
                 print('Linea {} no pudo ser cargada correctamente'.format(i))
 
 leerArchivoRouter('TPFinalMakkBetucci/routers.csv')
 leerArchivoConexiones('TPFinalMakkBetucci/conexiones.csv')
+
+print(Conexion.conexionesHistoricas)

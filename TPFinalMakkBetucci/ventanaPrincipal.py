@@ -1,8 +1,11 @@
 from PyQt5 import QtCore, QtGui, QtWidgets
 from PyQt5.QtWidgets import QApplication
-from ventanasSecundarias import Ui_FormMunis, Ui_FormAgregarRouter, Ui_FormRouter, Ui_FormVerConexPorUbicacion, ListboxWidget, Ui_FormVerConexEntreFechas
+from ventanasSecundarias import Ui_FormMunis, Ui_FormAgregarConexion, Ui_FormEliminarConexion, Ui_FormEliminarRouter, Ui_FormAgregarRouter, Ui_FormRouter, Ui_FormVerConexPorUbicacion, ListboxWidget, Ui_FormVerConexEntreFechas
 
-class Ui_MainWindow(object):
+class Ui_MainWindow(QtWidgets.QMainWindow):
+    # def __init__(self):
+    #     super().__init__()
+
     def setupUi(self, MainWindow):
         MainWindow.setObjectName("MainWindow")
         MainWindow.resize(621, 457)
@@ -37,7 +40,6 @@ class Ui_MainWindow(object):
         self.verticalLayout.addWidget(self.labelSaludo)
         self.label = QtWidgets.QLabel(self.verticalLayoutWidget)
 
-        
         font = QtGui.QFont()
         font.setFamily("Calibri")
         font.setPointSize(12)
@@ -113,28 +115,28 @@ class Ui_MainWindow(object):
     def verConexionesPorProvincia(self):
         self.Form = QtWidgets.QWidget()
         self.ui = Ui_FormVerConexPorUbicacion()
-        self.ui.setupUi(self.Form,'provincia')
+        self.ui.setupUi(self.Form,'provincia',self.Form)
         self.Form.show()
-    
+        
     #Ver N° de conexiones por departamento dado 
     def verConexionesPorDepartamento(self):
         self.Form = QtWidgets.QWidget()
         self.ui = Ui_FormVerConexPorUbicacion()
-        self.ui.setupUi(self.Form,'departamento')
+        self.ui.setupUi(self.Form,'departamento',self.Form)
         self.Form.show()
     
     #Ver N° de conexiones por municipio dado 
     def verConexionesPorMunicipio(self):
         self.Form = QtWidgets.QWidget()
         self.ui = Ui_FormVerConexPorUbicacion()
-        self.ui.setupUi(self.Form,'municipio')
+        self.ui.setupUi(self.Form,'municipio',self.Form)
         self.Form.show()
     
     #Filtrar y mostrar la # de conexiones entre dos fechas dadas
     def verConexionesEntreFechas(self):
         self.Form = QtWidgets.QMainWindow()
         self.ui = Ui_FormVerConexEntreFechas()
-        self.ui.setupUi(self.Form)
+        self.ui.setupUi(self.Form,self.Form)
         self.Form.show()
         return
 
@@ -147,17 +149,26 @@ class Ui_MainWindow(object):
     
     #Eliminar un router
     def eliminarRouter(self):
-        return
+        self.Form = QtWidgets.QWidget()
+        self.ui = Ui_FormEliminarRouter()
+        self.ui.setupUi(self.Form)
+        self.Form.show()
 
     #Agregar una conexion (validar los datos)
     def agregarConexion(self):
-        return
+        self.Form = QtWidgets.QWidget()
+        self.ui = Ui_FormAgregarConexion()
+        self.ui.setupUi(self.Form)
+        self.Form.show()
 
     #Eliminar una conexion
     def eliminarConexion(self):
-        return
+        self.Form = QtWidgets.QWidget()
+        self.ui = Ui_FormEliminarConexion()
+        self.ui.setupUi(self.Form)
+        self.Form.show()
 
-    ##### Crear un file de auxiliares para estas funciones falopas #####
+##### Crear un file de auxiliares para estas funciones falopas #####
 
     #Funcion para cancelar la opcion de apretar el boton en caso de que no se escriba nada o no se ingrese una opcion numerica entre 1 y 11 (inclusive)
     def botonSeleccionar_enable(self):
@@ -182,7 +193,6 @@ class Ui_MainWindow(object):
         self.ingreseOpcionLabel.setText(_translate("MainWindow", "Ingrese una opción:"))
         self.labelSaludo.setText(_translate("MainWindow", "Bienvenidos al Sistema de Información de País Digital"))
         self.label.setText(_translate("MainWindow", "1. Leer archivo de municipios\n2. Leer archivo de puntos de acceso\n3. Ver N° de conexiones por provincia dada\n4. Ver N° de conexiones por departamento dado\n5. Ver N° de conexiones por municipio dado\n6. Ver N° de conexiones totales en el pais entre 2 fechas\n7. Agregar un router\n8. Dar de baja un router\n9. Agregar conexiones\n10. Quitar conexiones\n11. Salir"))
-
 
     #Main
 if __name__ == "__main__":
