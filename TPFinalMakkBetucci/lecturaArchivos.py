@@ -8,7 +8,7 @@ import json
 #Lectura del csv municipios
 def cargarProvinciasyDptos(pathMunicipios):
     prefijos_json = {}
-    with open('TPFinalMakkBetucci/prefijos.json') as json_file:
+    with open('prefijos.json') as json_file:
         prefijos_json = json.load(json_file)
     with open(pathMunicipios, encoding= 'unicode_escape') as csvFile:
         reader=csv.DictReader(csvFile)
@@ -29,10 +29,6 @@ def cargarProvinciasyDptos(pathMunicipios):
                     Municipio(linea['provincia_id'], linea['provincia'], linea['id_departamento'], linea['departamento'], linea['municipio_id'], linea['municipio'])
             except:
                 print('Linea {} no pudo ser cargada correctamente'.format(i))
-
-
-listaMunicipios = []
-cargarProvinciasyDptos('TPFinalMakkBetucci/municipios.csv')
 
 def leerArchivoRouter(pathRouters):
     #Lectura del csv routers
@@ -74,7 +70,7 @@ def leerArchivoRouter(pathRouters):
                         linea['municipio_id'], municipio)
 
                     # listaMunicipios.append(linea)
-                if linea['id'] not in Router.diccionarioRouter.keys():
+                if linea['identificador'] not in Router.diccionarioRouter.keys():
                     Router(linea['id'], linea['identificador'],linea['ubicacion'],linea['latitud'],linea['longitud'],
                         linea['municipio_id'], linea['provincia_id'], linea['id_departamento'])
                 else:
@@ -93,17 +89,38 @@ def leerArchivoConexiones(pathConexiones):
             try:
                 i+=1        
                 conexion = Conexion(linea['Direccion IP'],linea['MAC Address'],linea['Fecha'],linea['Horario'],linea['Activa'],linea['Direccion IP'])
+                
                 if linea['Direccion IP'] in Router.diccionarioRouter and linea['Activa'] == '1':
                     router = Router.diccionarioRouter[linea['Direccion IP']]
+
                     if conexion.direccionMAC not in router.conexiones:
                         router.conexiones[conexion.direccionMAC] = conexion
                     else:
                         print('Conexion {} ya fue cargada previamente'.format(conexion.direccionMAC))
+
             except Exception as e:
                 print(e)
                 print('Linea {} no pudo ser cargada correctamente'.format(i))
 
-leerArchivoRouter('TPFinalMakkBetucci/routers.csv')
-leerArchivoConexiones('TPFinalMakkBetucci/conexiones.csv')
+### PARA CARGAR MANUALMENTE Y VER QUE FUNCIONE ###
 
-print(Conexion.conexionesHistoricas)
+# cargarProvinciasyDptos('municipios.csv')
+# leerArchivoRouter('routers.csv')
+# leerArchivoConexiones('conexiones.csv')
+
+
+### PARA IMPRIMIR LO QUE SE CARGÓ ###
+
+# for k,v in Provincia.diccionarioProv.items():
+#     print(k,v)   
+
+# for provincia in Provincia.diccionarioProv.items():
+#     for key,value in provincia[1].diccionarioDptos.items():
+#         print(key,value)   
+
+# for provincia in Provincia.diccionarioProv.items():
+#     for depto in provincia[1].diccionarioDptos.items():
+#         for k,v in depto[1].diccionarioMunicipios.items():
+#             print(k,v)
+        
+# print(Conexion.conexionesHistoricas)

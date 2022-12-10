@@ -6,7 +6,7 @@ from queue import Queue
 class Router():
     diccionarioRouter: dict[str,'Router'] = dict()
     
-    def __init__(self, routerID:int, identificador:str, ubicacion, latitud:float, longitud:float, municipioID:str, provinciaID:str, departamentoID:int):
+    def __init__(self, id:int, identificador:str, ubicacion, latitud:float, longitud:float, municipioID:str, provinciaID:str, departamentoID:int):
         if provinciaID not in Provincia.diccionarioProv:
             raise Exception("Provincia no registrada")
         
@@ -18,7 +18,7 @@ class Router():
         if municipioID not in depto.diccionarioMunicipios:
             raise Exception("Municipio no registrado")
         
-        self.routerID = routerID
+        self.id = id
         self.identificador = identificador
         self.ubicacion = ubicacion
         self.latitud = latitud
@@ -30,8 +30,8 @@ class Router():
         self.conexiones = dict()
         self.colaConexionesPendientes: Queue[Conexion] = Queue()
         
-        if self.routerID not in Router.diccionarioRouter:
-            Router.diccionarioRouter[self.routerID] = self        
+        if self.identificador not in Router.diccionarioRouter:
+            Router.diccionarioRouter[self.identificador] = self        
             
     #Metodo para agregar las conexiones extraidas a los routers asociados entre direccionIP-routerID
     #Llamar a esta funcion cuando se esten leyendo las conexiones del csv, para saber si appendearlas a la lista

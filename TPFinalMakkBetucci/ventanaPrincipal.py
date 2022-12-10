@@ -3,46 +3,38 @@ from PyQt5.QtWidgets import QApplication
 from ventanasSecundarias import Ui_FormMunis, Ui_FormAgregarConexion, Ui_FormEliminarConexion, Ui_FormEliminarRouter, Ui_FormAgregarRouter, Ui_FormRouter, Ui_FormVerConexPorUbicacion, ListboxWidget, Ui_FormVerConexEntreFechas
 
 class Ui_MainWindow(QtWidgets.QMainWindow):
-    # def __init__(self):
-    #     super().__init__()
 
     def setupUi(self, MainWindow):
         MainWindow.setObjectName("MainWindow")
         MainWindow.resize(621, 457)
+    
         self.centralwidget = QtWidgets.QWidget(MainWindow)
         self.centralwidget.setObjectName("centralwidget")
+
         self.botonSeleccionarOpcion = QtWidgets.QPushButton(self.centralwidget)
         self.botonSeleccionarOpcion.setGeometry(QtCore.QRect(430, 290, 121, 31))
         self.botonSeleccionarOpcion.setObjectName("botonSeleccionarOpcion")
         self.ingreseOpcionLabel = QtWidgets.QLabel(self.centralwidget)
         self.ingreseOpcionLabel.setGeometry(QtCore.QRect(110, 280, 131, 41))
-        font = QtGui.QFont()
-        font.setFamily("Calibri")
-        font.setPointSize(12)
-        self.ingreseOpcionLabel.setFont(font)
+
         self.ingreseOpcionLabel.setObjectName("ingreseOpcionLabel")
         self.textEditIngresoOpcion = QtWidgets.QTextEdit(self.centralwidget)
         self.textEditIngresoOpcion.setGeometry(QtCore.QRect(250, 290, 171, 31))
         self.textEditIngresoOpcion.setObjectName("textEditIngresoOpcion")
+
         self.verticalLayoutWidget = QtWidgets.QWidget(self.centralwidget)
         self.verticalLayoutWidget.setGeometry(QtCore.QRect(90, 10, 461, 271))
         self.verticalLayoutWidget.setObjectName("verticalLayoutWidget")
+
         self.verticalLayout = QtWidgets.QVBoxLayout(self.verticalLayoutWidget)
         self.verticalLayout.setContentsMargins(0, 0, 0, 0)
         self.verticalLayout.setObjectName("verticalLayout")
+
         self.labelSaludo = QtWidgets.QLabel(self.verticalLayoutWidget)
-        font = QtGui.QFont()
-        font.setFamily("Calibri")
-        font.setPointSize(16)
-        self.labelSaludo.setFont(font)
         self.labelSaludo.setObjectName("labelSaludo")
         self.verticalLayout.addWidget(self.labelSaludo)
-        self.label = QtWidgets.QLabel(self.verticalLayoutWidget)
 
-        font = QtGui.QFont()
-        font.setFamily("Calibri")
-        font.setPointSize(12)
-        self.label.setFont(font)
+        self.label = QtWidgets.QLabel(self.verticalLayoutWidget)
         self.label.setObjectName("label")
         self.verticalLayout.addWidget(self.label)
 
@@ -103,7 +95,6 @@ class Ui_MainWindow(QtWidgets.QMainWindow):
                 self.botonSeleccionarOpcion.clicked.connect(lambda: QApplication.quit()) 
                 print('\n---PROGRAMA FINALIZADO---\n')
 
-
     #Cargar archivo municipios
     def ventanaLeerArchivoMuni(self):
         demo = Ui_FormMunis()
@@ -145,50 +136,33 @@ class Ui_MainWindow(QtWidgets.QMainWindow):
 
     #Agregar un router (validar los datos)
     def agregarRouter(self):
-        self.Form = QtWidgets.QWidget()
+        self.Form = QtWidgets.QMainWindow()
         self.ui = Ui_FormAgregarRouter()
-        self.ui.setupUi(self.Form)
+        self.ui.setupUi(self.Form,self.Form)
         self.Form.show()
     
     #Eliminar un router
     def eliminarRouter(self):
-        self.Form = QtWidgets.QWidget()
+        self.Form = QtWidgets.QMainWindow()
         self.ui = Ui_FormEliminarRouter()
-        self.ui.setupUi(self.Form)
+        self.ui.setupUi(self.Form,self.Form)
         self.Form.show()
 
     #Agregar una conexion (validar los datos)
     def agregarConexion(self):
-        self.Form = QtWidgets.QWidget()
+        self.Form = QtWidgets.QMainWindow()
         self.ui = Ui_FormAgregarConexion()
-        self.ui.setupUi(self.Form)
+        self.ui.setupUi(self.Form,self.Form)
         self.Form.show()
 
     #Eliminar una conexion
     def eliminarConexion(self):
-        self.Form = QtWidgets.QWidget()
+        self.Form = QtWidgets.QMainWindow()
         self.ui = Ui_FormEliminarConexion()
-        self.ui.setupUi(self.Form)
+        self.ui.setupUi(self.Form,self.Form)
         self.Form.show()
 
-##### Crear un file de auxiliares para estas funciones falopas #####
-
-    #Funcion para cancelar la opcion de apretar el boton en caso de que no se escriba nada o no se ingrese una opcion numerica entre 1 y 11 (inclusive)
-    # def botonSeleccionar_enable(self):
-    #     texto = self.textEditIngresoOpcion.toPlainText()
-    #     if len(texto) != 0:
-    #         try:
-    #             opcionIndicada = int(texto)
-    #             if opcionIndicada in range(1,12):
-    #                 self.botonSeleccionarOpcion.setEnabled(True)
-    #             else:
-    #                 self.botonSeleccionarOpcion.setEnabled(False)
-    #         except:
-    #             self.botonSeleccionarOpcion.setEnabled(False)
-    #     else:
-    #         self.botonSeleccionarOpcion.setEnabled(False)
-
-    #Funcion falopa que le cambia el text a algunos objetos
+    #Funcion que le cambia el text a algunos objetos
     def retranslateUi(self, MainWindow):
         _translate = QtCore.QCoreApplication.translate
         MainWindow.setWindowTitle(_translate("MainWindow", "MainWindow"))

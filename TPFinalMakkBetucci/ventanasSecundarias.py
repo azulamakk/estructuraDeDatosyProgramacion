@@ -4,12 +4,11 @@ import sys,os
 import time
 import threading
 from PyQt5.QtCore import Qt,QUrl,QRect,QDateTime
-from PyQt5.QtGui import QFont
-import datetime
+from datetime import datetime
 import re
 import calendar
 import string
-import lecturaArchivos, municipios,routers
+import lecturaArchivos, municipios, routers, conexiones
 #aca importar las funciones del menu que vamos a ejecutar
 
 # Clase auxiliar
@@ -19,10 +18,7 @@ class Ui_FormRouters(object):
         Form.resize(578, 426)
         self.labelCargarArchivoMuni = QtWidgets.QLabel(Form)
         self.labelCargarArchivoMuni.setGeometry(QtCore.QRect(100, 140, 221, 16))
-        font = QtGui.QFont()
-        font.setFamily("Calibri")
-        font.setPointSize(10)
-        self.labelCargarArchivoMuni.setFont(font)
+
         self.labelCargarArchivoMuni.setObjectName("labelCargarArchivorRouters")
         self.botonCargarArchivoMuni = QtWidgets.QPushButton(Form)
         self.botonCargarArchivoMuni.setGeometry(QtCore.QRect(410, 140, 111, 23))
@@ -80,15 +76,10 @@ class Ui_FormMunis(QMainWindow):
         self.setWindowTitle("Cargar archivo municipios")
         self.resize(700,500)
 
-        font = QFont()
-        font.setFamily("Calibri")
-        font.setPointSize(10)
-
         self.layoutPrincipal = QHBoxLayout() 
 
         self.labelCargarArchivoMuni = QLabel("Arrastre o adjunte archivo municipios:")
         self.labelCargarArchivoMuni.setGeometry(250,300,200,100)
-        self.labelCargarArchivoMuni.setFont(font)
         self.labelCargarArchivoMuni.setObjectName("labelCargarArchivoMuni")
 
         self.layoutPrincipal.addWidget(self.labelCargarArchivoMuni)
@@ -129,7 +120,7 @@ class Ui_FormMunis(QMainWindow):
             msg = QMessageBox()
             msg.setInformativeText("Archivo cargado correctamente")
             msg.exec_()
-
+        
 # Esta clase es para ejecutar la opcion 2
 class Ui_FormRouter(QMainWindow):
     def __init__(self):
@@ -137,15 +128,10 @@ class Ui_FormRouter(QMainWindow):
         self.setWindowTitle("Cargar archivo routers")
         self.resize(700,500)
 
-        font = QFont()
-        font.setFamily("Calibri")
-        font.setPointSize(10)
-
         self.layoutPrincipal = QHBoxLayout() 
 
         self.labelCargarArchivoRouter = QLabel("Arrastre o adjunte archivo routers:")
         self.labelCargarArchivoRouter.setGeometry(250,300,200,100)
-        self.labelCargarArchivoRouter.setFont(font)
         self.labelCargarArchivoRouter.setObjectName("labelCargarArchivoRouter")
 
         self.layoutPrincipal.addWidget(self.labelCargarArchivoRouter)
@@ -182,15 +168,14 @@ class Ui_FormRouter(QMainWindow):
             item = QListWidgetItem(self.lstbox_.currentItem())
             pathRouter = item.text()
             lecturaArchivos.leerArchivoRouter(pathRouter)
-            #lecturaArchivos.leerArchivoConexiones('conexiones.csv')
+            lecturaArchivos.leerArchivoConexiones('conexiones.csv')
             msg = QMessageBox()
             msg.setInformativeText("Archivo cargado correctamente")
             msg.exec_()
 
 # Esta clase es para ejecutar la opcion 3,4 y 5
 class Ui_FormVerConexPorUbicacion(QtWidgets.QMainWindow):   
-    valueChanged = QtCore.pyqtSignal(int)
-
+    valueChanged = QtCore.pyqtSignal(str)
     def __init__(self):
         super().__init__()
         self.secondWidgetWindow = None
@@ -227,10 +212,6 @@ class Ui_FormVerConexPorUbicacion(QtWidgets.QMainWindow):
         if ubicacion == 'provincia':
             self.label = QtWidgets.QLabel(Form)
             self.label.setGeometry(QtCore.QRect(40, 160, 151, 16))
-            font = QtGui.QFont()
-            font.setFamily("Calibri")
-            font.setPointSize(12)
-            self.label.setFont(font)
             self.label.setObjectName("label")
             self.label.setText(_translate("Form", "Ingrese una provincia:"))
             self.pushButton.clicked.connect(self.mostrarConexionesPorProvincia)
@@ -238,10 +219,6 @@ class Ui_FormVerConexPorUbicacion(QtWidgets.QMainWindow):
         elif ubicacion == 'departamento':
             self.label = QtWidgets.QLabel(Form)
             self.label.setGeometry(QtCore.QRect(20, 160, 180, 16))
-            font = QtGui.QFont()
-            font.setFamily("Calibri")
-            font.setPointSize(12)
-            self.label.setFont(font)
             self.label.setObjectName("label")
             self.label.setText(_translate("Form", "Ingrese un departamento:"))
             self.pushButton.clicked.connect(self.mostrarConexionesPorDepartamento)
@@ -249,22 +226,18 @@ class Ui_FormVerConexPorUbicacion(QtWidgets.QMainWindow):
         elif ubicacion == 'municipio':
             self.label = QtWidgets.QLabel(Form)
             self.label.setGeometry(QtCore.QRect(20, 160, 180, 16))
-            font = QtGui.QFont()
-            font.setFamily("Calibri")
-            font.setPointSize(12)
-            self.label.setFont(font)
             self.label.setObjectName("label")
             self.label.setText(_translate("Form", "Ingrese un municipio:"))
             self.pushButton.clicked.connect(self.mostrarConexionesPorMunicipio)
 
-            self.valueChanged.connect(self.on_value_changed)
-            self.pushButton.clicked.connect(self.on_clicked)
+        self.valueChanged.connect(self.on_value_changed)
+        self.pushButton.clicked.connect(self.on_clicked)
 
         self.backButton.clicked.connect(lambda: self.secondWidgetWindow.close())
 
     @QtCore.pyqtSlot()
     def on_clicked(self):
-        self.textEdit.clear()
+        #self.textEdit.clear()
         self.textEdit.setGeometry(QtCore.QRect(210, 150, 140, 100))
 
         if self.ubicacion == 'provincia':
@@ -274,7 +247,7 @@ class Ui_FormVerConexPorUbicacion(QtWidgets.QMainWindow):
         if self.ubicacion == 'municipio':
             threading.Thread(target=self.mostrarConexionesPorMunicipio, daemon=True).start()
 
-    @QtCore.pyqtSlot(int)
+    @QtCore.pyqtSlot(str)
     def on_value_changed(self,value):
         self.textEdit.append("Conexion: {}".format(value))
 
@@ -290,46 +263,47 @@ class Ui_FormVerConexPorUbicacion(QtWidgets.QMainWindow):
         # con el atributo provinciaID del router. Si coinciden entonces imprimo las conexiones que tiene ese router ID (imprimo las direcciones IP)
         
         for provincia in municipios.Provincia.diccionarioProv.items():
-            if provincia[0] == textoFinal:
+            if provincia[1].provincia == textoFinal:
                 for router in routers.Router.diccionarioRouter.keys():
-                    #print(routers.Router.diccionarioRouter[router].provinciaID)
-                    if provincia[0] == routers.Router.diccionarioRouter[router].provinciaID:
+                    if provincia[1].provinciaID == routers.Router.diccionarioRouter[router].provinciaID:
                         for conexion in routers.Router.diccionarioRouter[router].conexiones.items():
                             #Esto hace un print del resultado de la funcion en un text box y lo imprime con un delay de 0.1 segundos
-                            print('Prueba')
-                            self.valueChanged.emit(conexion[0]) #imprime la direccion IP de la conexion (es la key de la tupla item)
+                            self.valueChanged.emit(str(conexion[0])) #imprime la direccion IP de la conexion (es la key de la tupla item)
                             time.sleep(0.1)
 
+    #Funcion que muestra las conexiones por departamento dado             
     def mostrarConexionesPorDepartamento(self):
         text = self.textEdit.toPlainText().strip()
         texto = quitarTildes(text)
         textoFinal = string.capwords(texto)
-        # agarro el deptoID que corresponde a la depto seleccionado
-        for departamento in municipios.Provincia.diccionarioDptos.items():
-            if departamento.departamentoID == textoFinal:
-                #me fijo para cada router donde coincide el deptoID con el filtrado
-                for router in routers.Router.diccionarioRouter.keys():
-                    if departamento.departamentoID == routers.Router.diccionarioRouter[router].departamentoID:
-                        for conexion in routers.Router.diccionarioRouter[router].conexiones.items():
-                            self.valueChanged.emit(conexion)
-                            time.sleep(0.1)
+        for provincia in municipios.Provincia.diccionarioProv.items():
+            for departamento in provincia[1].diccionarioDptos.items():
+                if departamento[1].departamento == textoFinal:
+                    for router in routers.Router.diccionarioRouter.keys():
+                        if departamento[0] == routers.Router.diccionarioRouter[router].departamentoID:
+                            for conexion in routers.Router.diccionarioRouter[router].conexiones.items():
+                                self.valueChanged.emit(str(conexion[0]))
+                                time.sleep(0.1)
    
+    #Funcion que muestra las conexiones por municipio dado
     def mostrarConexionesPorMunicipio(self):
         text = self.textEdit.toPlainText().strip()
         texto = quitarTildes(text)
         textoFinal = string.capwords(texto)
-        # agarro el muniID que corresponde al muni seleccionado
-        for municipio in municipios.Departamento.diccionarioMunicipios.items():
-            if municipio.municipioID == textoFinal:
-                #me fijo para cada router donde coincide el muniID con el filtrado
-                for router in routers.Router.diccionarioRouter.keys():
-                    if municipio.municipioID == routers.Router.diccionarioRouter[router].municipioID:
-                        for conexion in routers.Router.diccionarioRouter[router].conexiones.items():
-                            self.valueChanged.emit(conexion)
-                            time.sleep(0.1)
+        for provincia in municipios.Provincia.diccionarioProv.items():
+            for departamento in provincia[1].diccionarioDptos.items():
+                for municipio in departamento[1].diccionarioMunicipios.items():
+                    if municipio[1].municipio == textoFinal:
+                        for router in routers.Router.diccionarioRouter.items():
+                            if municipio[1].departamentoID == router[1].departamentoID:
+                                for conexion in router[1].conexiones.items():
+                                    self.valueChanged.emit(str(conexion[0]))
+                                    time.sleep(0.1)
 
 # Esta clase es para ejecutar la opcion 6
 class Ui_FormVerConexEntreFechas(QMainWindow):
+    valueChanged = QtCore.pyqtSignal(str)
+
     def __init__(self):
         super().__init__()
         self.secondWidgetWindow = None
@@ -338,7 +312,7 @@ class Ui_FormVerConexEntreFechas(QMainWindow):
         self.secondWidgetWindow = secondWidgetWindow
 
         MainWindow.setObjectName("MainWindow")
-        MainWindow.resize(800, 500)
+        MainWindow.resize(800, 620)
         self.centralwidget = QtWidgets.QWidget(MainWindow)
         self.centralwidget.setObjectName("centralwidget")
 
@@ -356,10 +330,6 @@ class Ui_FormVerConexEntreFechas(QMainWindow):
 
         # Label de seleccionar fecha inicio
         self.labelIngresoFechaInicio = QtWidgets.QLabel(self.verticalLayoutWidget)
-        font = QtGui.QFont()
-        font.setFamily("Calibri")
-        font.setPointSize(12)
-        self.labelIngresoFechaInicio.setFont(font)
         self.labelIngresoFechaInicio.setObjectName("label")
         self.labelIngresoFechaInicio.setText("Ingrese fecha de inicio:")
         self.horizontalLayout.addWidget(self.labelIngresoFechaInicio)
@@ -383,10 +353,6 @@ class Ui_FormVerConexEntreFechas(QMainWindow):
 
         # Label de seleccionar fecha fin
         self.labelFechaFin = QtWidgets.QLabel(self.verticalLayoutWidget)
-        font = QtGui.QFont()
-        font.setFamily("Calibri")
-        font.setPointSize(12)
-        self.labelFechaFin.setFont(font)
         self.labelFechaFin.setObjectName("label")
         self.labelFechaFin.setText("Ingrese fecha de fin:")
         self.horizontalLayout_2.addWidget(self.labelFechaFin)
@@ -417,20 +383,29 @@ class Ui_FormVerConexEntreFechas(QMainWindow):
         self.backButton.setText("Volver")
         self.verticalLayout.addWidget(self.backButton)
 
+        self.textEdit = QtWidgets.QTextEdit()
+        self.textEdit.setGeometry(QtCore.QRect(380, 130, 100, 100))
+        self.textEdit.setObjectName("textEdit")
+        self.verticalLayout.addWidget(self.textEdit)
 
-        #### Acciones ####
+        #### Acciones ####  PD: abria que validar que "fecha fin > fecha inicio" 
+        self.valueChanged.connect(self.on_value_changed)
 
-        # PD: abria que validar que "fecha fin > fecha inicio" 
-        
-        # Console log de las fechas elegidas
-        
         self.botonSeleccionarFechaInicio.clicked.connect(lambda: self.asignarFechaInicio())
         self.botonSeleccionarFechaFin.clicked.connect(lambda: self.asignarFechaFin())
-
-
         # Se ejecuta la funcion que muestra las conexiones entre las dos fechas seleccionadas
-        self.botonIngresoRangoFechas.clicked.connect(lambda: self.mostrarConexionesEntreFechas(self.fechaInicio,self.fechaFin))
+        # deberia poder verificar que se hayan apretado ambos botones para poder ingresar el rango de fecha, ya que se compone de dos fechas
+        self.botonIngresoRangoFechas.clicked.connect(self.on_clicked)
         self.backButton.clicked.connect(lambda: self.secondWidgetWindow.close())
+
+    @QtCore.pyqtSlot()
+    def on_clicked(self):
+        #self.textEdit.clear()
+        threading.Thread(target=self.mostrarConexionesEntreFechas, daemon=True).start()
+
+    @QtCore.pyqtSlot(str)
+    def on_value_changed(self,value):
+        self.textEdit.append("Conexion: {}".format(value))
 
     def asignarFechaInicio(self):
         self.fechaInicio = QDateTime(self.calendarInicio.selectedDate()).toPyDateTime()
@@ -438,143 +413,277 @@ class Ui_FormVerConexEntreFechas(QMainWindow):
     def asignarFechaFin(self):
         self.fechaFin = QDateTime(self.calendarFechaFin.selectedDate()).toPyDateTime()
 
-    def mostrarConexionesEntreFechas(self,fechaInicio,fechaFin):
-        print('Fecha desde: ',fechaInicio)
-        print('Fecha hasta: ',fechaFin)
-        print('/n')
-        print("Aca se ejecuta la funcion que muestra las conexiones entre las dos fechas")
+    #Funcion que muestra las conexiones totales en el pais entre dos fechas
+    def mostrarConexionesEntreFechas(self):
+        for router in routers.Router.diccionarioRouter.items():
+            for conexion in router[1].conexiones.items():
+                if conexion[1].fechaYHora > self.fechaInicio and conexion[1].fechaYHora < self.fechaFin:
+                    self.valueChanged.emit(str(conexion[0]))
+                    #time.sleep(0.1)
         
 # Esta clase es para ejecutar la opcion 7
-class Ui_FormAgregarRouter(object):
-    def setupUi(self, Form):
+class Ui_FormAgregarRouter(QMainWindow):
+
+    def __init__(self):
+        super().__init__()
+        self.secondWidgetWindow = None
+        
+    def setupUi(self, Form,secondWidgetWindow):
+        self.secondWidgetWindow = secondWidgetWindow
         Form.setObjectName("Form")
-        Form.resize(559, 323)
-        self.pushButton = QtWidgets.QPushButton(Form)
-        self.pushButton.setGeometry(QtCore.QRect(400, 150, 71, 31))
+        Form.resize(532, 421)
+        Form.setWindowTitle("Form")
+        self.centralwidget = QtWidgets.QWidget(Form)
+
+        self.verticalLayoutWidget = QtWidgets.QWidget(self.centralwidget)
+        self.verticalLayoutWidget.setGeometry(QtCore.QRect(60, 0, 421, 233))
+
+        self.verticalLayout = QtWidgets.QVBoxLayout(self.verticalLayoutWidget)
+        self.verticalLayout.setContentsMargins(0,0,0,0)
+
+        self.horizontalLayout = QtWidgets.QHBoxLayout()
+
+        self.diccionarioObjetos = dict()
+
+        i = 0
+        cantidadDeCamposRouter = 8
+        while i < cantidadDeCamposRouter:
+            if i == 1:
+                self.agregarObjetos(i,'Ingresar identificador: ')
+            elif i == 2:
+                self.agregarObjetos(i,'Ingresar identificador: ')
+            elif i == 3:
+                self.agregarObjetos(i,'Ingresar ubicacion: ')
+            elif i == 4:
+                self.agregarObjetos(i,'Ingresar latitud: ')
+            elif i == 5:
+                self.agregarObjetos(i,'Ingresar longitud: ')
+            elif i == 6:
+                self.agregarObjetos(i,'Ingresar municipio_id: ')
+            elif i == 7:
+                self.agregarObjetos(i,'Ingresar provincia_id: ')
+            elif i == 8:
+                self.agregarObjetos(i,'Ingresar id_departamento: ')
+            i += 1    
+
+        # Push button para seleccionar el ID escrito
+        # Aca validar si no existe ya el router, blockear el boton de seleccionar o enviar un mensaje en rojo "eliga nu router no repetido"
+        self.pushButton = QtWidgets.QPushButton(self.verticalLayoutWidget)
         self.pushButton.setObjectName("pushButton")
+        self.pushButton.setText("Agregar router")
+        self.verticalLayout.addWidget(self.pushButton)
 
-        self.textEdit = QtWidgets.QTextEdit(Form)
-        self.textEdit.setGeometry(QtCore.QRect(240, 150, 120, 31))
-        self.textEdit.setObjectName("textEdit")
-        self.textEdit.textChanged.connect(lambda: botonSeleccionar_enableConAlfanumerico(self))
-
-        _translate = QtCore.QCoreApplication.translate
-        Form.setWindowTitle(_translate("Form", "Form"))
-        self.pushButton.setText(_translate("Form", "Seleccionar"))
+        Form.setCentralWidget(self.centralwidget)
         QtCore.QMetaObject.connectSlotsByName(Form)
 
+        self.pushButton.clicked.connect(lambda: self.funcionAgregarRouter())
 
-        self.label = QtWidgets.QLabel(Form)
-        self.label.setGeometry(QtCore.QRect(40, 160, 250, 16))
-        font = QtGui.QFont()
-        font.setFamily("Calibri")
-        font.setPointSize(12)
-        self.label.setFont(font)
-        self.label.setObjectName("label")
-        self.label.setText(_translate("Form", "Ingrese router ID a agregar:"))
-        self.pushButton.clicked.connect(lambda: self.funcionAgregarRouter(self.textEdit.toPlainText()))
+        # Text box y su label para ingresar por teclado el router ID
+    def agregarObjetos(self,i,campo):
+        Hlayout = "horizontalLayout" + str(i)
+        self.Hlayout = QtWidgets.QHBoxLayout()
 
-    def funcionAgregarRouter(self,texto):
-        print('ID del router a agregar: ',texto)
+        label = "label" + str(i)
+        self.label = QtWidgets.QLabel(self.verticalLayoutWidget)
+        self.label.setObjectName(campo)
+        self.label.setText(campo)
+        self.Hlayout.addWidget(self.label)
+
+        textEdit = "textEdit" + str(i)
+        self.textEdit = QtWidgets.QTextEdit(self.verticalLayoutWidget)
+        self.textEdit.setObjectName("textEdit"+str(i))
+        self.Hlayout.addWidget(self.textEdit)        
+
+        self.diccionarioObjetos[self.label.objectName()] = ''
+        self.verticalLayout.addLayout(self.Hlayout)
+
+    def funcionAgregarRouter(self):            
+        for k,v in self.diccionarioObjetos.items():
+            print('{}{}'.format(k,v))
+
+        msg = QMessageBox()
+        msg.setInformativeText("Router agregado correctamente")
+        msg.exec_()
 
 # Esta clase es para ejecutar la opcion 8
-class Ui_FormEliminarRouter(object):
-    def setupUi(self, Form):
+class Ui_FormEliminarRouter(QMainWindow):
+    def __init__(self):
+        super().__init__()
+        self.secondWidgetWindow = None
+        
+    def setupUi(self, Form,secondWidgetWindow):
+        self.secondWidgetWindow = secondWidgetWindow
         Form.setObjectName("Form")
-        Form.resize(559, 323)
-        self.pushButton = QtWidgets.QPushButton(Form)
-        self.pushButton.setGeometry(QtCore.QRect(400, 150, 71, 31))
-        self.pushButton.setObjectName("pushButton")
+        Form.resize(532, 421)
+        Form.setWindowTitle("Form")
+        self.centralwidget = QtWidgets.QWidget(Form)
 
-        self.textEdit = QtWidgets.QTextEdit(Form)
-        self.textEdit.setGeometry(QtCore.QRect(240, 150, 120, 31))
+        self.verticalLayoutWidget = QtWidgets.QWidget(self.centralwidget)
+        self.verticalLayoutWidget.setGeometry(QtCore.QRect(60, 0, 421, 233))
+
+        self.verticalLayout = QtWidgets.QVBoxLayout(self.verticalLayoutWidget)
+        self.verticalLayout.setContentsMargins(0,0,0,0)
+
+        self.horizontalLayout = QtWidgets.QHBoxLayout()
+
+        # Text box y su label para ingresar por teclado el router ID
+        self.Hlayout = QtWidgets.QHBoxLayout()
+
+        self.label = QtWidgets.QLabel(self.verticalLayoutWidget)
+        self.label.setObjectName('labelIngresoDireccionIP')
+        self.label.setText('Ingresar router ID: ')
+        self.Hlayout.addWidget(self.label)
+
+        self.textEdit = QtWidgets.QTextEdit(self.verticalLayoutWidget)
         self.textEdit.setObjectName("textEdit")
-        self.textEdit.textChanged.connect(lambda: botonSeleccionar_enableConAlfanumerico(self))
+        self.Hlayout.addWidget(self.textEdit)        
 
-        _translate = QtCore.QCoreApplication.translate
-        Form.setWindowTitle(_translate("Form", "Form"))
-        self.pushButton.setText(_translate("Form", "Seleccionar"))
+        self.verticalLayout.addLayout(self.Hlayout)
+
+        self.pushButton = QtWidgets.QPushButton(self.verticalLayoutWidget)
+        self.pushButton.setObjectName("pushButton")
+        self.pushButton.setText("Eliminar router")
+        self.verticalLayout.addWidget(self.pushButton)
+
+        Form.setCentralWidget(self.centralwidget)
         QtCore.QMetaObject.connectSlotsByName(Form)
 
+        self.pushButton.clicked.connect(lambda: self.funcionEliminarRouter())
 
-        self.label = QtWidgets.QLabel(Form)
-        self.label.setGeometry(QtCore.QRect(40, 160, 250, 16))
-        font = QtGui.QFont()
-        font.setFamily("Calibri")
-        font.setPointSize(12)
-        self.label.setFont(font)
-        self.label.setObjectName("label")
-        self.label.setText(_translate("Form", "Ingrese router ID a eliminar:"))
-        self.pushButton.clicked.connect(lambda: self.funcionAgregarRouter(self.textEdit.toPlainText()))
-
-    def funcionAgregarRouter(self,texto):
-        print('ID del router a eliminar: ',texto)
+    def funcionEliminarRouter(self):            
+        print(self.textEdit.toPlainText())
+        msg = QMessageBox()
+        msg.setInformativeText("Router eliminado correctamente")
+        msg.exec_()
 
 # Esta clase es para ejecutar la opcion 9
-class Ui_FormAgregarConexion(object):
-    def setupUi(self, Form):
+class Ui_FormAgregarConexion(QMainWindow):
+    def __init__(self):
+        super().__init__()
+        self.secondWidgetWindow = None
+        
+    def setupUi(self, Form,secondWidgetWindow):
+        self.secondWidgetWindow = secondWidgetWindow
         Form.setObjectName("Form")
-        Form.resize(759, 323)
-        self.pushButton = QtWidgets.QPushButton(Form)
-        self.pushButton.setGeometry(QtCore.QRect(600, 150, 71, 31))
+        Form.resize(532, 421)
+        Form.setWindowTitle("Form")
+        self.centralwidget = QtWidgets.QWidget(Form)
+
+        self.verticalLayoutWidget = QtWidgets.QWidget(self.centralwidget)
+        self.verticalLayoutWidget.setGeometry(QtCore.QRect(60, 0, 421, 233))
+
+        self.verticalLayout = QtWidgets.QVBoxLayout(self.verticalLayoutWidget)
+        self.verticalLayout.setContentsMargins(0,0,0,0)
+
+        self.horizontalLayout = QtWidgets.QHBoxLayout()
+
+        self.diccionarioObjetos = dict()
+
+        i = 0
+        cantidadDeCamposRouter = 6
+        while i < cantidadDeCamposRouter:
+            if i == 1:
+                self.agregarObjetos(i,'Ingresar direccion IP: ')
+            elif i == 2:
+                self.agregarObjetos(i,'Ingresar MAC Address: ')
+            elif i == 3:
+                self.agregarObjetos(i,'Fecha: ')
+            elif i == 4:
+                self.agregarObjetos(i,'Horario: ')
+            #quizas no hace falta esto, total toda conexion que agregas deberia estar activa, salvo que ya este completo el cupo de 20 conexiones por router
+            elif i == 5:
+                self.agregarObjetos(i,'Activa: ')
+            i += 1    
+
+        # Push button para seleccionar el ID escrito
+        # Aca validar si no existe ya el router, blockear el boton de seleccionar o enviar un mensaje en rojo "eliga nu router no repetido"
+        self.pushButton = QtWidgets.QPushButton(self.verticalLayoutWidget)
         self.pushButton.setObjectName("pushButton")
+        self.pushButton.setText("Agregar conexion")
+        self.verticalLayout.addWidget(self.pushButton)
 
-        self.textEdit = QtWidgets.QTextEdit(Form)
-        self.textEdit.setGeometry(QtCore.QRect(400, 150, 120, 31))
-        self.textEdit.setObjectName("textEdit")
-        self.textEdit.textChanged.connect(lambda: botonSeleccionar_enableConAlfanumerico(self))
-
-        _translate = QtCore.QCoreApplication.translate
-        Form.setWindowTitle(_translate("Form", "Form"))
-        self.pushButton.setText(_translate("Form", "Seleccionar"))
+        Form.setCentralWidget(self.centralwidget)
         QtCore.QMetaObject.connectSlotsByName(Form)
 
-        self.label = QtWidgets.QLabel(Form)
-        self.label.setGeometry(QtCore.QRect(40, 160, 350, 16))
-        font = QtGui.QFont()
-        font.setFamily("Calibri")
-        font.setPointSize(12)
-        self.label.setFont(font)
-        self.label.setObjectName("label")
-        self.label.setText(_translate("Form", "Ingrese direccion ID de la conexion a agregar:"))
-        self.pushButton.clicked.connect(lambda: self.funcionAgregarRouter(self.textEdit.toPlainText()))
+        self.pushButton.clicked.connect(lambda: self.funcionAgregarConexion())
 
-    def funcionAgregarRouter(self,texto):
-        print('Direccion IP de la conexion a agregar: ',texto)
+        # Text box y su label para ingresar por teclado el router ID
+    def agregarObjetos(self,i,campo):
+        Hlayout = "horizontalLayout" + str(i)
+        self.Hlayout = QtWidgets.QHBoxLayout()
+
+        label = "label" + str(i)
+        self.label = QtWidgets.QLabel(self.verticalLayoutWidget)
+        self.label.setObjectName(campo)
+        self.label.setText(campo)
+        self.Hlayout.addWidget(self.label)
+
+        textEdit = "textEdit" + str(i)
+        self.textEdit = QtWidgets.QTextEdit(self.verticalLayoutWidget)
+        self.textEdit.setObjectName("textEdit"+str(i))
+        self.Hlayout.addWidget(self.textEdit)        
+
+        self.diccionarioObjetos[self.label.objectName()] = ''
+        self.verticalLayout.addLayout(self.Hlayout)
+
+    def funcionAgregarConexion(self):            
+        for k,v in self.diccionarioObjetos.items():
+            print('{}{}'.format(k,v))
+
+        msg = QMessageBox()
+        msg.setInformativeText("Conexion agregada correctamente")
+        msg.exec_()
 
 # Esta clase es para ejecutar la opcion 10
-class Ui_FormEliminarConexion(object):
-    def setupUi(self, Form):
+class Ui_FormEliminarConexion(QMainWindow):
+    def __init__(self):
+        super().__init__()
+        self.secondWidgetWindow = None
+        
+    def setupUi(self, Form,secondWidgetWindow):
+        self.secondWidgetWindow = secondWidgetWindow
         Form.setObjectName("Form")
-        Form.resize(759, 323)
-        self.pushButton = QtWidgets.QPushButton(Form)
-        self.pushButton.setGeometry(QtCore.QRect(600, 150, 71, 31))
-        self.pushButton.setObjectName("pushButton")
+        Form.resize(532, 421)
+        Form.setWindowTitle("Form")
+        self.centralwidget = QtWidgets.QWidget(Form)
 
-        self.textEdit = QtWidgets.QTextEdit(Form)
-        self.textEdit.setGeometry(QtCore.QRect(400, 150, 120, 31))
+        self.verticalLayoutWidget = QtWidgets.QWidget(self.centralwidget)
+        self.verticalLayoutWidget.setGeometry(QtCore.QRect(60, 0, 421, 233))
+
+        self.verticalLayout = QtWidgets.QVBoxLayout(self.verticalLayoutWidget)
+        self.verticalLayout.setContentsMargins(0,0,0,0)
+
+        self.horizontalLayout = QtWidgets.QHBoxLayout()
+
+        # Text box y su label para ingresar por teclado el router ID
+        self.Hlayout = QtWidgets.QHBoxLayout()
+
+        self.label = QtWidgets.QLabel(self.verticalLayoutWidget)
+        self.label.setObjectName('labelIngresoDireccionIP')
+        self.label.setText('Ingresar direccion IP: ')
+        self.Hlayout.addWidget(self.label)
+
+        self.textEdit = QtWidgets.QTextEdit(self.verticalLayoutWidget)
         self.textEdit.setObjectName("textEdit")
-        self.textEdit.textChanged.connect(lambda: botonSeleccionar_enableConAlfanumerico(self))
+        self.Hlayout.addWidget(self.textEdit)        
 
-        _translate = QtCore.QCoreApplication.translate
-        Form.setWindowTitle(_translate("Form", "Form"))
-        self.pushButton.setText(_translate("Form", "Seleccionar"))
+        self.verticalLayout.addLayout(self.Hlayout)
+
+        self.pushButton = QtWidgets.QPushButton(self.verticalLayoutWidget)
+        self.pushButton.setObjectName("pushButton")
+        self.pushButton.setText("Eliminar conexion")
+        self.verticalLayout.addWidget(self.pushButton)
+
+        Form.setCentralWidget(self.centralwidget)
         QtCore.QMetaObject.connectSlotsByName(Form)
 
+        self.pushButton.clicked.connect(lambda: self.funcionEliminarConexion())
 
-        self.label = QtWidgets.QLabel(Form)
-        self.label.setGeometry(QtCore.QRect(40, 160, 350, 16))
-        font = QtGui.QFont()
-        font.setFamily("Calibri")
-        font.setPointSize(12)
-        self.label.setFont(font)
-        self.label.setObjectName("label")
-        self.label.setText(_translate("Form", "Ingrese direccion IP de la conexion a eliminar:"))
-
-        self.pushButton.clicked.connect(lambda: self.funcionAgregarRouter(self.textEdit.toPlainText()))
-
-    def funcionAgregarRouter(self,texto):
-        print('Direccion IP a eliminar: ',texto)
+    def funcionEliminarConexion(self):            
+        print(self.textEdit.toPlainText())
+        msg = QMessageBox()
+        msg.setInformativeText("Conexion eliminada correctamente")
+        msg.exec_()
 
 # Para validar que se ingrese un alfanumerico con regex: AAA000-00
 def botonSeleccionar_enableConAlfanumerico(self):
@@ -592,18 +701,15 @@ def botonSeleccionar_enableConAlfanumerico(self):
         self.pushButton.setEnabled(False)
 
 # Para que validar que no pueda apretar el boton seleccionar con un numero (prov, depto, muni)
-def botonSeleccionar_enableConTexto(self):
-    
-    #en realidad esta lista de provincias debeseria ser extraida de la base de datos nuestra, o sea de las prov que existen en nuestro sistema por el momento
-    tuplaProvincias = ('Buenos Aires','Catamarca','Chaco','Chubut','Cordoba','Corrientes','Entre Rios','Formosa','Jujuy','La Pampa','La Rioja','Mendoza','Misiones','Neuquen','Rio Negro','Salta','San Juan','San Luis','Santa Cruz','Santa Fe','Santiago Del Estero','Tierra Del Fuego','Tucuman',)
-    
+def botonSeleccionar_enableConTexto(self):  
     text = self.textEdit.toPlainText().strip()
     texto = quitarTildes(text)
     textoFinal = string.capwords(texto)
     #quitar tildes, hacer capitalize
     if len(textoFinal) != 0:
         try:
-            if textoFinal.isnumeric() == False and textoFinal in tuplaProvincias:
+            #El setProvincias/setDeptos/setMunicipios es extraido de la base de datos nuestra, o sea de las prov que existen en nuestro sistema por el momento
+            if textoFinal.isnumeric() == False and (textoFinal in municipios.Provincia.setProvincias or textoFinal in municipios.Departamento.setDepartamentos or textoFinal in municipios.Municipio.setMunicipios):
                 self.pushButton.setEnabled(True)
             else:
                 self.pushButton.setEnabled(False)
@@ -612,6 +718,7 @@ def botonSeleccionar_enableConTexto(self):
     else:
         self.pushButton.setEnabled(False)
 
+# Funcion para quitar tildes
 def quitarTildes(texto):
         replacements = (
         ("á", "a"),
@@ -624,66 +731,21 @@ def quitarTildes(texto):
             texto = texto.replace(a, b).replace(a.upper(), b.upper())
         return texto
 
-# def IngresoFechayHora():
-#     diaFecha= obtenerInt('Ingrese un dia: ', 0, 31)
+# Funcion para convertir el formato de fecha
+def parseDate(fechahora):
+    fecha = fechahora.split(" ")[0]
+    hora = fechahora.split(" ")[1]
 
-#     mesFecha= obtenerInt('Ingrese un mes: ', 0, 12)
+    dateParts = fecha.split("-")
+    if len(dateParts) < 3:
+        return None
+    [year, month, day] = dateParts
 
-#     anioFecha= obtenerInt('Ingrese un año: ', 2019, 2022)
+    timeParts = hora.split(":")
+    if len(timeParts) < 2:
+        return None
+    [hour, minute, seconds] = timeParts
 
-#     horaFecha= obtenerInt('Ingrese una hora: ', 0, 23)
+    return datetime(int(year), int(month), int(day), int(hour), int(minute), int(seconds))
+ 
 
-#     minutosFecha= obtenerInt('Ingrese un minuto: ', 0, 59)
-
-#     fecha = datetime.datetime(anioFecha, mesFecha, diaFecha, horaFecha, minutosFecha)
-#     print(fecha)
-#     return fecha
-
-# def IngresoSoloFecha():
-#     diaFecha= obtenerInt('Ingrese un dia: ', 0, 31)
-
-#     mesFecha= obtenerInt('Ingrese un mes: ', 0, 12)
-
-#     anioFecha= obtenerInt('Ingrese un año: ', 2019, 2022) #revisar que año de inicio dejamos
-#     fecha = datetime.date(anioFecha, mesFecha, diaFecha)
-#     return fecha
-
-# def IngresoSoloHora():
-#     horaFecha= obtenerInt('Ingrese una hora: ', 0, 23)
-
-#     minutosFecha= obtenerInt('Ingrese un minuto: ', 0, 59)
-
-#     hora = datetime.time(horaFecha, minutosFecha)
-    
-#     return hora
-
-# def obtenerInt(mensaje, minimo, maximo):
-#     try:    
-#         numero = int(input(mensaje))
-
-#         if numero < minimo or numero > maximo:
-#             print('Numero de fecha incorrecto. Intente de nuevo')
-#             return obtenerInt(mensaje, minimo, maximo)
-#         else:
-#             return numero
-
-#     except ValueError or TypeError:
-#         print('Dato de tipo erroneo')
-#         return obtenerInt(mensaje, minimo, maximo)
-
-# def parseDate(date, time):
-#     try:    
-#         dateParts = date.split("/")
-#         if len(dateParts) < 3:
-#             return None
-
-#         [month, day, year] = dateParts
-#         timeParts = time.split(":")
-#         if len(timeParts) < 2:
-#             return None
-
-#         [hour, minute] = timeParts
-
-#         return datetime.datetime(int(year), int(month), int(day), int(hour), int(minute))
-#     except:
-#         return None
