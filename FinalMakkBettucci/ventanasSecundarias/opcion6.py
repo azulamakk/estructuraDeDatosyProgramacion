@@ -2,7 +2,6 @@ from PyQt5 import QtCore, QtWidgets
 from PyQt5.QtWidgets import QCalendarWidget, QMainWindow,QPushButton, QMessageBox
 import threading
 from PyQt5.QtCore import QDateTime
-import time
 import sys
 from datetime import datetime
 from conexiones import *

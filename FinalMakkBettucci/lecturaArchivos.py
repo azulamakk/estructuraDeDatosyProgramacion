@@ -8,7 +8,7 @@ import json
 #Lectura del csv municipios
 def cargarProvinciasyDptos(pathMunicipios):
     prefijos_json = {}
-    with open('FinalMakkBettucci/prefijos.json') as json_file:
+    with open('prefijos.json') as json_file:
         prefijos_json = json.load(json_file)
     with open(pathMunicipios, encoding= 'unicode_escape') as csvFile:
         reader=csv.DictReader(csvFile)

@@ -16,7 +16,6 @@ class Ui_FormAgregarRouter(QMainWindow):
         self.secondWidgetWindow = secondWidgetWindow
         MainWindow.setObjectName("MainWindow")
         MainWindow.resize(628, 649)
-        MainWindow.setWindowTitle("Opcion ingresada: Agregar router")
         self.centralwidget = QtWidgets.QWidget(MainWindow)
         self.centralwidget.setObjectName("centralwidget")
 
@@ -153,10 +152,17 @@ class Ui_FormAgregarRouter(QMainWindow):
         self.verticalLayout.addWidget(self.botonIngresoDatos)
         ###
 
+        # Back button para volver al menu principal
+        self.backButton = QtWidgets.QPushButton(self.centralwidget)
+        self.backButton.setObjectName("pushButton")
+        self.backButton.setText("Volver")
+        self.backButton.setGeometry(100, 570, 400, 25)
+        ###
+
         #Text box para mostrar el output de la funcion
         self.textEditOutput = QtWidgets.QTextEdit(self.centralwidget)
         self.textEditOutput.setObjectName("textEditOutput")
-        self.textEditOutput.setGeometry(100, 450, 400, 150)
+        self.textEditOutput.setGeometry(100, 450, 400, 110)
         #self.verticalLayout.addWidget(self.textEditOutput)
 
         MainWindow.setCentralWidget(self.centralwidget)
@@ -192,6 +198,7 @@ class Ui_FormAgregarRouter(QMainWindow):
         
         self.valueChanged.connect(self.on_value_changed)
         self.botonIngresoDatos.clicked.connect(self.on_clicked)
+        self.backButton.clicked.connect(lambda: self.secondWidgetWindow.close())
 
     def retranslateUi(self, MainWindow):
         _translate = QtCore.QCoreApplication.translate

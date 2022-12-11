@@ -11,9 +11,9 @@ from ventanasSecundarias.opcion9 import Ui_FormAgregarConexion
 from ventanasSecundarias.opcion10 import Ui_FormEliminarConexion
 import lecturaArchivos
 
-lecturaArchivos.cargarProvinciasyDptos('FinalMakkBettucci/municipios.csv')
-lecturaArchivos.leerArchivoRouter('FinalMakkBettucci/routers.csv')
-lecturaArchivos.leerArchivoConexiones('FinalMakkBettucci/conexiones.csv')
+lecturaArchivos.cargarProvinciasyDptos('municipios.csv')
+lecturaArchivos.leerArchivoRouter('routers.csv')
+lecturaArchivos.leerArchivoConexiones('conexiones.csv')
 
 class Ui_MainWindow(QtWidgets.QMainWindow):
 
@@ -22,6 +22,7 @@ class Ui_MainWindow(QtWidgets.QMainWindow):
 
         # with open(cssFile,"r") as css:
         #     self.setStyleSheet(css.read())
+        
         MainWindow.setObjectName("MainWindow")
         self.setWindowIcon(QtGui.QIcon('logo.ico'))
         MainWindow.resize(621, 457)
@@ -118,21 +119,21 @@ class Ui_MainWindow(QtWidgets.QMainWindow):
     
     #Ver N° de conexiones por provincia dada 
     def verConexionesPorProvincia(self):
-        self.Form = QtWidgets.QWidget()
+        self.Form = QtWidgets.QMainWindow()
         self.ui = Ui_FormVerConexPorUbicacion()
         self.ui.setupUi(self.Form,'provincia',self.Form)
         self.Form.show()
         
     #Ver N° de conexiones por departamento dado 
     def verConexionesPorDepartamento(self):
-        self.Form = QtWidgets.QWidget()
+        self.Form = QtWidgets.QMainWindow()
         self.ui = Ui_FormVerConexPorUbicacion()
         self.ui.setupUi(self.Form,'departamento',self.Form)
         self.Form.show()
     
     #Ver N° de conexiones por municipio dado 
     def verConexionesPorMunicipio(self):
-        self.Form = QtWidgets.QWidget()
+        self.Form = QtWidgets.QMainWindow()
         self.ui = Ui_FormVerConexPorUbicacion()
         self.ui.setupUi(self.Form,'municipio',self.Form)
         self.Form.show()
