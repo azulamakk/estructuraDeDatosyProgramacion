@@ -1,167 +1,185 @@
 from PyQt5 import QtCore, QtWidgets
 from PyQt5.QtWidgets import QMessageBox, QMainWindow
 import re
+import threading
 
 # Esta clase es para ejecutar la opcion 7
 class Ui_FormAgregarRouter(QMainWindow):
+    valueChanged = QtCore.pyqtSignal(str)
+    diccionarioObjetos = dict()
 
     def __init__(self):
         super().__init__()
         self.secondWidgetWindow = None
         
-    def setupUi(self, Form,secondWidgetWindow):
+    def setupUi(self, MainWindow,secondWidgetWindow):
         self.secondWidgetWindow = secondWidgetWindow
-        Form.setObjectName("Form")
-        Form.resize(532, 421)
-        Form.setWindowTitle("Opcion ingresada: Añadir router")
-        self.centralwidget = QtWidgets.QWidget(Form)
+        MainWindow.setObjectName("MainWindow")
+        MainWindow.resize(628, 649)
+        MainWindow.setWindowTitle("Opcion ingresada: Agregar router")
+        self.centralwidget = QtWidgets.QWidget(MainWindow)
+        self.centralwidget.setObjectName("centralwidget")
 
         self.verticalLayoutWidget = QtWidgets.QWidget(self.centralwidget)
-        self.verticalLayoutWidget.setGeometry(QtCore.QRect(60, 0, 421, 233))
-
+        self.verticalLayoutWidget.setGeometry(QtCore.QRect(100, 40, 391, 401))
+        self.verticalLayoutWidget.setObjectName("verticalLayoutWidget")
         self.verticalLayout = QtWidgets.QVBoxLayout(self.verticalLayoutWidget)
-        self.verticalLayout.setContentsMargins(0,0,0,0)
-
-        self.horizontalLayout = QtWidgets.QHBoxLayout()
- 
-        self.diccionarioObjetos = dict()
-
-        #Ingresar id
-        self.HlayoutID = QtWidgets.QHBoxLayout()
-
-        self.labelID = QtWidgets.QLabel(self.verticalLayoutWidget)
-        self.labelID.setObjectName('labelIngresoID')
-        self.labelID.setText('Ingresar id: ')
-        self.HlayoutID.addWidget(self.labelID)
+        self.verticalLayout.setContentsMargins(0, 0, 0, 0)
+        self.verticalLayout.setObjectName("verticalLayout")
+        
+        #Ingreso de ID
+        self.horizontalLayout_9 = QtWidgets.QHBoxLayout()
+        self.horizontalLayout_9.setObjectName("horizontalLayout_9")
+        
+        self.labelIngresoID = QtWidgets.QLabel(self.verticalLayoutWidget)
+        self.labelIngresoID.setObjectName("labelIngresoID")
+        self.horizontalLayout_9.addWidget(self.labelIngresoID)
 
         self.textEditID = QtWidgets.QTextEdit(self.verticalLayoutWidget)
-        self.textEditID.setObjectName("textEditIngresoID")
-        self.HlayoutID.addWidget(self.textEditID)        
+        self.textEditID.setObjectName("textEditID")
+        self.horizontalLayout_9.addWidget(self.textEditID)
 
-        self.verticalLayout.addLayout(self.HlayoutID)
+        self.verticalLayout.addLayout(self.horizontalLayout_9)
+        ###
 
-        #Ingresar identificador
-        self.HlayoutIdentificador = QtWidgets.QHBoxLayout()
+        #Ingreso de identificador
+        self.horizontalLayout = QtWidgets.QHBoxLayout()
+        self.horizontalLayout.setObjectName("horizontalLayout")
 
         self.labelIdentificador = QtWidgets.QLabel(self.verticalLayoutWidget)
-        self.labelIdentificador.setObjectName('labelIngresoIdentificador')
-        self.labelIdentificador.setText('Ingresar identificador: ')
-        self.HlayoutIdentificador.addWidget(self.labelIdentificador)
+        self.labelIdentificador.setObjectName("labelIdentificador")
+        self.horizontalLayout.addWidget(self.labelIdentificador)
 
         self.textEditIdentificador = QtWidgets.QTextEdit(self.verticalLayoutWidget)
-        self.textEditIdentificador.setObjectName("textEditIngresoIdentificador")
-        self.HlayoutIdentificador.addWidget(self.textEditIdentificador)        
+        self.textEditIdentificador.setObjectName("textEdit")
+        self.horizontalLayout.addWidget(self.textEditIdentificador)
 
-        self.verticalLayout.addLayout(self.HlayoutIdentificador)
+        self.verticalLayout.addLayout(self.horizontalLayout)
+        ###
 
-        #Ingresar ubicacion
-        self.HlayoutUbicacion = QtWidgets.QHBoxLayout()
+        #Ingreso de ubicacion
+        self.horizontalLayout_8 = QtWidgets.QHBoxLayout()
+        self.horizontalLayout_8.setObjectName("horizontalLayout_8")
 
-        self.labelUbicacion = QtWidgets.QLabel(self.verticalLayoutWidget)
-        self.labelUbicacion.setObjectName('labelIngresoUbicacion')
-        self.labelUbicacion.setText('Ingresar ubicacion: ')
-        self.HlayoutUbicacion.addWidget(self.labelUbicacion)
+        self.labelIngresoUbicacion = QtWidgets.QLabel(self.verticalLayoutWidget)
+        self.labelIngresoUbicacion.setObjectName("labelIngresoUbicacion")
+        self.horizontalLayout_8.addWidget(self.labelIngresoUbicacion)
 
         self.textEditUbicacion = QtWidgets.QTextEdit(self.verticalLayoutWidget)
-        self.textEditUbicacion.setObjectName("textEditIngresoUbicacion")
-        self.HlayoutUbicacion.addWidget(self.textEditUbicacion)        
+        self.textEditUbicacion.setObjectName("textEditUbicacion")
+        self.horizontalLayout_8.addWidget(self.textEditUbicacion)
 
-        self.verticalLayout.addLayout(self.HlayoutUbicacion)
+        self.verticalLayout.addLayout(self.horizontalLayout_8)
+        ###
 
-        #Ingresar latitud
-        self.HlayoutLatitud = QtWidgets.QHBoxLayout()
+        #Ingreso de latitud
+        self.horizontalLayout_10 = QtWidgets.QHBoxLayout()
+        self.horizontalLayout_10.setObjectName("horizontalLayout_10")
 
-        self.labelLatitud = QtWidgets.QLabel(self.verticalLayoutWidget)
-        self.labelLatitud.setObjectName('labelIngresoLatitud')
-        self.labelLatitud.setText('Ingresar latitud: ')
-        self.HlayoutLatitud.addWidget(self.labelLatitud)
+        self.labelIngresoLatitud = QtWidgets.QLabel(self.verticalLayoutWidget)
+        self.labelIngresoLatitud.setObjectName("labelIngresoLatitud")
+        self.horizontalLayout_10.addWidget(self.labelIngresoLatitud)
 
         self.textEditLatitud = QtWidgets.QTextEdit(self.verticalLayoutWidget)
-        self.textEditLatitud.setObjectName("textEditIngresoLatitud")
-        self.HlayoutLatitud.addWidget(self.textEditLatitud)        
+        self.textEditLatitud.setObjectName("textEditLatitud")
+        self.horizontalLayout_10.addWidget(self.textEditLatitud)
 
-        self.verticalLayout.addLayout(self.HlayoutLatitud)
+        self.verticalLayout.addLayout(self.horizontalLayout_10)
+        ###
 
-        #Ingresar longitud
-        self.HlayoutLongitud = QtWidgets.QHBoxLayout()
+        #Ingreso de longitud
+        self.horizontalLayout_11 = QtWidgets.QHBoxLayout()
+        self.horizontalLayout_11.setObjectName("horizontalLayout_11")
 
-        self.labelLongitud = QtWidgets.QLabel(self.verticalLayoutWidget)
-        self.labelLongitud.setObjectName('labelIngresoLongitud')
-        self.labelLongitud.setText('Ingresar longitud: ')
-        self.HlayoutLongitud.addWidget(self.labelLongitud)
+        self.labelIngresoLongitud = QtWidgets.QLabel(self.verticalLayoutWidget)
+        self.labelIngresoLongitud.setObjectName("labelIngresoLongitud")
+        self.horizontalLayout_11.addWidget(self.labelIngresoLongitud)
 
         self.textEditLongitud = QtWidgets.QTextEdit(self.verticalLayoutWidget)
-        self.textEditLongitud.setObjectName("textEditIngresoLongitud")
-        self.HlayoutLongitud.addWidget(self.textEditLongitud)        
+        self.textEditLongitud.setObjectName("textEditLongitud")
+        self.horizontalLayout_11.addWidget(self.textEditLongitud)
 
-        #Ingresar municipio ID
-        self.HlayoutMuniID = QtWidgets.QHBoxLayout()
+        self.verticalLayout.addLayout(self.horizontalLayout_11)
+        ###
 
-        self.labelMuniID = QtWidgets.QLabel(self.verticalLayoutWidget)
-        self.labelMuniID.setObjectName('labelIngresoMuniID')
-        self.labelMuniID.setText('Ingresar municipio ID: ')
-        self.HlayoutMuniID.addWidget(self.labelMuniID)
+        #Ingreso de municipio ID
+        self.horizontalLayout_12 = QtWidgets.QHBoxLayout()
+        self.horizontalLayout_12.setObjectName("horizontalLayout_12")
+
+        self.labelIngresoMuniID = QtWidgets.QLabel(self.verticalLayoutWidget)
+        self.labelIngresoMuniID.setObjectName("labelIngresoMuniID")
+        self.horizontalLayout_12.addWidget(self.labelIngresoMuniID)
 
         self.textEditMuniID = QtWidgets.QTextEdit(self.verticalLayoutWidget)
-        self.textEditMuniID.setObjectName("textEditIngresoMuniID")
-        self.HlayoutMuniID.addWidget(self.textEditMuniID)        
+        self.textEditMuniID.setObjectName("textEditMuniID")
+        self.horizontalLayout_12.addWidget(self.textEditMuniID)
 
-        self.verticalLayout.addLayout(self.HlayoutMuniID)
+        self.verticalLayout.addLayout(self.horizontalLayout_12)
+        ###
 
-        #Ingresar provincia ID
-        self.HlayoutProvID = QtWidgets.QHBoxLayout()
+        #Ingreso de provincia ID
+        self.horizontalLayout_13 = QtWidgets.QHBoxLayout()
+        self.horizontalLayout_13.setObjectName("horizontalLayout_13")
 
-        self.labelProvID = QtWidgets.QLabel(self.verticalLayoutWidget)
-        self.labelProvID.setObjectName('labelIngresoProvID')
-        self.labelProvID.setText('Ingresar provincia ID: ')
-        self.HlayoutProvID.addWidget(self.labelProvID)
+        self.labelIngresoProvID = QtWidgets.QLabel(self.verticalLayoutWidget)
+        self.labelIngresoProvID.setObjectName("labelIngresoProvID")
+        self.horizontalLayout_13.addWidget(self.labelIngresoProvID)
 
         self.textEditProvID = QtWidgets.QTextEdit(self.verticalLayoutWidget)
-        self.textEditProvID.setObjectName("textEditIngresoProvinciaID")
-        self.HlayoutProvID.addWidget(self.textEditProvID)        
+        self.textEditProvID.setObjectName("textEditProvID")
+        self.horizontalLayout_13.addWidget(self.textEditProvID)
 
-        self.verticalLayout.addLayout(self.HlayoutProvID)
+        self.verticalLayout.addLayout(self.horizontalLayout_13)
+        ###
+        
+        #Ingreso de departamento ID
+        self.horizontalLayout_14 = QtWidgets.QHBoxLayout()
+        self.horizontalLayout_14.setObjectName("horizontalLayout_14")
 
-        #Ingresar departamento ID
-        self.HlayoutDptoID = QtWidgets.QHBoxLayout()
+        self.labelIngresoDeptoID = QtWidgets.QLabel(self.verticalLayoutWidget)
+        self.labelIngresoDeptoID.setObjectName("labelIngresoDeptoID")
+        self.horizontalLayout_14.addWidget(self.labelIngresoDeptoID)
 
-        self.labelDptoID = QtWidgets.QLabel(self.verticalLayoutWidget)
-        self.labelDptoID.setObjectName('labelIngresoDptoID')
-        self.labelDptoID.setText('Ingresar departamento ID: ')
-        self.HlayoutDptoID.addWidget(self.labelDptoID)
+        self.textEditDeptoID = QtWidgets.QTextEdit(self.verticalLayoutWidget)
+        self.textEditDeptoID.setObjectName("textEditDeptoID")
+        self.horizontalLayout_14.addWidget(self.textEditDeptoID)
+    
+        self.verticalLayout.addLayout(self.horizontalLayout_14)
+        ###
 
-        self.textEditDptoID = QtWidgets.QTextEdit(self.verticalLayoutWidget)
-        self.textEditDptoID.setObjectName("textEditIngresoDptoID")
-        self.HlayoutDptoID.addWidget(self.textEditDptoID)        
+        # Push button de ingreso de datos
+        self.botonIngresoDatos = QtWidgets.QPushButton(self.verticalLayoutWidget)
+        self.botonIngresoDatos.setObjectName("botonIngresoDatos")
+        self.verticalLayout.addWidget(self.botonIngresoDatos)
+        ###
 
-        self.verticalLayout.addLayout(self.HlayoutDptoID)
+        #Text box para mostrar el output de la funcion
+        self.textEditOutput = QtWidgets.QTextEdit(self.centralwidget)
+        self.textEditOutput.setObjectName("textEditOutput")
+        self.textEditOutput.setGeometry(100, 450, 400, 150)
+        #self.verticalLayout.addWidget(self.textEditOutput)
 
-        # Push button para seleccionar el ID escrito
-        # Aca validar si no existe ya el router, blockear el boton de seleccionar o enviar un mensaje en rojo "eliga nu router no repetido"
-        self.pushButton = QtWidgets.QPushButton(self.verticalLayoutWidget)
-        self.pushButton.setObjectName("pushButton")
-        self.pushButton.setText("Agregar router")
-        self.verticalLayout.addWidget(self.pushButton)
+        MainWindow.setCentralWidget(self.centralwidget)
 
-        Form.setCentralWidget(self.centralwidget)
-        QtCore.QMetaObject.connectSlotsByName(Form)
+        self.retranslateUi(MainWindow)
+        QtCore.QMetaObject.connectSlotsByName(MainWindow)
 
         #Valido que el ID sea un valor numerico
-        self.textEditID.textChanged.connect(lambda: self.pushButton.setEnabled(True) if self.textEditID.toPlainText().isnumeric() == True else self.pushButton.setEnabled(False))
-        
+        self.textEditID.textChanged.connect(lambda: self.botonSeleccionar_enableConAlfanumerico('^([0-9]{3,4})',self.textEditID) if self.textEditID.toPlainText().isnumeric() == True else self.botonIngresoDatos.setEnabled(False))
+
         #Valido que el identificador tenga un patron tipo ABC123-01
         self.textEditIdentificador.textChanged.connect(lambda: self.botonSeleccionar_enableConAlfanumerico('^([A-Z]{3})([0-9]{3})-([0-9]{2})',self.textEditIdentificador))
         
         #Valido que la ubicacion sea un texto
-        self.textEditUbicacion.textChanged.connect(lambda: self.pushButton.setEnabled(True) if self.textEditUbicacion.toPlainText().isnumeric() == False else self.pushButton.setEnabled(False))
+        self.textEditUbicacion.textChanged.connect(lambda: self.botonIngresoDatos.setEnabled(True) if self.textEditUbicacion.toPlainText().isnumeric() == False else self.botonIngresoDatos.setEnabled(False))
         
         #Valido que la latitud sea un float
         if self.textEditLatitud.toPlainText().isnumeric() == True:
-            self.textEditLatitud.textChanged.connect(lambda: self.pushButton.setEnabled(True) if isinstance(self.textEditLatitud,float) == False else self.pushButton.setEnabled(False))
+            self.textEditLatitud.textChanged.connect(lambda: self.botonIngresoDatos.setEnabled(True) if isinstance(self.textEditLatitud,float) == False else self.botonIngresoDatos.setEnabled(False))
         
         #Valido que la longitud sea un float
         if self.textEditLongitud.toPlainText().isnumeric() == True:
-            self.textEditLongitud.textChanged.connect(lambda: self.pushButton.setEnabled(True) if isinstance(self.textEditLongitud,float) == False else self.pushButton.setEnabled(False))
+            self.textEditLongitud.textChanged.connect(lambda: self.botonIngresoDatos.setEnabled(True) if isinstance(self.textEditLongitud,float) == False else self.botonIngresoDatos.setEnabled(False))
         
         #Valido que municipio ID tenga un patron tipo ABC123
         self.textEditMuniID.textChanged.connect(lambda: self.botonSeleccionar_enableConAlfanumerico('^([A-Z]{3})([0-9]{3})',self.textEditMuniID))
@@ -170,13 +188,36 @@ class Ui_FormAgregarRouter(QMainWindow):
         self.textEditProvID.textChanged.connect(lambda: self.botonSeleccionar_enableConAlfanumerico('^([A-Z]{2})-([A-Z])',self.textEditProvID))
         
         #Valido que dptoId tenga un patron de 4 numeros
-        self.textEditDptoID.textChanged.connect(lambda: self.botonSeleccionar_enableConAlfanumerico('^([0-9]{4})',self.textEditDptoID))
-
-        self.pushButton.clicked.connect(lambda: self.funcionAgregarRouter())
-
-
-    def funcionAgregarRouter(self):       
+        self.textEditDeptoID.textChanged.connect(lambda: self.botonSeleccionar_enableConAlfanumerico('^([0-9]{4})',self.textEditDeptoID))
         
+        self.valueChanged.connect(self.on_value_changed)
+        self.botonIngresoDatos.clicked.connect(self.on_clicked)
+
+    def retranslateUi(self, MainWindow):
+        _translate = QtCore.QCoreApplication.translate
+        MainWindow.setWindowTitle(_translate("MainWindow", "MainWindow"))
+        self.labelIngresoMuniID.setText(_translate("MainWindow", "Ingresar municipio ID:"))
+        self.labelIngresoLongitud.setText(_translate("MainWindow", "Ingresar longitud:"))
+        self.botonIngresoDatos.setText(_translate("MainWindow", "Ingresar datos del router nuevo"))
+        self.labelIngresoDeptoID.setText(_translate("MainWindow", "Ingresar departamento ID:"))
+        self.labelIngresoProvID.setText(_translate("MainWindow", "Ingresar provincia ID:"))
+        self.labelIdentificador.setText(_translate("MainWindow", "Ingresar identificador:"))
+        self.labelIngresoID.setText(_translate("MainWindow", "Ingresar ID:"))
+        self.labelIngresoUbicacion.setText(_translate("MainWindow", "Ingresar ubicacion:"))
+        self.labelIngresoLatitud.setText(_translate("MainWindow", "Ingresar latitud:"))
+        QtCore.QMetaObject.connectSlotsByName(MainWindow)
+
+
+    @QtCore.pyqtSlot()
+    def on_clicked(self):
+        threading.Thread(target=self.funcionAgregarRouter(), daemon=True).start()
+
+    @QtCore.pyqtSlot(str)
+    def on_value_changed(self,value):
+        self.textEditOutput.append(value)
+
+    def funcionAgregarRouter(self):
+
         self.diccionarioObjetos['Id: '] = self.textEditID.toPlainText()
         self.diccionarioObjetos['Identificador: '] = self.textEditIdentificador.toPlainText()
         self.diccionarioObjetos['Ubicacion: '] = self.textEditUbicacion.toPlainText()
@@ -184,10 +225,12 @@ class Ui_FormAgregarRouter(QMainWindow):
         self.diccionarioObjetos['Longitud: '] = self.textEditLongitud.toPlainText()
         self.diccionarioObjetos['Municipio ID: '] = self.textEditMuniID.toPlainText()
         self.diccionarioObjetos['Provincia ID: '] = self.textEditProvID.toPlainText()
-        self.diccionarioObjetos['Departamento ID: '] = self.textEditDptoID.toPlainText()
+        self.diccionarioObjetos['Departamento ID: '] = self.textEditDeptoID.toPlainText()
 
         for k,v in self.diccionarioObjetos.items():
-            print('{}{}'.format(k,v))
+            linea = k + str(v)
+            print(linea)
+            self.valueChanged.emit(str(linea))
 
         msg = QMessageBox()
         msg.setInformativeText("Router agregado correctamente")
@@ -199,10 +242,10 @@ class Ui_FormAgregarRouter(QMainWindow):
         if len(text) != 0:
             try:
                 if re.fullmatch(pattern,text):
-                    self.pushButton.setEnabled(True)
+                    self.botonIngresoDatos.setEnabled(True)
                 else:
-                    self.pushButton.setEnabled(False)
+                    self.botonIngresoDatos.setEnabled(False)
             except:
-                self.pushButton.setEnabled(False)
+                self.botonIngresoDatos.setEnabled(False)
         else:
-            self.pushButton.setEnabled(False)
+            self.botonIngresoDatos.setEnabled(False)
