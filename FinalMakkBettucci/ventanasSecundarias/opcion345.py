@@ -1,7 +1,6 @@
 from PyQt5 import QtCore, QtWidgets
 from PyQt5.QtWidgets import QMessageBox, QPushButton
 import threading
-from datetime import datetime
 import sys
 import string
 
@@ -92,53 +91,56 @@ class Ui_FormVerConexPorUbicacion(QtWidgets.QMainWindow):
 
     #Funcion que muestra las conexiones por provincia dada
     def mostrarConexionesPorProvincia(self):
-        idProvinciaIngresado  = self.textEdit.toPlainText().strip()
-        if idProvinciaIngresado not in Provincia.diccionarioProv:
+        idProvinciaIngresada  = self.textEdit.toPlainText().strip()
+        if idProvinciaIngresada not in Provincia.diccionarioProv:
             msg = QMessageBox()
             msg.setInformativeText("No existe la provincia ingresada")
             msg.exec_()
-        
-        for router in Router.diccionarioRouter.keys():
-            if idProvinciaIngresado == Router.diccionarioRouter[router].provinciaID:
-                for conexion in Router.diccionarioRouter[router].conexiones:
-                    self.valueChanged.emit(conexion)
+        else:
+            for router in Router.diccionarioRouter.keys():
+                if idProvinciaIngresada == Router.diccionarioRouter[router].provinciaID:
+                    for conexion in Router.diccionarioRouter[router].conexiones.items():
+                        self.valueChanged.emit(str(conexion[1].routerID))
+
 
     #Funcion que muestra las conexiones por departamento dado             
     def mostrarConexionesPorDepartamento(self):
         idDepartamentoIngresado  = self.textEdit.toPlainText().strip()
-        if idDepartamentoIngresado not in Departamento.diccionarioDptos:
+        # for provincia in Provincia.diccionarioProv.items():
+        #     if idDepartamentoIngresado not in provincia[1].diccionarioDptos.keys():
+        if idDepartamentoIngresado not in Departamento.setDepartamentos:
             msg = QMessageBox()
             msg.setInformativeText("No existe el departamento ingresado")
             msg.exec_()
-        
-        for router in Router.diccionarioRouter.keys():
-            if idDepartamentoIngresado == Router.diccionarioRouter[router].departamentoID:
-                for conexion in Router.diccionarioRouter[router].conexiones:
-                    self.valueChanged.emit(conexion)
-   
+        else:
+            for router in Router.diccionarioRouter.keys():
+                if idDepartamentoIngresado == Router.diccionarioRouter[router].departamentoID:
+                    for conexion in Router.diccionarioRouter[router].conexiones.items():
+                        self.valueChanged.emit(str(conexion[1].routerID))
+
     #Funcion que muestra las conexiones por municipio dado
     def mostrarConexionesPorMunicipio(self):
         idMunicipioIngresado = self.textEdit.toPlainText().strip()
-        if idMunicipioIngresado not in Municipio.diccionarioMunicipios:
+        if idMunicipioIngresado not in Municipio.setMunicipios:
             msg = QMessageBox()
             msg.setInformativeText("No existe el municipio ingresado")
             msg.exec_()
-        
-        for router in Router.diccionarioRouter.keys():
-            if idMunicipioIngresado == Router.diccionarioRouter[router].municipioID:
-                for conexion in Router.diccionarioRouter[router].conexiones:
-                    self.valueChanged.emit(conexion)
+        else:    
+            for router in Router.diccionarioRouter.keys():
+                if idMunicipioIngresado == Router.diccionarioRouter[router].municipioID:
+                    for conexion in Router.diccionarioRouter[router].conexiones.items():
+                        self.valueChanged.emit(str(conexion[1].routerID))
 
 # Para que validar que no pueda apretar el boton seleccionar con un numero (prov, depto, muni)
 def botonSeleccionar_enableConTexto(self):  
     text = self.textEdit.toPlainText().strip()
-    texto = quitarTildes(text)
-    textoFinal = string.capwords(texto)
+    # texto = quitarTildes(text)
+    # textoFinal = string.capwords(texto)
     #quitar tildes, hacer capitalize
-    if len(textoFinal) != 0:
+    if len(text) != 0:
         try:
             #El setProvincias/setDeptos/setMunicipios es extraido de la base de datos nuestra, o sea de las prov que existen en nuestro sistema por el momento
-            if textoFinal.isnumeric() == False and (textoFinal in Provincia.setProvincias or textoFinal in Departamento.setDepartamentos or textoFinal in Municipio.setMunicipios):
+            if text.isnumeric() == False and (text in Provincia.diccionarioProv.keys() or text in Departamento.setDepartamentos or text in Municipio.setMunicipios):
                 self.pushButton.setEnabled(True)
             else:
                 self.pushButton.setEnabled(False)
@@ -148,15 +150,14 @@ def botonSeleccionar_enableConTexto(self):
         self.pushButton.setEnabled(False)
 
 # Funcion para quitar tildes
-def quitarTildes(texto):
-        replacements = (
-        ("á", "a"),
-        ("é", "e"),
-        ("í", "i"),
-        ("ó", "o"),
-        ("ú", "u"),
-        )
-        for a, b in replacements:
-            texto = texto.replace(a, b).replace(a.upper(), b.upper())
-        return texto
-
+# def quitarTildes(texto):
+#         replacements = (
+#         ("á", "a"),
+#         ("é", "e"),
+#         ("í", "i"),
+#         ("ó", "o"),
+#         ("ú", "u"),
+#         )
+#         for a, b in replacements:
+#             texto = texto.replace(a, b).replace(a.upper(), b.upper())
+#         return texto

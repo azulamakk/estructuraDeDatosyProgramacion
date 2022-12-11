@@ -13,7 +13,7 @@ class Ui_FormAgregarRouter(QMainWindow):
         self.secondWidgetWindow = secondWidgetWindow
         Form.setObjectName("Form")
         Form.resize(532, 421)
-        Form.setWindowTitle("Opcion seleccionada: Añadir router")
+        Form.setWindowTitle("Opcion ingresada: Añadir router")
         self.centralwidget = QtWidgets.QWidget(Form)
 
         self.verticalLayoutWidget = QtWidgets.QWidget(self.centralwidget)

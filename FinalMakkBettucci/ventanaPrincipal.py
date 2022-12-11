@@ -9,6 +9,11 @@ from ventanasSecundarias.opcion7 import Ui_FormAgregarRouter
 from ventanasSecundarias.opcion8 import Ui_FormEliminarRouter
 from ventanasSecundarias.opcion9 import Ui_FormAgregarConexion
 from ventanasSecundarias.opcion10 import Ui_FormEliminarConexion
+import lecturaArchivos
+
+lecturaArchivos.cargarProvinciasyDptos('FinalMakkBettucci/municipios.csv')
+lecturaArchivos.leerArchivoRouter('FinalMakkBettucci/routers.csv')
+lecturaArchivos.leerArchivoConexiones('FinalMakkBettucci/conexiones.csv')
 
 class Ui_MainWindow(QtWidgets.QMainWindow):
 
@@ -62,8 +67,8 @@ class Ui_MainWindow(QtWidgets.QMainWindow):
     def capturarOpcion(self):
 
         texto = self.textEditIngresoOpcion.toPlainText()
-        if len(texto) != 0:
-            if texto.isnumeric() == False:
+        if len(texto) > 0:
+            if texto.isnumeric() == True:
                 try:
                     opcionIndicada = int(texto)
                     if opcionIndicada in range(1,12):
@@ -99,7 +104,7 @@ class Ui_MainWindow(QtWidgets.QMainWindow):
                 self.botonSeleccionarOpcion.clicked.connect(self.eliminarConexion)
             elif opcionIndicada == 11:
                 self.botonSeleccionarOpcion.clicked.connect(lambda: QApplication.quit()) 
-                print('\n---PROGRAMA FINALIZADO---\n')
+                # print('\n---PROGRAMA FINALIZADO---\n')
 
     #Cargar archivo municipios
     def ventanaLeerArchivoMuni(self):
@@ -182,8 +187,8 @@ class Ui_MainWindow(QtWidgets.QMainWindow):
         4. Ver N° de conexiones por departamento dado
         5. Ver N° de conexiones por municipio dado
         6. Ver N° de conexiones totales en el pais entre 2 fechas y horas dadas
-        7. Agregar un router
-        8. Dar de baja un router
+        7. Agregar un punto de acceso
+        8. Dar de baja un punto de acceso
         9. Agregar conexiones
         10. Quitar conexiones
         11. Salir'''))

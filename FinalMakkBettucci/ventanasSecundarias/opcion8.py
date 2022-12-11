@@ -16,7 +16,7 @@ class Ui_FormEliminarRouter(QMainWindow):
         self.secondWidgetWindow = secondWidgetWindow
         Form.setObjectName("Form")
         Form.resize(532, 421)
-        Form.setWindowTitle("Form")
+        Form.setWindowTitle("Opcion ingresada: Eliminar router")
         self.centralwidget = QtWidgets.QWidget(Form)
 
         self.verticalLayoutWidget = QtWidgets.QWidget(self.centralwidget)

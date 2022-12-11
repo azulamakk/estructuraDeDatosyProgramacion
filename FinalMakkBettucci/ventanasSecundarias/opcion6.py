@@ -1,8 +1,11 @@
 from PyQt5 import QtCore, QtWidgets
-from PyQt5.QtWidgets import QCalendarWidget, QMainWindow,QPushButton
+from PyQt5.QtWidgets import QCalendarWidget, QMainWindow,QPushButton, QMessageBox
 import threading
 from PyQt5.QtCore import QDateTime
+import time
 import sys
+from datetime import datetime
+from conexiones import *
 
 # setting path
 sys.path.append('TPFinalMakkBettucci')
@@ -24,6 +27,7 @@ class Ui_FormVerConexEntreFechas(QMainWindow):
 
         MainWindow.setObjectName("MainWindow")
         MainWindow.resize(800, 620)
+        MainWindow.setWindowTitle("Opcion ingresada: Conexion en intervalo temporal")
         self.centralwidget = QtWidgets.QWidget(MainWindow)
         self.centralwidget.setObjectName("centralwidget")
 
@@ -50,11 +54,11 @@ class Ui_FormVerConexEntreFechas(QMainWindow):
         self.horizontalLayout.addWidget(self.calendarInicio)
         self.calendarInicio.setGridVisible(True)
 
-        # Boton para seleccionar la fecha inicio
-        self.botonSeleccionarFechaInicio = QtWidgets.QPushButton(self.verticalLayoutWidget)
-        self.botonSeleccionarFechaInicio.setObjectName("botonSeleccionarFechaInicio")
-        self.botonSeleccionarFechaInicio.setText("Seleccionar")
-        self.horizontalLayout.addWidget(self.botonSeleccionarFechaInicio)
+        #Objeto time picker fecha inicio
+        self.timeEditInicio = QtWidgets.QTimeEdit(self.verticalLayoutWidget)
+        self.timeEditInicio.setGeometry(QtCore.QRect(80, 100, 118, 22))
+        self.timeEditInicio.setObjectName("timeEdit")
+        self.horizontalLayout.addWidget(self.timeEditInicio)
 
         self.verticalLayout.addLayout(self.horizontalLayout)
 
@@ -73,11 +77,11 @@ class Ui_FormVerConexEntreFechas(QMainWindow):
         self.horizontalLayout_2.addWidget(self.calendarFechaFin)
         self.calendarFechaFin.setGridVisible(True)
 
-        # Boton para seleccionar la fecha fin
-        self.botonSeleccionarFechaFin = QtWidgets.QPushButton(self.verticalLayoutWidget)
-        self.botonSeleccionarFechaFin.setObjectName("botonSeleccionarFechaFin")
-        self.botonSeleccionarFechaFin.setText("Seleccionar")
-        self.horizontalLayout_2.addWidget(self.botonSeleccionarFechaFin)
+        #Objeto time picker fecha fin
+        self.timeEditFin = QtWidgets.QTimeEdit(self.verticalLayoutWidget)
+        self.timeEditFin.setGeometry(QtCore.QRect(80, 100, 118, 22))
+        self.timeEditFin.setObjectName("timeEdit")
+        self.horizontalLayout_2.addWidget(self.timeEditFin)
 
         self.verticalLayout.addLayout(self.horizontalLayout_2)
         MainWindow.setCentralWidget(self.centralwidget)
@@ -88,31 +92,57 @@ class Ui_FormVerConexEntreFechas(QMainWindow):
         self.botonIngresoRangoFechas.setText("Ingresar rango de fechas")
         self.verticalLayout.addWidget(self.botonIngresoRangoFechas)
 
-        self.backButton = QPushButton()
-        self.backButton.setGeometry(QtCore.QRect(380, 100, 71, 31))
-        self.backButton.setObjectName("backButton")
-        self.backButton.setText("Volver")
-        self.verticalLayout.addWidget(self.backButton)
-        self.backButton.clicked.connect(lambda: self.exit())
-
+        #Text box para mostrar el output de la funcion
         self.textEdit = QtWidgets.QTextEdit()
         self.textEdit.setGeometry(QtCore.QRect(380, 130, 100, 100))
         self.textEdit.setObjectName("textEdit")
         self.verticalLayout.addWidget(self.textEdit)
 
+        #Boton para volver al menu principal
+        self.backButton = QPushButton()
+        self.backButton.setGeometry(QtCore.QRect(380, 100, 71, 31))
+        self.backButton.setObjectName("backButton")
+        self.backButton.setText("Volver")
+        self.verticalLayout.addWidget(self.backButton)
+        self.backButton.clicked.connect(lambda: self.close())
+
         #### Acciones ####  PD: abria que validar que "fecha fin > fecha inicio" 
         self.valueChanged.connect(self.on_value_changed)
 
-        self.botonSeleccionarFechaInicio.clicked.connect(lambda: self.asignarFechaInicio())
-        self.botonSeleccionarFechaFin.clicked.connect(lambda: self.asignarFechaFin())
         # Se ejecuta la funcion que muestra las conexiones entre las dos fechas seleccionadas
         # deberia poder verificar que se hayan apretado ambos botones para poder ingresar el rango de fecha, ya que se compone de dos fechas
         self.botonIngresoRangoFechas.clicked.connect(self.on_clicked)
 
+    def parseDate(self, date, time):
+        datePart = datetime.strftime(date,"%d-%m-%Y")
+        timePart1 = datetime.combine(datetime.today(),time)
+        timePart2 = datetime.strftime(timePart1,"%H:%M:%S")
+
+        dateParts = datePart.split("-")
+        if len(dateParts) < 3:
+            return None
+        [year, month, day] = dateParts
+        
+        timeParts = timePart2.split(":")
+        if len(timeParts) < 3:
+            return None
+        [hour, minute, seconds] = timeParts
+
+        return datetime(int(day), int(month), int(year), int(hour), int(minute), int(seconds))
+
     @QtCore.pyqtSlot()
     def on_clicked(self):
         #self.textEdit.clear()
-        threading.Thread(target=self.mostrarConexionesEntreFechas, daemon=True).start()
+        self.fechaYhoraInicio = self.asignarFechaInicio()
+        self.fechaYhoraFin = self.asignarFechaFin()
+
+        if self.fechaYhoraInicio > self.fechaYhoraFin:
+            msg = QMessageBox()
+            msg.setInformativeText("La fecha de finalizacion no puede ser anterior a la fecha de inicio")
+            msg.setText('Por favor vuelva a elegir las fechas')
+            msg.exec_()
+        else:
+            threading.Thread(target=self.mostrarConexionesEntreFechas(self.fechaYhoraInicio,self.fechaYhoraFin), daemon=True).start()
 
     @QtCore.pyqtSlot(str)
     def on_value_changed(self,value):
@@ -120,14 +150,24 @@ class Ui_FormVerConexEntreFechas(QMainWindow):
 
     def asignarFechaInicio(self):
         self.fechaInicio = QDateTime(self.calendarInicio.selectedDate()).toPyDateTime()
+        self.horaInicio = self.timeEditInicio.time().toPyTime()
+        self.fechaYhoraInicio = self.parseDate(self.fechaInicio,self.horaInicio)
+        return self.fechaYhoraInicio
 
     def asignarFechaFin(self):
         self.fechaFin = QDateTime(self.calendarFechaFin.selectedDate()).toPyDateTime()
+        self.horaFin = self.timeEditFin.time().toPyTime()
+        self.fechaYhoraFin = self.parseDate(self.fechaFin,self.horaFin)
+        return self.fechaYhoraFin
 
     #Funcion que muestra las conexiones totales en el pais entre dos fechas
-    def mostrarConexionesEntreFechas(self):
-        for router in Router.diccionarioRouter.items():
-            for conexion in router[1].conexiones.items():
-                if conexion[1].fechaYHora > self.fechaInicio and conexion[1].fechaYHora < self.fechaFin:
-                    self.valueChanged.emit(str(conexion[0]))
-                    #time.sleep(0.1)
+    def mostrarConexionesEntreFechas(self, fechaHoraInicio, fechaHoraFin):
+        print('Inicio: ',fechaHoraInicio)
+        print('Fin: ',fechaHoraFin)
+        nodoActual = Conexion.conexionesHistoricas.head
+        while nodoActual != None:
+            if nodoActual.valor.fechaYHora > fechaHoraInicio and nodoActual.valor.fechaYHora < fechaHoraFin:
+                self.valueChanged.emit(str(nodoActual.valor))
+            nodoActual = nodoActual.prox
+
+    

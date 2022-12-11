@@ -12,7 +12,7 @@ from lecturaArchivos import leerArchivoConexiones, leerArchivoRouter
 class Ui_FormRouter(QMainWindow):
     def __init__(self):
         super().__init__()
-        self.setWindowTitle("Opcion seleccionada: Cargar archivo routers")
+        self.setWindowTitle("Opcion ingresada: Cargar archivo routers")
         self.resize(700,500)
 
         self.layoutPrincipal = QHBoxLayout() 
@@ -39,7 +39,7 @@ class Ui_FormRouter(QMainWindow):
         self.backButton.setObjectName("backButton")
         self.backButton.setText("Volver")
         self.layoutPrincipal.addWidget(self.backButton)
-        self.backButton.clicked.connect(lambda: self.exit())
+        self.backButton.clicked.connect(lambda: self.close())
 
         widgetLayout = QWidget()
         widgetLayout.setLayout(self.layoutPrincipal)
