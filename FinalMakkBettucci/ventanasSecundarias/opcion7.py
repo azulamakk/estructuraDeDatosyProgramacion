@@ -14,7 +14,7 @@ from routers import Router
 class Ui_FormAgregarRouter(QMainWindow):
     valueChanged = QtCore.pyqtSignal(str)
     diccionarioObjetos = dict()
-
+    
     def __init__(self):
         super().__init__()
         self.secondWidgetWindow = None
@@ -221,7 +221,6 @@ class Ui_FormAgregarRouter(QMainWindow):
         self.labelIngresoUbicacion.setText(_translate("MainWindow", "Ingresar ubicacion:"))
         self.labelIngresoLatitud.setText(_translate("MainWindow", "Ingresar latitud:"))
         QtCore.QMetaObject.connectSlotsByName(MainWindow)
-
 
     @QtCore.pyqtSlot()
     def on_clicked(self):

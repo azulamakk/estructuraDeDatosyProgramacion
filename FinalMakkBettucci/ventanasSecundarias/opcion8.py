@@ -23,14 +23,14 @@ class Ui_FormEliminarRouter(QMainWindow):
         self.centralwidget = QtWidgets.QWidget(Form)
 
         self.verticalLayoutWidget = QtWidgets.QWidget(self.centralwidget)
-        self.verticalLayoutWidget.setGeometry(QtCore.QRect(60, 0, 421, 233))
+        self.verticalLayoutWidget.setGeometry(QtCore.QRect(60, 30, 435, 130))
 
         self.verticalLayout = QtWidgets.QVBoxLayout(self.verticalLayoutWidget)
         self.verticalLayout.setContentsMargins(0,0,0,0)
 
         self.horizontalLayout = QtWidgets.QHBoxLayout()
 
-        # Text box y su label para ingresar por teclado el router ID
+        # Text box y su label para ingresar por teclado el router ID (en el horizontal layout)
         self.Hlayout = QtWidgets.QHBoxLayout()
 
         self.label = QtWidgets.QLabel(self.verticalLayoutWidget)
@@ -44,15 +44,37 @@ class Ui_FormEliminarRouter(QMainWindow):
 
         self.verticalLayout.addLayout(self.Hlayout)
 
+        ### BOTON ELIMINAR Y VOLVER EN EL VERTICAL LAYOUT ###
+
         self.pushButton = QtWidgets.QPushButton(self.verticalLayoutWidget)
         self.pushButton.setObjectName("pushButton")
         self.pushButton.setText("Eliminar router")
         self.verticalLayout.addWidget(self.pushButton)
 
+        self.backButton = QtWidgets.QPushButton(self.verticalLayoutWidget)
+        self.backButton.setObjectName("pushButton")
+        self.backButton.setText("Volver")
+        self.verticalLayout.addWidget(self.backButton)
+        self.backButton.clicked.connect(lambda: self.secondWidgetWindow.close())
+
         Form.setCentralWidget(self.centralwidget)
         QtCore.QMetaObject.connectSlotsByName(Form)
 
         self.pushButton.clicked.connect(lambda: self.funcionEliminarRouter())
+
+    # def botonSeleccionar_enableConAlfanumerico(self, pattern, textEdit):
+    #     text = textEdit.toPlainText()
+    #     if len(text) != 0:
+    #         try:
+    #             if re.fullmatch(pattern,text):
+    #                 self.botonIngresoDatos.setEnabled(True)
+    #             else:
+    #                 self.botonIngresoDatos.setEnabled(False)
+    #         except:
+    #             self.botonIngresoDatos.setEnabled(False)
+    #     else:
+    #         self.botonIngresoDatos.setEnabled(False)
+
 
     def funcionEliminarRouter(self):            
         print(self.textEdit.toPlainText())

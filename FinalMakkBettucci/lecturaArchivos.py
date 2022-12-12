@@ -11,7 +11,7 @@ def cargarProvinciasyDptos(pathMunicipios):
     with open('FinalMakkBettucci/prefijos.json') as json_file:
         prefijos_json = json.load(json_file)
     with open(pathMunicipios, encoding= 'unicode_escape') as csvFile:
-        reader=csv.DictReader(csvFile)
+        reader=csv.DictReader(csvFile, delimiter=';')
         i=0
         for linea in reader:
             try:
@@ -32,8 +32,8 @@ def cargarProvinciasyDptos(pathMunicipios):
 
 def leerArchivoRouter(pathRouters):
     #Lectura del csv routers
-    with open(pathRouters, encoding='unicode_escape') as csvFile:
-        geolocator = Nominatim(user_agent="geoapiExercises")
+    with open(pathRouters, encoding='unicode-escape') as csvFile:
+        # geolocator = Nominatim(user_agent="geoapiExercises")
         reader=csv.DictReader(csvFile, delimiter=';')
         i=0
         for linea in reader:
@@ -59,10 +59,10 @@ def leerArchivoRouter(pathRouters):
                         latitude = str(latitude / 1_000_000)
                         longitude = str(longitude / 1_000_000)
 
-                        # location = geolocator.reverse(latitude+","+longitude)
+                        # # location = geolocator.reverse(latitude+","+longitude)
 
-                        # address = location.raw['address']
-                        # municipio = address.get('county', '')  
+                        # # address = location.raw['address']
+                        # # municipio = address.get('county', '')  
                         municipio = ''
                     #Se crea el objeto Municipio
 
@@ -70,7 +70,7 @@ def leerArchivoRouter(pathRouters):
                         linea['municipio_id'], municipio)
 
                     # listaMunicipios.append(linea)
-                if linea['identificador'] not in Router.diccionarioRouter.keys():
+                if linea['identificador'] not in Router.diccionarioRouter:
                     Router(linea['id'], linea['identificador'],linea['ubicacion'],linea['latitud'],linea['longitud'],
                         linea['municipio_id'], linea['provincia_id'], linea['id_departamento'])
                 else:
@@ -79,7 +79,6 @@ def leerArchivoRouter(pathRouters):
                 print(e)
                 print('Linea {} no pudo ser cargada correctamente'.format(i))
 
-# leerArchivoRouter('TPFinalMakkBetucci/routers.csv')
 def leerArchivoConexiones(pathConexiones):
     #Lectura del csv conexiones y carga de conexiones al diccionario de conexiones y a los routers
     with open(pathConexiones, encoding='utf-8-sig') as csvFile:

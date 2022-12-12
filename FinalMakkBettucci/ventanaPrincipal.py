@@ -10,6 +10,7 @@ from ventanasSecundarias.opcion8 import Ui_FormEliminarRouter
 from ventanasSecundarias.opcion9 import Ui_FormAgregarConexion
 from ventanasSecundarias.opcion10 import Ui_FormEliminarConexion
 import lecturaArchivos
+from almacenarCambios import *
 
 lecturaArchivos.cargarProvinciasyDptos('FinalMakkBettucci/municipios.csv')
 lecturaArchivos.leerArchivoRouter('FinalMakkBettucci/routers.csv')
@@ -19,7 +20,7 @@ class Ui_MainWindow(QtWidgets.QMainWindow):
 
     def setupUi(self, MainWindow):
         MainWindow.setObjectName("MainWindow")
-        self.setWindowIcon(QtGui.QIcon('logo.ico'))
+        self.setWindowIcon(QtGui.QIcon('FinalMakkBettucci/logo.ico'))
         MainWindow.resize(621, 457)
 
         self.centralwidget = QtWidgets.QWidget(MainWindow)
@@ -99,13 +100,14 @@ class Ui_MainWindow(QtWidgets.QMainWindow):
             elif opcionIndicada == 10:
                 self.botonSeleccionarOpcion.clicked.connect(self.eliminarConexion)
             elif opcionIndicada == 11:
-                self.botonSeleccionarOpcion.clicked.connect(lambda: QApplication.quit()) 
-                # print('\n---PROGRAMA FINALIZADO---\n')
+                self.botonSeleccionarOpcion.clicked.connect(self.guardarYCerrar) 
 
     #Cargar archivo municipios
     def ventanaLeerArchivoMuni(self):
-        demo = VentanaCargarMunicipio()
-        demo.show()
+        self.Form = QtWidgets.QMainWindow()
+        self.ui = VentanaCargarMunicipio()
+        self.ui.setupUi(self.Form,self.Form)
+        self.Form.show()
 
     #Cargar archivo routers
     def ventanaLeerArchivoRouters(self):
@@ -169,6 +171,12 @@ class Ui_MainWindow(QtWidgets.QMainWindow):
         self.ui.setupUi(self.Form,self.Form)
         self.Form.show()
 
+    def guardarYCerrar(self):
+        actualizarArchivoMuni('FinalMakkBettucci/municipios.csv')
+        actualizarArchivoRouters('FinalMakkBettucci/routers.csv')
+        actualizarArchivoConexiones('FinalMakkBettucci/conexiones.csv')
+        app.exit()
+
     #Funcion que le cambia el text a algunos objetos
     def retranslateUi(self, MainWindow):
         _translate = QtCore.QCoreApplication.translate
@@ -187,7 +195,7 @@ class Ui_MainWindow(QtWidgets.QMainWindow):
         8. Dar de baja un punto de acceso
         9. Agregar conexiones
         10. Quitar conexiones
-        11. Salir'''))
+        11. Cerrar y guardar cambios'''))
 
     #Main
 if __name__ == "__main__":

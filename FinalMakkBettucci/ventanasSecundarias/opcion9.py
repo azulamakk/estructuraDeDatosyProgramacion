@@ -47,6 +47,12 @@ class Ui_FormAgregarConexion(QMainWindow):
         self.pushButton.setText("Agregar conexion")
         self.verticalLayout.addWidget(self.pushButton)
 
+        self.backButton = QtWidgets.QPushButton(self.verticalLayoutWidget)
+        self.backButton.setObjectName("pushButton")
+        self.backButton.setText("Volver")
+        self.verticalLayout.addWidget(self.backButton)
+        self.backButton.clicked.connect(lambda: self.secondWidgetWindow.close())
+
         Form.setCentralWidget(self.centralwidget)
         QtCore.QMetaObject.connectSlotsByName(Form)
 
@@ -86,8 +92,7 @@ class Ui_FormAgregarConexion(QMainWindow):
         routerID = self.diccionarioObjetos['Router ID']
         try:
             if routerID not in Router.diccionarioRouter:
-                raise Exception("El router no existe")
-
+                raise Exception("el router no existe")
             conexion = Conexion(ip,mac,fecha,horario,activa,routerID)
             router = Router.diccionarioRouter[routerID]
             router.agregarConexion(conexion)

@@ -12,7 +12,6 @@ sys.path.append('TPFinalMakkBettucci')
 # importing
 from routers import *
 
-
 # Esta clase es para ejecutar la opcion 6
 class Ui_FormVerConexEntreFechas(QMainWindow):
     valueChanged = QtCore.pyqtSignal(str)
@@ -103,7 +102,7 @@ class Ui_FormVerConexEntreFechas(QMainWindow):
         self.backButton.setObjectName("backButton")
         self.backButton.setText("Volver")
         self.verticalLayout.addWidget(self.backButton)
-        self.backButton.clicked.connect(lambda: self.close())
+        self.backButton.clicked.connect(lambda: self.secondWidgetWindow.close())
 
         #### Acciones ####  PD: abria que validar que "fecha fin > fecha inicio" 
         self.valueChanged.connect(self.on_value_changed)
@@ -164,13 +163,13 @@ class Ui_FormVerConexEntreFechas(QMainWindow):
         print('Inicio: ',fechaHoraInicio)
         print('Fin: ',fechaHoraFin)
         nodoActual = Conexion.conexionesHistoricas.head
+        
         while nodoActual != None:
             if nodoActual.valor.fechaYHora < fechaHoraInicio:
                 nodoActual = nodoActual.prox
                 continue
             if nodoActual.valor.fechaYHora > fechaHoraFin:
-                break
-
+                break            
             self.valueChanged.emit(str(nodoActual.valor))
             nodoActual = nodoActual.prox
 
