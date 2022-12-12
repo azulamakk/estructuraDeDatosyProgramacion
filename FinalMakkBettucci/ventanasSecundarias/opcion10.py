@@ -28,7 +28,7 @@ class Ui_FormEliminarConexion(QMainWindow):
         self.verticalLayout.setContentsMargins(0,0,0,0)
 
         # Text box y su label para ingresar por teclado el router ID (en el horizontal layout Router)
-        self.horizontalLayoutRouter = QtWidgets.QHBoxLayout(self.verticalLayoutWidget)
+        self.horizontalLayoutRouter = QtWidgets.QHBoxLayout()
 
         labelRouter = QtWidgets.QLabel(self.verticalLayoutWidget)
         labelRouter.setObjectName('labelIngresoRouterID')
@@ -42,7 +42,7 @@ class Ui_FormEliminarConexion(QMainWindow):
         self.verticalLayout.addLayout(self.horizontalLayoutRouter)
 
         # Text box y su label para ingresar por teclado el MAC Address (en el horizontal layout MAC)
-        self.horizontalLayoutMAC = QtWidgets.QHBoxLayout(self.verticalLayoutWidget)
+        self.horizontalLayoutMAC = QtWidgets.QHBoxLayout()
 
         labelMAC = QtWidgets.QLabel(self.verticalLayoutWidget)
         labelMAC.setObjectName('labelIngresoMAC')
@@ -82,25 +82,14 @@ class Ui_FormEliminarConexion(QMainWindow):
         textRouter = textEditRouter.toPlainText()
         textMAC = str(textEditMAC.toPlainText())
 
-        if len(textRouter) == 9 and len(textMAC) == 7:
-            # print(re.fullmatch(patternRouter, textRouter))
-            # print(re.fullmatch(patternMAC, textMAC))
-            # print(textRouter)
-            
-            # for keys in Router.diccionarioRouter.keys():
-            #     print(keys)
-
-            # print(textRouter in Router.diccionarioRouter)
-            #print(textMAC in Router.diccionarioRouter[textRouter].conexiones)
-            self.pushButton.setEnabled(True)
-        
-            # try:
-            #     if re.fullmatch(patternRouter, textRouter) and re.fullmatch(patternMAC, textMAC) and textRouter in Router.diccionarioRouter and textMAC in Router.diccionarioRouter[textRouter].conexiones:
-            #         self.pushButton.setEnabled(True)
-            #     else:
-            #         self.pushButton.setEnabled(False)
-            # except:
-            #     self.pushButton.setEnabled(False)
+        if len(textRouter) != 0 and len(textMAC) != 0:
+            try:
+                if re.fullmatch(patternRouter, textRouter) and re.fullmatch(patternMAC, textMAC) and textRouter in Router.diccionarioRouter and textMAC in Router.diccionarioRouter[textRouter].conexiones:
+                    self.pushButton.setEnabled(True)
+                else:
+                    self.pushButton.setEnabled(False)
+            except:
+                self.pushButton.setEnabled(False)
         else:
             self.pushButton.setEnabled(False)
 

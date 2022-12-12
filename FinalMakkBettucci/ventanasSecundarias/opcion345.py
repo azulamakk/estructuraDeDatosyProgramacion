@@ -28,62 +28,88 @@ class Ui_FormVerConexPorUbicacion(QtWidgets.QMainWindow):
         self.centralwidget = QtWidgets.QWidget(Form)
         self.centralwidget.setObjectName("centralwidget")
 
-        self.verticalLayoutWidget = QtWidgets.QWidget(self.centralwidget)
-        self.verticalLayoutWidget.setGeometry(QtCore.QRect(20, 40, 550, 50))
-        self.verticalLayoutWidget.setObjectName("verticalLayoutWidget")
-        self.verticalLayout = QtWidgets.QVBoxLayout(self.verticalLayoutWidget)
-        self.verticalLayout.setContentsMargins(0, 0, 0, 0)
-        self.verticalLayout.setObjectName("verticalLayout")
-
         if ubicacion == 'provincia':
 
-            ### DENTRO DEL LAYOUT ###
-            self.horizontalLayoutProvincia = QtWidgets.QHBoxLayout(self.verticalLayoutWidget)
-            self.horizontalLayoutProvincia.setObjectName("horizontalLayout_9")
+            self.verticalLayoutWidget = QtWidgets.QWidget(self.centralwidget)
+            self.verticalLayoutWidget.setGeometry(QtCore.QRect(20, 40, 550, 50))
+            self.verticalLayoutWidget.setObjectName("verticalLayoutWidget")
+            
+            self.verticalLayout = QtWidgets.QVBoxLayout(self.verticalLayoutWidget)
+            self.verticalLayout.setContentsMargins(0, 0, 0, 0)
+            self.verticalLayout.setObjectName("verticalLayout")
 
-            self.label = QtWidgets.QLabel(self.verticalLayoutWidget)
-            self.label.setObjectName("label")
-            self.label.setText("Ingrese una provincia:")
-            self.horizontalLayoutProvincia.addWidget(self.label)
+            ### DENTRO DEL LAYOUT ###
+            self.horizontalLayoutProvincia = QtWidgets.QHBoxLayout()
+            self.horizontalLayoutProvincia.setObjectName("horizontalLayoutProvincia")
+
+            self.labelProvincia = QtWidgets.QLabel(self.verticalLayoutWidget)
+            self.labelProvincia.setObjectName("labelProvincia")
+            self.labelProvincia.setText("Ingrese una provincia:")
+            self.horizontalLayoutProvincia.addWidget(self.labelProvincia)
 
             self.textEditProv = QtWidgets.QTextEdit(self.verticalLayoutWidget)
-            self.textEditProv.setObjectName("textEditProv")
+            self.textEditProv.setObjectName("textEditProvincia")
             self.horizontalLayoutProvincia.addWidget(self.textEditProv)
-            self.textEditProv.textChanged.connect(self.botonSeleccionar_enableConTextoProv)
-
-            self.pushButton = QtWidgets.QPushButton(self.verticalLayoutWidget)
-            self.pushButton.setObjectName("pushButton")
-            self.pushButton.setText("Seleccionar")
-            self.horizontalLayoutProvincia.addWidget(self.pushButton)
-            self.pushButton.clicked.connect(self.mostrarConexionesPorProvincia)
 
             self.verticalLayout.addLayout(self.horizontalLayoutProvincia)
 
             ## FUERA DEL LAYOUT ###
-            self.textEditOutput = QtWidgets.QTextEdit(self.centralwidget)
-            self.textEditOutput.setObjectName("textEditOutput")
-            self.textEditOutput.setGeometry(133, 100, 357, 150)
 
-            self.backButton = QPushButton(self.centralwidget)
-            self.backButton.setObjectName("backButton")
-            self.backButton.setGeometry(133, 260, 357, 30)
-            self.backButton.setText("Volver")
+            self.pushButtonProvincia = QtWidgets.QPushButton(self.centralwidget)
+            self.pushButtonProvincia.setObjectName("pushButtonProvincia")
+            self.pushButtonProvincia.setGeometry(133, 100, 357, 25)
+            self.pushButtonProvincia.setText("Seleccionar")
+            
+            self.textEditOutputProvincia = QtWidgets.QTextEdit(self.centralwidget)
+            self.textEditOutputProvincia.setObjectName("textEditOutputProvincia")
+            self.textEditOutputProvincia.setGeometry(133, 140, 357, 150)
+
+            self.backButtonProvincia = QPushButton(self.centralwidget)
+            self.backButtonProvincia.setObjectName("backButtonProvincia")
+            self.backButtonProvincia.setGeometry(133, 305, 357, 25)
+            self.backButtonProvincia.setText("Volver")
+
+            Form.setCentralWidget(self.centralwidget)
+
+            ## CONNECTS ##
+            QtCore.QMetaObject.connectSlotsByName(Form)
+            self.textEditProv.textChanged.connect(self.botonSeleccionar_enableConTextoProv)
+
+            self.valueChanged.connect(self.on_value_changed)
+            self.pushButtonProvincia.clicked.connect(self.on_clicked)
+
+            self.backButtonProvincia.clicked.connect(lambda: self.secondWidgetWindow.close())
+            
 
         elif ubicacion == 'departamento':
 
+            self.verticalLayoutWidget = QtWidgets.QWidget(self.centralwidget)
+            self.verticalLayoutWidget.setGeometry(QtCore.QRect(20, 40, 550, 100))
+            self.verticalLayoutWidget.setObjectName("verticalLayoutWidget")
+            
+            self.verticalLayout = QtWidgets.QVBoxLayout(self.verticalLayoutWidget)
+            self.verticalLayout.setContentsMargins(0, 0, 0, 0)
+            self.verticalLayout.setObjectName("verticalLayout")
+
             ### DENTRO DEL LAYOUT ###
-            self.horizontalLayoutDepartamento = QtWidgets.QHBoxLayout(self.verticalLayoutWidget)
-            self.horizontalLayoutDepartamento.setObjectName("horizontalLayout_9")
+
+            # PRIMERO ARMAMOS EL HORIZONTAL LAYOUT CON EL INGRESO DE PROVINCIA #
+            self.horizontalLayoutProv= QtWidgets.QHBoxLayout()
+            self.horizontalLayoutProv.setObjectName("horizontalLayoutDepartamento")
 
             labelProv = QtWidgets.QLabel(self.verticalLayoutWidget)
             labelProv.setObjectName("labelProv")
             labelProv.setText("Ingrese una provincia:")
-            self.horizontalLayoutDepartamento.addWidget(labelProv)
+            self.horizontalLayoutProv.addWidget(labelProv)
 
             self.textEditProv = QtWidgets.QTextEdit(self.verticalLayoutWidget)
             self.textEditProv.setObjectName("textEditProv")
-            self.textEditProv.textChanged.connect(self.botonSeleccionar_enableConTextoDpto)
-            self.horizontalLayoutDepartamento.addWidget(self.textEditProv)
+            self.horizontalLayoutProv.addWidget(self.textEditProv)
+
+            # SEGUNDO ARMAMOS EL HORIZONTAL LAYOUT CON EL INGRESO DE DEPARTAMENTO #
+
+            self.horizontalLayoutDepartamento = QtWidgets.QHBoxLayout()
+            self.horizontalLayoutDepartamento.setObjectName("horizontalLayoutDepartamento")
 
             labelDepto = QtWidgets.QLabel(self.verticalLayoutWidget)
             labelDepto.setObjectName("labelDepto")
@@ -93,51 +119,85 @@ class Ui_FormVerConexPorUbicacion(QtWidgets.QMainWindow):
             self.textEditDepto = QtWidgets.QTextEdit(self.verticalLayoutWidget)
             self.textEditDepto.setObjectName("textEditDepto")
             self.horizontalLayoutDepartamento.addWidget(self.textEditDepto)
-            self.textEditDepto.textChanged.connect(self.botonSeleccionar_enableConTextoDpto)
 
-            self.pushButton = QtWidgets.QPushButton(self.verticalLayoutWidget)
-            self.pushButton.setObjectName("pushButton")
-            self.pushButton.setText("Seleccionar")
-            self.horizontalLayoutDepartamento.addWidget(self.pushButton)
-            self.pushButton.clicked.connect(self.mostrarConexionesPorDepartamento)
+            # AÑADIMOS EL HORIZONTAL LAYOUT DE  DEPARTAMENTO Y PROVINCIA AL VERTICAL LAYOUT #
 
+            self.verticalLayout.addLayout(self.horizontalLayoutProv)
             self.verticalLayout.addLayout(self.horizontalLayoutDepartamento)
 
             ### FUERA DEL LAYOUT ###
+
+            self.pushButtonDepartamento = QtWidgets.QPushButton(self.centralwidget)
+            self.pushButtonDepartamento.setObjectName("pushButtonDepartamento")
+            self.pushButtonDepartamento.setGeometry(152, 150, 337, 30)
+            self.pushButtonDepartamento.setText("Seleccionar")
+
             self.textEditOutput = QtWidgets.QTextEdit(self.centralwidget)
             self.textEditOutput.setObjectName("textEditOutput")
-            self.textEditOutput.setGeometry(152, 100, 337, 150)
+            self.textEditOutput.setGeometry(152, 190, 337, 150)
 
-            self.backButton = QPushButton(self.centralwidget)
-            self.backButton.setObjectName("backButton")
-            self.backButton.setGeometry(152, 260, 337, 30)
-            self.backButton.setText("Volver")
+            self.backButtonDepartamento = QPushButton(self.centralwidget)
+            self.backButtonDepartamento.setObjectName("backButton")
+            self.backButtonDepartamento.setGeometry(152, 350, 337, 30)
+            self.backButtonDepartamento.setText("Volver")
+
+            Form.setCentralWidget(self.centralwidget)
+
+            ## CONNECTS ##
+            QtCore.QMetaObject.connectSlotsByName(Form)
+
+            self.textEditProv.textChanged.connect(self.botonSeleccionar_enableConTextoProv)
+            self.textEditDepto.textChanged.connect(self.botonSeleccionar_enableConTextoDpto)
+            
+            self.valueChanged.connect(self.on_value_changed)
+            self.pushButtonDepartamento.clicked.connect(self.on_clicked)
+
+            self.backButtonDepartamento.clicked.connect(lambda: self.secondWidgetWindow.close())
 
         elif ubicacion == 'municipio':
+
+            self.verticalLayoutWidget = QtWidgets.QWidget(self.centralwidget)
+            self.verticalLayoutWidget.setGeometry(QtCore.QRect(20, 40, 550, 100))
+            self.verticalLayoutWidget.setObjectName("verticalLayoutWidget")
             
-            ### DENTRO DEL LAUYOUT ###
-            self.horizontalLayoutMunicipio = QtWidgets.QHBoxLayout(self.verticalLayoutWidget)
-            self.horizontalLayoutMunicipio.setObjectName("horizontalLayout_9")
+            self.verticalLayout = QtWidgets.QVBoxLayout(self.verticalLayoutWidget)
+            self.verticalLayout.setContentsMargins(0, 0, 0, 0)
+            self.verticalLayout.setObjectName("verticalLayout")
+            
+            ### DENTRO DEL LAYOUT ###
+
+            # PRIMERO ARMAMOS EL HORIZONTAL LAYOUT CON EL INGRESO DE PROVINCIA #
+
+            self.horizontalLayoutProvincia = QtWidgets.QHBoxLayout()
+            self.horizontalLayoutProvincia.setObjectName("horizontalLayout_9")
             
             labelProv = QtWidgets.QLabel(self.verticalLayoutWidget)
             labelProv.setObjectName("labelProv")
             labelProv.setText("Ingrese una provincia:")
-            self.horizontalLayoutMunicipio.addWidget(labelProv)
+            self.horizontalLayoutProvincia.addWidget(labelProv)
 
             self.textEditProv = QtWidgets.QTextEdit(self.verticalLayoutWidget)
             self.textEditProv.setObjectName("textEditProv")
-            self.textEditProv.textChanged.connect(self.botonSeleccionar_enableConTextoMuni)
-            self.horizontalLayoutMunicipio.addWidget(self.textEditProv)
+            self.horizontalLayoutProvincia.addWidget(self.textEditProv)
+
+            # SEGUNDO ARMAMOS EL HORIZONTAL LAYOUT CON EL INGRESO DE DEPARTAMENTO #
+
+            self.horizontalLayoutDepartamento = QtWidgets.QHBoxLayout()
+            self.horizontalLayoutDepartamento.setObjectName("horizontalLayoutDepartamento")
 
             labelDepto = QtWidgets.QLabel(self.verticalLayoutWidget)
             labelDepto.setObjectName("labelDepto")
             labelDepto.setText("Ingrese un departamento:")
-            self.horizontalLayoutMunicipio.addWidget(labelDepto)
+            self.horizontalLayoutDepartamento.addWidget(labelDepto)
 
             self.textEditDepto = QtWidgets.QTextEdit(self.verticalLayoutWidget)
             self.textEditDepto.setObjectName("textEditDepto")
-            self.horizontalLayoutMunicipio.addWidget(self.textEditDepto)
-            self.textEditDepto.textChanged.connect(self.botonSeleccionar_enableConTextoMuni)
+            self.horizontalLayoutDepartamento.addWidget(self.textEditDepto)
+
+            # TERCERO ARMAMOS EL HORIZONTAL LAYOUT CON EL INGRESO DE MUNICIPIO #
+
+            self.horizontalLayoutMunicipio = QtWidgets.QHBoxLayout()
+            self.horizontalLayoutMunicipio.setObjectName("horizontalLayoutMunicipio")
 
             labelMuni = QtWidgets.QLabel(self.verticalLayoutWidget)
             labelMuni.setObjectName("label")
@@ -147,45 +207,49 @@ class Ui_FormVerConexPorUbicacion(QtWidgets.QMainWindow):
             self.textEditMuni = QtWidgets.QTextEdit(self.verticalLayoutWidget)
             self.textEditMuni.setObjectName("textEdit")
             self.horizontalLayoutMunicipio.addWidget(self.textEditMuni)
-            self.textEditMuni.textChanged.connect(self.botonSeleccionar_enableConTextoMuni)
 
-            self.pushButton = QtWidgets.QPushButton(self.verticalLayoutWidget)
-            self.pushButton.setObjectName("pushButton")
-            self.pushButton.setText("Seleccionar")
-            self.horizontalLayoutMunicipio.addWidget(self.pushButton)
-            self.pushButton.clicked.connect(self.mostrarConexionesPorMunicipio)
-
+            # AGREGAMOS LOS HORIZONTAL LAYOUTS AL VERTICAL LAYOUT #
+            self.verticalLayout.addLayout(self.horizontalLayoutProvincia)
+            self.verticalLayout.addLayout(self.horizontalLayoutDepartamento)
             self.verticalLayout.addLayout(self.horizontalLayoutMunicipio)
 
             ### FUERA DEL LAYOUT ###
+
+            self.pushButtonMunicipio = QtWidgets.QPushButton(self.centralwidget)
+            self.pushButtonMunicipio.setObjectName("pushButton")
+            self.pushButtonMunicipio.setGeometry(128, 150, 361, 30)
+            self.pushButtonMunicipio.setText("Seleccionar")
+
             self.textEditOutput = QtWidgets.QTextEdit(self.centralwidget)
             self.textEditOutput.setObjectName("textEditOutput")
-            self.textEditOutput.setGeometry(128, 100, 361, 150)
+            self.textEditOutput.setGeometry(128, 190, 361, 150)
 
-            self.backButton = QPushButton(self.centralwidget)
-            self.backButton.setObjectName("backButton")
-            self.backButton.setGeometry(128, 260, 361, 30)
-            self.backButton.setText("Volver")
+            self.backButtonMunicipio = QPushButton(self.centralwidget)
+            self.backButtonMunicipio.setObjectName("backButtonMunicipio")
+            self.backButtonMunicipio.setGeometry(128, 350, 361, 30)
+            self.backButtonMunicipio.setText("Volver")
 
-        Form.setCentralWidget(self.centralwidget)
+            Form.setCentralWidget(self.centralwidget)
 
-        QtCore.QMetaObject.connectSlotsByName(Form)
+            ## CONNECTS ##
+            self.textEditProv.textChanged.connect(self.botonSeleccionar_enableConTextoProv)
+            self.textEditDepto.textChanged.connect(self.botonSeleccionar_enableConTextoDpto)
+            self.textEditMuni.textChanged.connect(self.botonSeleccionar_enableConTextoMuni)
 
-        self.valueChanged.connect(self.on_value_changed)
-        self.pushButton.clicked.connect(self.on_clicked)
-        self.pushButton.setEnabled(False)
+            QtCore.QMetaObject.connectSlotsByName(Form)
+            self.valueChanged.connect(self.on_value_changed)
+            self.pushButtonMunicipio.clicked.connect(self.on_clicked)
 
-
-        self.backButton.clicked.connect(lambda: self.secondWidgetWindow.close())
+            self.backButtonMunicipio.clicked.connect(lambda: self.secondWidgetWindow.close())
 
     @QtCore.pyqtSlot()
     def on_clicked(self):
         if self.ubicacion == 'provincia':
-            threading.Thread(target=self.mostrarConexionesPorProvincia, daemon=True).start()
+            threading.Thread(target=self.mostrarConexionesPorProvincia(), daemon=True).start()
         if self.ubicacion == 'departamento':
-            threading.Thread(target=self.mostrarConexionesPorDepartamento, daemon=True).start()
+            threading.Thread(target=self.mostrarConexionesPorDepartamento(), daemon=True).start()
         if self.ubicacion == 'municipio':
-            threading.Thread(target=self.mostrarConexionesPorMunicipio, daemon=True).start()
+            threading.Thread(target=self.mostrarConexionesPorMunicipio(), daemon=True).start()
 
     @QtCore.pyqtSlot(str)
     def on_value_changed(self,value):

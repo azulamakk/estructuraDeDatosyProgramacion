@@ -1,0 +1,579 @@
+municipio_id;provincia_id;id_departamento;municipio;provincia;departamento
+CBA384;AR-X;1401;Villa Candelaria Norte;Cordoba;Rio Seco
+CBA066;AR-X;1401;;Cordoba;Rio Seco
+CBA071;AR-X;1382;Chucul;Cordoba;Rio Cuarto
+CBA380;AR-X;1382;;Cordoba;Rio Cuarto
+CBA318;AR-X;1382;;Cordoba;Rio Cuarto
+CBA277;AR-X;1388;;Cordoba;Tercero Arriba
+CBA157;AR-X;1388;;Cordoba;Tercero Arriba
+CBA364;AR-X;1388;;Cordoba;Tercero Arriba
+CBA234;AR-X;1388;;Cordoba;Tercero Arriba
+CBA308;AR-X;1388;;Cordoba;Tercero Arriba
+CBA148;AR-X;1388;;Cordoba;Tercero Arriba
+CBA218;AR-X;1396;La Falda;Cordoba;Punilla
+CBA171;AR-X;1396;;Cordoba;Punilla
+CBA222;AR-X;1396;;Cordoba;Punilla
+CBA405;AR-X;1396;;Cordoba;Punilla
+CBA415;AR-X;1391;;Cordoba;Calamuchita
+CBA052;AR-X;1391;;Cordoba;Calamuchita
+CBA404;AR-X;1391;;Cordoba;Calamuchita
+CBA231;AR-X;1391;;Cordoba;Calamuchita
+CBA168;AR-X;1391;;Cordoba;Calamuchita
+CBA329;AR-X;1391;;Cordoba;Calamuchita
+CBA223;AR-X;1391;;Cordoba;Calamuchita
+CBA100;AR-X;1406;;Cordoba;Capital
+CBA307;AR-X;1398;;Cordoba;Rio Segundo
+CBA106;AR-X;1398;;Cordoba;Rio Segundo
+CBA397;AR-X;1398;;Cordoba;Rio Segundo
+CBA301;AR-X;1398;;Cordoba;Rio Segundo
+CBA290;AR-X;1398;;Cordoba;Rio Segundo
+CBA042;AR-X;1398;;Cordoba;Rio Segundo
+CBA218;AR-X;1386;;Cordoba;Marcos Juarez
+CBA107;AR-X;1386;;Cordoba;Marcos Juarez
+CBA154;AR-X;1386;;Cordoba;Marcos Juarez
+CBA246;AR-X;1386;;Cordoba;Marcos Juarez
+CBA155;AR-X;1386;;Cordoba;Marcos Juarez
+CBA357;AR-X;1393;;Cordoba;General San Martin
+CBA366;AR-X;1393;;Cordoba;General San Martin
+CBA411;AR-X;1393;;Cordoba;General San Martin
+CBA233;AR-X;1402;;Cordoba;Pocho
+CBA206;AR-X;1402;;Cordoba;Pocho
+CBA296;AR-X;1395;;Cordoba;Ischilin
+CBA051;AR-X;1395;;Cordoba;Ischilin
+CBA207;AR-X;1400;;Cordoba;Totoral
+CBA398;AR-X;1400;;Cordoba;Totoral
+CBA359;AR-X;1400;;Cordoba;Totoral
+CBA398;AR-X;1383;Villa Allende;Cordoba;Colon
+CBA087;AR-X;1383;Jesus Maria;Cordoba;Colon
+CBA381;AR-X;1383;;Cordoba;Colon
+CBA158;AR-X;1383;;Cordoba;Colon
+CBA317;AR-X;1383;;Cordoba;Colon
+CBA315;AR-X;1383;;Cordoba;Colon
+CBA376;AR-X;1383;;Cordoba;Colon
+CBA083;AR-X;1383;;Cordoba;Colon
+CBA014;AR-X;1387;;Cordoba;San Justo
+CBA091;AR-X;1387;;Cordoba;San Justo
+CBA264;AR-X;1387;;Cordoba;San Justo
+CBA095;AR-X;1387;;Cordoba;San Justo
+CBA087;AR-X;1387;;Cordoba;San Justo
+CBA038;AR-X;1387;;Cordoba;San Justo
+CBA311;AR-X;1387;;Cordoba;San Justo
+CBA419;AR-X;1389;;Cordoba;Santa Maria
+CBA011;AR-X;1389;;Cordoba;Santa Maria
+CBA221;AR-X;1385;;Cordoba;Juarez Celman
+CBA140;AR-X;1385;;Cordoba;Juarez Celman
+CBA193;AR-X;1407;;Cordoba;Presidente Roque Saenz Pena
+CBA306;AR-X;1394;;Cordoba;Rio Primero
+CBA185;AR-X;1394;;Cordoba;Rio Primero
+CBA258;AR-X;1394;;Cordoba;Rio Primero
+CBA260;AR-X;1384;;Cordoba;Union
+CBA160;AR-X;1384;;Cordoba;Union
+CBA263;AR-X;1384;;Cordoba;Union
+CBA012;AR-X;1384;;Cordoba;Union
+SFE042;AR-S;1693;Campo Piaggio;Santa Fe;San Jeronimo
+SFE284;AR-S;1693;;Santa Fe;San Jeronimo
+SFE182;AR-S;1685;;Santa Fe;San Cristobal
+SFE033;AR-S;1691;;Santa Fe;Caseros
+SFE067;AR-S;1691;;Santa Fe;Caseros
+SFE271;AR-S;1700;;Santa Fe;Las Colonias
+SFE290;AR-S;1700;;Santa Fe;Las Colonias
+SFE245;AR-S;1700;;Santa Fe;Las Colonias
+SFE362;AR-S;1690;;Santa Fe;San Justo
+SFE275;AR-S;1690;;Santa Fe;San Justo
+SFE295;AR-S;1690;;Santa Fe;San Justo
+SFE116;AR-S;1690;;Santa Fe;San Justo
+SFE054;AR-S;1684;;Santa Fe;Rosario
+SFE360;AR-S;1684;;Santa Fe;Rosario
+SFE143;AR-S;1684;;Santa Fe;Rosario
+SFE129;AR-S;1684;;Santa Fe;Rosario
+SFE264;AR-S;1684;;Santa Fe;Rosario
+SFE020;AR-S;1684;;Santa Fe;Rosario
+SFE242;AR-S;1701;;Santa Fe;Nueve de Julio
+SFE115;AR-S;1701;;Santa Fe;Nueve de Julio
+SFE144;AR-S;1701;;Santa Fe;Nueve de Julio
+SFE336;AR-S;1701;;Santa Fe;Nueve de Julio
+SFE351;AR-S;1701;;Santa Fe;Nueve de Julio
+SFE188;AR-S;1692;;Santa Fe;Belgrano
+SFE224;AR-S;1692;;Santa Fe;Belgrano
+SFE335;AR-S;1692;;Santa Fe;Belgrano
+SFE015;AR-S;1692;;Santa Fe;Belgrano
+SFE301;AR-S;1683;;Santa Fe;General Lopez
+SFE225;AR-S;1683;;Santa Fe;General Lopez
+SFE100;AR-S;1683;;Santa Fe;General Lopez
+SFE266;AR-S;1683;;Santa Fe;General Lopez
+SFE217;AR-S;1683;;Santa Fe;General Lopez
+SFE049;AR-S;1687;;Santa Fe;San Lorenzo
+SFE126;AR-S;1687;;Santa Fe;San Lorenzo
+SFE203;AR-S;1687;;Santa Fe;San Lorenzo
+SFE260;AR-S;1687;;Santa Fe;San Lorenzo
+SFE108;AR-S;1694;;Santa Fe;La Capital
+SFE227;AR-S;1694;;Santa Fe;La Capital
+SFE318;AR-S;1694;;Santa Fe;La Capital
+SFE178;AR-S;1694;;Santa Fe;La Capital
+SFE305;AR-S;1694;;Santa Fe;La Capital
+SFE257;AR-S;1689;;Santa Fe;Castellanos
+SFE073;AR-S;1689;;Santa Fe;Castellanos
+SFE243;AR-S;1689;;Santa Fe;Castellanos
+SFE028;AR-S;1689;;Santa Fe;Castellanos
+SFE325;AR-S;1689;;Santa Fe;Castellanos
+SFE101;AR-S;1689;;Santa Fe;Castellanos
+SFE255;AR-S;1689;;Santa Fe;Castellanos
+SFE326;AR-S;1689;;Santa Fe;Castellanos
+SFE160;AR-S;1689;;Santa Fe;Castellanos
+SFE011;AR-S;1689;;Santa Fe;Castellanos
+SFE175;AR-S;1695;;Santa Fe;General Obligado
+SFE199;AR-S;1695;;Santa Fe;General Obligado
+SFE180;AR-S;1695;;Santa Fe;General Obligado
+SFE206;AR-S;1695;;Santa Fe;General Obligado
+SFE094;AR-S;1696;;Santa Fe;Iriondo
+SFE348;AR-S;1696;;Santa Fe;Iriondo
+SFE202;AR-S;1696;;Santa Fe;Iriondo
+SFE056;AR-S;1696;;Santa Fe;Iriondo
+SFE337;AR-S;1696;;Santa Fe;Iriondo
+SFE038;AR-S;1688;;Santa Fe;San Javier
+SFE288;AR-S;1688;;Santa Fe;San Javier
+SFE005;AR-S;1686;;Santa Fe;Constitucion
+SFE040;AR-S;1697;;Santa Fe;Vera
+SFE105;AR-S;1698;;Santa Fe;San Martin
+TUC100;AR-T;1648;Tafi del Valle;Tucuman;Tafi del Valle
+TUC007;AR-T;1648;;Tucuman;Tafi del Valle
+TUC030;AR-T;1648;;Tucuman;Tafi del Valle
+TUC082;AR-T;1654;;Tucuman;Lules
+TUC013;AR-T;1644;;Tucuman;Leales
+TUC009;AR-T;1649;;Tucuman;Tafi Viejo
+TUC055;AR-T;1649;;Tucuman;Tafi Viejo
+TUC107;AR-T;1650;;Tucuman;Simoca
+TUC097;AR-T;1650;;Tucuman;Simoca
+TUC109;AR-T;1643;;Tucuman;Monteros
+TUC071;AR-T;1643;;Tucuman;Monteros
+TUC034;AR-T;1651;;Tucuman;Burruyacu
+TUC036;AR-T;1651;;Tucuman;Burruyacu
+TUC106;AR-T;1651;;Tucuman;Burruyacu
+TUC015;AR-T;1651;;Tucuman;Burruyacu
+TUC112;AR-T;1652;;Tucuman;Yerba Buena
+TUC012;AR-T;1646;;Tucuman;Cruz Alta
+TUC004;AR-T;1646;;Tucuman;Cruz Alta
+TUC088;AR-T;1653;;Tucuman;Trancas
+TUC037;AR-T;1656;;Tucuman;Juan Bautista Alberdi
+TUC086;AR-T;1659;;Tucuman;Capital
+TUC006;AR-T;1647;;Tucuman;Chicligasta
+TUC041;AR-T;1647;;Tucuman;Chicligasta
+SCR016;AR-Z;1607;;Santa Cruz;Deseado
+COR019;AR-W;1425;;Corrientes;Santo Tome
+COR059;AR-W;1425;;Corrientes;Santo Tome
+COR020;AR-W;1425;;Corrientes;Santo Tome
+COR012;AR-W;1419;;Corrientes;Capital
+COR048;AR-W;1419;;Corrientes;Capital
+COR062;AR-W;1411;;Corrientes;Paso de los Libres
+COR033;AR-W;1428;;Corrientes;San Miguel
+COR055;AR-W;1428;;Corrientes;San Miguel
+COR069;AR-W;1431;;Corrientes;Saladas
+COR049;AR-W;1431;;Corrientes;Saladas
+COR007;AR-W;1415;;Corrientes;San Martin
+COR030;AR-W;1415;;Corrientes;San Martin
+COR065;AR-W;1415;;Corrientes;San Martin
+COR027;AR-W;1417;;Corrientes;Ituzaingo
+COR064;AR-W;1417;;Corrientes;Ituzaingo
+COR068;AR-W;1414;;Corrientes;San Roque
+COR006;AR-W;1414;;Corrientes;San Roque
+COR056;AR-W;1414;;Corrientes;San Roque
+COR026;AR-W;1427;;Corrientes;Itati
+COR011;AR-W;1418;;Corrientes;Concepcion
+COR010;AR-W;1418;;Corrientes;Concepcion
+COR025;AR-W;1412;;Corrientes;General Paz
+COR002;AR-W;1409;;Corrientes;Bella Vista
+COR071;AR-W;1409;;Corrientes;Bella Vista
+COR016;AR-W;1423;;Corrientes;Esquina
+COR067;AR-W;1413;;Corrientes;Goya
+COR035;AR-W;1429;;Corrientes;Mburucuya
+COR037;AR-W;1416;;Corrientes;Monte Caseros
+COR018;AR-W;1424;;Corrientes;Mercedes
+COR045;AR-W;1421;;Corrientes;Curuzu Cuatia
+COR057;AR-W;1430;;Corrientes;San Cosme
+MZA003;AR-M;1517;;Mendoza;Guaymallen
+MZA010;AR-M;1524;;Mendoza;Malargue
+MZA013;AR-M;1527;;Mendoza;San Carlos
+MZA018;AR-M;1532;;Mendoza;Tupungato
+MZA016;AR-M;1530;;Mendoza;Santa Rosa
+MZA017;AR-M;1531;;Mendoza;Tunuyan
+MZA015;AR-M;1529;;Mendoza;San Rafael
+MZA008;AR-M;1522;;Mendoza;Lujan de Cuyo
+MZA012;AR-M;1526;;Mendoza;Rivadavia
+MZA011;AR-M;1525;;Mendoza;Capital
+MZA001;AR-M;1515;;Mendoza;General Alvear
+MZA014;AR-M;1528;;Mendoza;San Martin
+MZA006;AR-M;1520;;Mendoza;Las Heras
+MZA004;AR-M;1518;;Mendoza;Junin
+BUE043;AR-B;1237;;Buenos Aires;General Alvear
+BUE007;AR-B;1284;Nueve de Julio;Buenos Aires;Nueve de Julio
+BUE089;AR-B;1284;;Buenos Aires;Nueve de Julio
+BUE101;AR-B;1202;Azul;Buenos Aires;Azul
+BUE007;AR-B;1202;;Buenos Aires;Azul
+BUE056;AR-B;1250;;Buenos Aires;General Viamonte
+BUE067;AR-B;1225;Coronel Pringles;Buenos Aires;Coronel Pringles
+BUE031;AR-B;1225;;Buenos Aires;Coronel Pringles
+BUE064;AR-B;1258;;Buenos Aires;La Costa
+BUE101;AR-B;1296;;Buenos Aires;Quilmes
+BUE014;AR-B;1208;;Buenos Aires;Berisso
+BUE102;AR-B;1260;La Plata;Buenos Aires;La Plata
+BUE066;AR-B;1260;;Buenos Aires;La Plata
+BUE010;AR-B;1326;Vicente Lopez;Buenos Aires;Vicente Lopez
+BUE099;AR-B;1326;Vicente Lopez;Buenos Aires;Vicente Lopez
+BUE072;AR-B;1326;Vicente Lopez;Buenos Aires;Vicente Lopez
+BUE068;AR-B;1326;Vicente Lopez;Buenos Aires;Vicente Lopez
+BUE118;AR-B;1326;Vicente Lopez;Buenos Aires;Vicente Lopez
+BUE131;AR-B;1326;;Buenos Aires;Vicente Lopez
+BUE069;AR-B;1263;;Buenos Aires;Las Flores
+BUE044;AR-B;1261;Lanus;Buenos Aires;Lanus
+BUE090;AR-B;1261;Lanus;Buenos Aires;Lanus
+BUE001;AR-B;1261;Lanus;Buenos Aires;Lanus
+BUE067;AR-B;1261;;Buenos Aires;Lanus
+BUE016;AR-B;1210;;Buenos Aires;Bragado
+BUE088;AR-B;1283;;Buenos Aires;Necochea
+BUE133;AR-B;1328;;Buenos Aires;Villarino
+BUE063;AR-B;1257;;Buenos Aires;Junin
+BUE046;AR-B;1240;;Buenos Aires;General Guido
+BUE125;AR-B;1320;;Buenos Aires;Tornquist
+BUE030;AR-B;1288;Pellegrini;Buenos Aires;Pellegrini
+BUE093;AR-B;1288;;Buenos Aires;Pellegrini
+BUE102;AR-B;1297;;Buenos Aires;Ramallo
+BUE113;AR-B;1308;;Buenos Aires;San Cayetano
+BUE032;AR-B;1226;;Buenos Aires;Coronel Suarez
+BUE073;AR-B;1268;;Buenos Aires;Lobos
+BUE045;AR-B;1239;;Buenos Aires;General Belgrano
+BUE111;AR-B;1306;;Buenos Aires;San Andres de Giles
+BUE036;AR-B;1230;;Buenos Aires;Escobar
+BUE076;AR-B;1271;;Buenos Aires;Magdalena
+BUE126;AR-B;1321;;Buenos Aires;Trenque Lauquen
+BUE083;AR-B;1278;;Buenos Aires;Monte
+BUE130;AR-B;1325;;Buenos Aires;Veinticinco de Mayo
+BUE010;AR-B;1205;;Buenos Aires;Baradero
+BUE099;AR-B;1294;;Buenos Aires;Puan
+BUE072;AR-B;1267;;Buenos Aires;Loberia
+BUE124;AR-B;1262;Laprida;Buenos Aires;Laprida
+BUE068;AR-B;1262;;Buenos Aires;Laprida
+BUE118;AR-B;1313;;Buenos Aires;San Pedro
+BUE044;AR-B;1238;;Buenos Aires;General Arenales
+BUE054;AR-B;1285;Olavarria;Buenos Aires;Olavarria
+BUE085;AR-B;1285;Olavarria;Buenos Aires;Olavarria
+BUE090;AR-B;1285;;Buenos Aires;Olavarria
+BUE094;AR-B;1195;Adolfo Alsina;Buenos Aires;Adolfo Alsina
+BUE053;AR-B;1195;Adolfo Alsina;Buenos Aires;Adolfo Alsina
+BUE001;AR-B;1195;;Buenos Aires;Adolfo Alsina
+BUE030;AR-B;1224;;Buenos Aires;Coronel Dorrego
+BUE048;AR-B;1242;;Buenos Aires;General La Madrid
+BUE104;AR-B;1299;;Buenos Aires;Rivadavia
+BUE114;AR-B;1309;;Buenos Aires;San Fernando
+BUE119;AR-B;1314;;Buenos Aires;San Vicente
+BUE071;AR-B;1266;;Buenos Aires;Lincoln
+BUE065;AR-B;1259;;Buenos Aires;La Matanza
+BUE008;AR-B;1203;;Buenos Aires;Bahia Blanca
+BUE080;AR-B;1275;;Buenos Aires;Marcos Paz
+BUE041;AR-B;1235;;Buenos Aires;Florentino Ameghino
+BUE096;AR-B;1291;;Buenos Aires;Pilar
+BUE097;AR-B;1292;;Buenos Aires;Pinamar
+BUE042;AR-B;1236;;Buenos Aires;General Alvarado
+BUE025;AR-B;1220;;Buenos Aires;Chascomus
+BUE115;AR-B;1310;;Buenos Aires;San Isidro
+BUE049;AR-B;1243;;Buenos Aires;General las Heras
+BUE124;AR-B;1319;;Buenos Aires;Tordillo
+BUE117;AR-B;1312;;Buenos Aires;San Nicolas
+BUE132;AR-B;1327;;Buenos Aires;Villa Gesell
+BUE082;AR-B;1277;;Buenos Aires;Merlo
+BUE009;AR-B;1204;;Buenos Aires;Balcarce
+BUE054;AR-B;1248;;Buenos Aires;General Rodriguez
+BUE085;AR-B;1280;;Buenos Aires;Moreno
+BUE017;AR-B;1212;;Buenos Aires;Campana
+BUE002;AR-B;1196;;Buenos Aires;Adolfo Gonzales Chaves
+BUE094;AR-B;1289;;Buenos Aires;Pergamino
+BUE053;AR-B;1247;;Buenos Aires;General Pueyrredon
+BUE015;AR-B;1209;;Buenos Aires;Bolivar
+BUE098;AR-B;1293;;Buenos Aires;Presidente Peron
+BUE035;AR-B;1229;;Buenos Aires;Ensenada
+BUE050;AR-B;1244;;Buenos Aires;General Lavalle
+BUE024;AR-B;1219;;Buenos Aires;Chacabuco
+BUE105;AR-B;1300;;Buenos Aires;Rojas
+BUE004;AR-B;1198;;Buenos Aires;Almirante Brown
+BUE121;AR-B;1316;;Buenos Aires;Tandil
+BUE086;AR-B;1281;;Buenos Aires;Moron
+BUE120;AR-B;1315;;Buenos Aires;Suipacha
+BUE091;AR-B;1286;;Buenos Aires;Patagones
+BUE075;AR-B;1270;;Buenos Aires;Lujan
+ERI037;AR-E;1435;;Entre Rios;Nogoya
+ERI004;AR-E;1435;;Entre Rios;Nogoya
+ERI160;AR-E;1433;;Entre Rios;Gualeguaychu
+ERI032;AR-E;1433;;Entre Rios;Gualeguaychu
+ERI025;AR-E;1433;;Entre Rios;Gualeguaychu
+ERI005;AR-E;1436;;Entre Rios;Uruguay
+ERI068;AR-E;1436;;Entre Rios;Uruguay
+ERI022;AR-E;1434;;Entre Rios;Diamante
+ERI016;AR-E;1434;;Entre Rios;Diamante
+ERI056;AR-E;1439;;Entre Rios;Parana
+ERI036;AR-E;1439;;Entre Rios;Parana
+ERI027;AR-E;1439;;Entre Rios;Parana
+ERI015;AR-E;1439;;Entre Rios;Parana
+ERI044;AR-E;1439;;Entre Rios;Parana
+ERI035;AR-E;1446;;Entre Rios;Tala
+ERI064;AR-E;1438;;Entre Rios;Islas del Ibicuy
+ERI041;AR-E;1438;;Entre Rios;Islas del Ibicuy
+ERI058;AR-E;1449;;Entre Rios;Villaguay
+ERI020;AR-E;1445;;Entre Rios;Gualeguay
+ERI024;AR-E;1445;;Entre Rios;Gualeguay
+ERI051;AR-E;1443;;Entre Rios;Federal
+ERI046;AR-E;1441;;Entre Rios;Colon
+ERI061;AR-E;1441;;Entre Rios;Colon
+ERI054;AR-E;1441;;Entre Rios;Colon
+ERI021;AR-E;1444;;Entre Rios;San Salvador
+ERI048;AR-E;1444;;Entre Rios;San Salvador
+ERI013;AR-E;1442;;Entre Rios;Concordia
+ERI040;AR-E;1437;;Entre Rios;La Paz
+MIS028;AR-N;1536;;Misiones;Cainguas
+MIS069;AR-N;1546;;Misiones;Guarani
+MIS030;AR-N;1546;;Misiones;Guarani
+MIS052;AR-N;1541;;Misiones;Montecarlo
+MIS015;AR-N;1541;;Misiones;Montecarlo
+MIS061;AR-N;1541;;Misiones;Montecarlo
+MIS002;AR-N;1534;;Misiones;Leandro N. Alem
+MIS016;AR-N;1534;;Misiones;Leandro N. Alem
+MIS059;AR-N;1544;;Misiones;Iguazu
+MIS032;AR-N;1544;;Misiones;Iguazu
+MIS047;AR-N;1544;;Misiones;Iguazu
+MIS023;AR-N;1544;;Misiones;Iguazu
+MIS068;AR-N;1549;;Misiones;San Pedro
+MIS013;AR-N;1538;;Misiones;Candelaria
+MIS070;AR-N;1538;;Misiones;Candelaria
+MIS063;AR-N;1540;;Misiones;Libertador General San Martin
+MIS060;AR-N;1540;;Misiones;Libertador General San Martin
+MIS057;AR-N;1547;;Misiones;Capital
+MIS064;AR-N;1543;;Misiones;San Ignacio
+MIS012;AR-N;1539;;Misiones;Obera
+MIS042;AR-N;1539;;Misiones;Obera
+MIS053;AR-N;1542;;Misiones;Eldorado
+MIS031;AR-N;1542;;Misiones;Eldorado
+CHU008;AR-U;1368;;Chubut;Languineo
+CHU002;AR-U;1368;;Chubut;Languineo
+CHU006;AR-U;1368;;Chubut;Languineo
+CHU032;AR-U;1368;;Chubut;Languineo
+CHU028;AR-U;1376;;Chubut;Gastre
+CHU022;AR-U;1376;;Chubut;Gastre
+CHU043;AR-U;1371;;Chubut;Futaleufu
+CHU010;AR-U;1371;;Chubut;Futaleufu
+CHU018;AR-U;1371;;Chubut;Futaleufu
+CHU021;AR-U;1375;;Chubut;Telsen
+CHU031;AR-U;1379;;Chubut;Paso de Indios
+CHU030;AR-U;1379;;Chubut;Paso de Indios
+CHU038;AR-U;1369;Buen Pasto;Chubut;Sarmiento
+CHU004;AR-U;1369;;Chubut;Sarmiento
+CHU025;AR-U;1377;;Chubut;Tehuelches
+CHU047;AR-U;1377;;Chubut;Tehuelches
+CHU038;AR-U;1377;;Chubut;Tehuelches
+CHU011;AR-U;1372;;Chubut;Cushamen
+CHU015;AR-U;1372;;Chubut;Cushamen
+CHU024;AR-U;1372;;Chubut;Cushamen
+CHU029;AR-U;1378;;Chubut;Martires
+CHU005;AR-U;1370;;Chubut;Florentino Ameghino
+CHU009;AR-U;1373;;Chubut;Escalante
+CHU046;AR-U;1367;;Chubut;Rio Senguer
+CHU037;AR-U;1367;;Chubut;Rio Senguer
+CHA024;AR-H;1359;;Chaco;Doce de Octubre
+CHA059;AR-H;1721;;Chaco;Quitilipi
+CHA043;AR-H;1364;;Chaco;Veinticinco de Mayo
+CHA046;AR-H;1347;Barranqueras;Chaco;San Fernando
+CHA002;AR-H;1347;;Chaco;San Fernando
+CHA007;AR-H;1350;;Chaco;Chacabuco
+CHA017;AR-H;1349;;Chaco;Tapenaga
+CHA068;AR-H;1358;;Chaco;General Guemes
+CHA046;AR-H;1358;;Chaco;General Guemes
+CHA018;AR-H;1358;;Chaco;General Guemes
+CHA028;AR-H;1360;;Chaco;Bermejo
+CHA041;AR-H;1360;;Chaco;Bermejo
+CHA026;AR-H;1360;;Chaco;Bermejo
+CHA063;AR-H;1351;;Chaco;Fray Justo Santa Maria de Oro
+CHA039;AR-H;1284;;Chaco;Nueve de Julio
+CHA001;AR-H;1346;;Chaco;Independencia
+CHA015;AR-H;1357;;Chaco;Mayor Luis Jorge Fontana
+CHA054;AR-H;1719;;Chaco;Comandante Fernandez
+CHA049;AR-H;1352;;Chaco;Libertador General San Martin
+LAP075;AR-L;1494;;La Pampa;Puelen
+LAP029;AR-L;1477;;La Pampa;Maraco
+LAP060;AR-L;1476;;La Pampa;Realico
+LAP067;AR-L;1483;;La Pampa;Chapaleufu
+LAP034;AR-L;1483;;La Pampa;Chapaleufu
+LAP065;AR-L;1480;;La Pampa;Capital
+LAP007;AR-L;1480;;La Pampa;Capital
+LAP070;AR-L;1496;;La Pampa;Toay
+LAP072;AR-L;1481;;La Pampa;Trenel
+RNO028;AR-R;1576;;Rio Negro;Norquinco
+RNO069;AR-R;1576;;Rio Negro;Norquinco
+RNO057;AR-R;1576;;Rio Negro;Norquinco
+RNO037;AR-R;1573;;Rio Negro;Adolfo Alsina
+RNO070;AR-R;1573;;Rio Negro;Adolfo Alsina
+RNO035;AR-R;1578;;Rio Negro;San Antonio
+RNO032;AR-R;1578;;Rio Negro;San Antonio
+RNO017;AR-R;1569;;Rio Negro;General Roca
+RNO009;AR-R;1569;;Rio Negro;General Roca
+RNO021;AR-R;1569;;Rio Negro;General Roca
+RNO064;AR-R;1577;;Rio Negro;Pichi Mahuida
+RNO043;AR-R;1566;;Rio Negro;Valcheta
+RNO042;AR-R;1566;;Rio Negro;Valcheta
+RNO071;AR-R;1566;;Rio Negro;Valcheta
+RNO041;AR-R;1568;;Rio Negro;El Cuy
+RNO058;AR-R;1568;;Rio Negro;El Cuy
+RNO065;AR-R;1572;;Rio Negro;Nueve de Julio
+RNO045;AR-R;1572;;Rio Negro;Nueve de Julio
+RNO068;AR-R;1572;;Rio Negro;Nueve de Julio
+RNO053;AR-R;1567;;Rio Negro;Veinticinco de Mayo
+RNO033;AR-R;1574;;Rio Negro;Bariloche
+RNO052;AR-R;1574;;Rio Negro;Bariloche
+SJU017;AR-J;1595;;San Juan;Valle Fertil
+SJU015;AR-J;1593;;San Juan;Sarmiento
+SJU008;AR-J;1586;;San Juan;Nueve de Julio
+SJU014;AR-J;1592;;San Juan;Santa Lucia
+SJU003;AR-J;1581;;San Juan;Calingasta
+SJU016;AR-J;1594;;San Juan;Ullum
+SJU007;AR-J;1585;;San Juan;Jachal
+SJU019;AR-J;1597;;San Juan;Zonda
+SJU011;AR-J;1589;;San Juan;Rivadavia
+SJU004;AR-J;1582;;San Juan;Caucete
+SJU010;AR-J;1588;;San Juan;Rawson
+SJU006;AR-J;1584;;San Juan;Iglesia
+JUJ001;AR-Y;1459;;Jujuy;Cochinoca
+JUJ002;AR-Y;1459;;Jujuy;Cochinoca
+JUJ037;AR-Y;1459;;Jujuy;Cochinoca
+JUJ030;AR-Y;1470;;Jujuy;Rinconada
+JUJ041;AR-Y;1470;;Jujuy;Rinconada
+JUJ020;AR-Y;1468;;Jujuy;Santa Barbara
+JUJ032;AR-Y;1468;;Jujuy;Santa Barbara
+JUJ029;AR-Y;1469;;Jujuy;Tilcara
+JUJ023;AR-Y;1469;;Jujuy;Tilcara
+JUJ047;AR-Y;1474;;Jujuy;Doctor Manuel Belgrano
+JUJ038;AR-Y;1460;;Jujuy;El Carmen
+JUJ004;AR-Y;1460;;Jujuy;El Carmen
+JUJ051;AR-Y;1465;;Jujuy;Susques
+JUJ011;AR-Y;1465;;Jujuy;Susques
+JUJ013;AR-Y;1465;;Jujuy;Susques
+JUJ042;AR-Y;1461;;Jujuy;San Pedro
+JUJ041;AR-Y;1467;Humahuaca;Jujuy;Humahuaca
+JUJ024;AR-Y;1467;;Jujuy;Humahuaca
+JUJ040;AR-Y;1472;;Jujuy;Tumbaya
+JUJ017;AR-Y;1462;;Jujuy;Yavi
+JUJ010;AR-Y;1464;;Jujuy;Valle Grande
+JUJ033;AR-Y;1471;;Jujuy;Palpala
+SAL014;AR-A;1667;;Salta;Chicoana
+SAL010;AR-A;1667;;Salta;Chicoana
+SAL052;AR-A;1680;;Salta;Rivadavia
+SAL044;AR-A;1680;;Salta;Rivadavia
+SAL015;AR-A;1675;Vaqueros;Salta;La Caldera
+SAL057;AR-A;1675;;Salta;La Caldera
+SAL006;AR-A;1664;;Salta;Cafayate
+SAL034;AR-A;1669;;Salta;La Vina
+SAL046;AR-A;1672;;Salta;Rosario de la Frontera
+SAL059;AR-A;1682;;Salta;Los Andes
+SAL049;AR-A;1682;;Salta;Los Andes
+SAL015;AR-A;1670;;Salta;Metan
+SAL043;AR-A;1670;;Salta;Metan
+SAL005;AR-A;1663;;Salta;Cachi
+SAL040;AR-A;1663;;Salta;Cachi
+SAL031;AR-A;1671;;Salta;La Candelaria
+SAL009;AR-A;1666;General Guemes;Salta;General Guemes
+SAL022;AR-A;1666;;Salta;General Guemes
+SAL013;AR-A;1666;;Salta;General Guemes
+SAL054;AR-A;1679;;Salta;Molinos
+SAL038;AR-A;1679;;Salta;Molinos
+SAL018;AR-A;1662;;Salta;Anta
+SAL020;AR-A;1660;;Salta;General Jose de San Martin
+SAL041;AR-A;1668;;Salta;Oran
+SAL033;AR-A;1677;;Salta;La Poma
+SAL047;AR-A;1665;;Salta;Rosario de Lerma
+SAL028;AR-A;1674;;Salta;Iruya
+SAL009;AR-A;1676;;Salta;Cerrillos
+SAL048;AR-A;1681;;Salta;Capital
+LRJ017;AR-F;1513;;La Rioja;Sanagasta
+LRJ006;AR-F;1502;;La Rioja;Famatina
+LRJ013;AR-F;1509;;La Rioja;Independencia
+LRJ012;AR-F;1508;;La Rioja;General San Martin
+LRJ014;AR-F;1510;;La Rioja;Capital
+LRJ002;AR-F;1498;;La Rioja;Castro Barros
+LRJ015;AR-F;1511;;La Rioja;Rosario Vera Penaloza
+LRJ016;AR-F;1512;;La Rioja;San Blas de los Sauces
+LRJ001;AR-F;1497;;La Rioja;Arauco
+LRJ009;AR-F;1505;;La Rioja;General Juan Facundo Quiroga
+LRJ011;AR-F;1507;;La Rioja;General Ortiz de Ocampo
+CAT003;AR-K;1330;;Catamarca;Andalgala
+CAT004;AR-K;1332;;Catamarca;Antofagasta de la Sierra
+CAT032;AR-K;1337;;Catamarca;Tinogasta
+CAT009;AR-K;1337;;Catamarca;Tinogasta
+CAT016;AR-K;1333;;Catamarca;Belen
+CAT005;AR-K;1333;;Catamarca;Belen
+CAT025;AR-K;1333;;Catamarca;Belen
+CAT018;AR-K;1342;;Catamarca;Paclin
+CAT019;AR-K;1341;;Catamarca;Poman
+CAT012;AR-K;1334;;Catamarca;Capayan
+CAT017;AR-K;1336;;Catamarca;Ambato
+CAT015;AR-K;1336;;Catamarca;Ambato
+CAT028;AR-K;1344;;Catamarca;Santa Maria
+CAT031;AR-K;1335;;Catamarca;El Alto
+TDF003;AR-V;1642;;Tierra del Fuego;Ushuaia
+TDF002;AR-V;1723;;Tierra del Fuego;Tolhuin
+TDF001;AR-V;1641;;Tierra del Fuego;Rio Grande
+NEU043;AR-Q;1552;;Neuquen;Minas
+NEU020;AR-Q;1552;;Neuquen;Minas
+NEU015;AR-Q;1552;;Neuquen;Minas
+NEU022;AR-Q;1552;;Neuquen;Minas
+NEU023;AR-Q;1552;;Neuquen;Minas
+NEU015;AR-Q;1556;Neuquen;Neuquen;Confluencia
+NEU032;AR-Q;1556;Neuquen;Neuquen;Confluencia
+NEU025;AR-Q;1556;;Neuquen;Confluencia
+NEU031;AR-Q;1556;;Neuquen;Confluencia
+NEU045;AR-Q;1556;;Neuquen;Confluencia
+NEU038;AR-Q;1556;;Neuquen;Confluencia
+NEU007;AR-Q;1555;;Neuquen;Norquin
+NEU012;AR-Q;1555;;Neuquen;Norquin
+NEU057;AR-Q;1558;;Neuquen;Zapala
+NEU026;AR-Q;1554;;Neuquen;Pehuenches
+NEU005;AR-Q;1554;;Neuquen;Pehuenches
+NEU032;AR-Q;1553;;Neuquen;Picunches
+NEU027;AR-Q;1559;;Neuquen;Picun Leufu
+NEU028;AR-Q;1559;;Neuquen;Picun Leufu
+NEU017;AR-Q;1560;;Neuquen;Huiliches
+NEU053;AR-Q;1550;;Neuquen;Anelo
+NEU046;AR-Q;1565;;Neuquen;Los Lagos
+CAB000;AR-C;;;Ciudad Autonoma de Buenos Aires;
+SGO081;AR-G;1631;Nueva Esperanza;Santiago del Estero;Pellegrini
+SGO057;AR-G;1631;;Santiago del Estero;Pellegrini
+SGO105;AR-G;1627;;Santiago del Estero;Guasayan
+SGO068;AR-G;1627;;Santiago del Estero;Guasayan
+SGO108;AR-G;1630;;Santiago del Estero;Juan Felipe Ibarra
+SGO081;AR-G;1630;;Santiago del Estero;Juan Felipe Ibarra
+SGO066;AR-G;1625;;Santiago del Estero;Avellaneda
+SGO035;AR-G;1625;;Santiago del Estero;Avellaneda
+SGO900;AR-G;1634;;Santiago del Estero;Moreno
+SGO064;AR-G;1634;;Santiago del Estero;Moreno
+SGO116;AR-G;1634;;Santiago del Estero;Moreno
+SGO119;AR-G;1634;;Santiago del Estero;Moreno
+SGO034;AR-G;1616;;Santiago del Estero;Belgrano
+SGO004;AR-G;1616;;Santiago del Estero;Belgrano
+SGO069;AR-G;1638;;Santiago del Estero;Capital
+SGO040;AR-G;1617;;Santiago del Estero;Figueroa
+SGO102;AR-G;1626;;Santiago del Estero;Rio Hondo
+SGO078;AR-G;1626;;Santiago del Estero;Rio Hondo
+SGO085;AR-G;1639;;Santiago del Estero;Ojo de Agua
+SGO013;AR-G;1624;;Santiago del Estero;Rivadavia
+SGO071;AR-G;1624;;Santiago del Estero;Rivadavia
+SGO082;AR-G;1632;;Santiago del Estero;Atamisqui
+SGO050;AR-G;1622;;Santiago del Estero;Salavina
+SLU005;AR-D;1599;;San Luis;Gobernador Dupuy
+SLU057;AR-D;1599;;San Luis;Gobernador Dupuy
+SLU019;AR-D;1599;;San Luis;Gobernador Dupuy
+SLU003;AR-D;1599;;San Luis;Gobernador Dupuy
+SLU007;AR-D;1599;;San Luis;Gobernador Dupuy
+SLU044;AR-D;1603;;San Luis;Chacabuco
+SLU011;AR-D;1601;;San Luis;Coronel Pringles
+SLU064;AR-D;1598;;San Luis;Juan Martin de Pueyrredon
+FOR031;AR-P;1453;;Formosa;Patino
+FOR004;AR-P;1453;;Formosa;Patino
+FOR033;AR-P;1453;;Formosa;Patino
+FOR019;AR-P;1458;;Formosa;Bermejo
+FOR001;AR-P;1450;;Formosa;Pilagas
+FOR002;AR-P;1451;;Formosa;Pilcomayo
+FOR008;AR-P;1452;;Formosa;Formosa

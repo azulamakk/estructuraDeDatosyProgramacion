@@ -1,0 +1,41 @@
+from ventanasSecundarias.opcion1 import *
+from municipios import *
+from routers import *
+import csv
+
+pathMuni = "municipios.csv"
+def actualizarArchivoMuni(pathMuni):
+    with open(pathMuni, "w",encoding="utf-8") as archivo:
+        writer = csv.writer(archivo, delimiter=';',quotechar='"', quoting=csv.QUOTE_MINIMAL)
+        writer.writerow(['municipio_id','provincia_id','id_departamento','municipio','provincia','departamento'])
+        for provId in Provincia.diccionarioProv:
+            prov = Provincia.diccionarioProv[provId]
+            for dptoId in prov.diccionarioDptos:
+                dpto = prov.diccionarioDptos[dptoId]
+                for municipioId in dpto.diccionarioMunicipios:
+                    municipio = dpto.diccionarioMunicipios[municipioId]
+                    writer.writerow([municipio.municipioID, prov.provinciaID, dpto.departamentoID, municipio.municipio, prov.provincia, dpto.departamento])
+    print("Archivo de municipios actualizado")
+    
+pathRouter = "routers.csv"
+def actualizarArchivoRouters(pathRouter):
+    with open(pathRouter, "w",encoding="utf-8") as archivo:
+        writer = csv.writer(archivo, delimiter=';',quotechar='"', quoting=csv.QUOTE_MINIMAL)
+        writer.writerow(['id','identificador','ubicacion','latitud','longitud','municipio_id','provincia_id','id_departamento'])
+        for routerId in Router.diccionarioRouter:
+            router = Router.diccionarioRouter[routerId]
+            writer.writerow([router.id, router.identificador, router.ubicacion, router.latitud, router.longitud, router.municipioID, router.provinciaID, router.departamentoID])
+    print("Archivo de routers actualizado")
+
+pathConexiones = "conexiones.csv"
+def actualizarArchivoConexiones(pathConexiones):
+    with open(pathConexiones, "w",encoding="utf-8") as archivo:
+        writer = csv.writer(archivo, delimiter=';',quotechar='"', quoting=csv.QUOTE_MINIMAL)
+        writer.writerow(['Router ID','MAC Address','Fecha','Horario','Activa','Direccion IP'])
+        for routerId in Router.diccionarioRouter:
+            router = Router.diccionarioRouter[routerId]
+            for conexionId in router.conexiones:
+                conexion = router.conexiones[conexionId]
+                fecha, hora = str(conexion.fechaYHora).split(" ")
+                writer.writerow([conexion.direccionIP, conexion.direccionMAC, fecha, hora, conexion.activa, conexion.routerID])
+    print("Archivo de conexiones actualizado")

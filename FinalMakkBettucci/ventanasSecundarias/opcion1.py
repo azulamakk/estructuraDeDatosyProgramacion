@@ -63,7 +63,7 @@ class VentanaCargarMunicipio(QMainWindow):
 
         ## DEFINO EL VERTICAL LAYOUT ##
         self.verticalLayoutWidget = QtWidgets.QWidget(self.centralwidget)
-        self.verticalLayoutWidget.setGeometry(QtCore.QRect(100, 40, 391, 401))
+        self.verticalLayoutWidget.setGeometry(QtCore.QRect(100, 40, 500, 201))
         self.verticalLayoutWidget.setObjectName("verticalLayoutWidget")
         self.verticalLayout = QtWidgets.QVBoxLayout(self.verticalLayoutWidget)
         self.verticalLayout.setContentsMargins(0, 0, 0, 0)

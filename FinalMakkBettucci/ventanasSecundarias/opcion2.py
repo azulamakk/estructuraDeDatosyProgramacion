@@ -1,5 +1,5 @@
 from PyQt5.QtWidgets import QMessageBox, QLabel, QWidget,QListWidgetItem, QHBoxLayout, QMainWindow,QPushButton
-from PyQt5 import QtCore
+from PyQt5 import QtCore, QtWidgets
 from ventanasSecundarias.opcion1 import ListboxWidget
 import sys
 
@@ -12,38 +12,58 @@ from lecturaArchivos import leerArchivoConexiones, leerArchivoRouter
 class Ui_FormRouter(QMainWindow):
     def __init__(self):
         super().__init__()
-        self.setWindowTitle("Opcion ingresada: Cargar archivo routers")
-        self.resize(700,500)
+        self.secondWidgetWindow = None
+    
+    def setupUi(self, MainWindow,secondWidgetWindow):
 
-        self.layoutPrincipal = QHBoxLayout() 
+        self.secondWidgetWindow = secondWidgetWindow
+        MainWindow.setObjectName("MainWindow")
+        MainWindow.setWindowTitle("Opcion ingresada: Agregar Router")
+        MainWindow.resize(700, 500)
+        self.centralwidget = QtWidgets.QWidget(MainWindow)
+        self.centralwidget.setObjectName("centralwidget")
 
+        ## DEFINO EL VERTICAL LAYOUT ##
+        self.verticalLayoutWidget = QtWidgets.QWidget(self.centralwidget)
+        self.verticalLayoutWidget.setGeometry(QtCore.QRect(100, 40, 500, 201))
+        self.verticalLayoutWidget.setObjectName("verticalLayoutWidget")
+        self.verticalLayout = QtWidgets.QVBoxLayout(self.verticalLayoutWidget)
+        self.verticalLayout.setContentsMargins(0, 0, 0, 0)
+        self.verticalLayout.setObjectName("verticalLayout")
+
+        ## DEFINO EL HORIZONTAL LAYOUT QUE VA A CONTENER EL LABEL Y EL BOTON CARGAR ##
+        self.horizontalLayout = QtWidgets.QHBoxLayout()
+        self.horizontalLayout.setObjectName("horizontalLayout")
+
+        # CREO Y AGREGO EL LABEL AL HORIZONTAL LAYOUT #
+        self.labelCargarArchivoRouter = QLabel(self.verticalLayoutWidget)
         self.labelCargarArchivoRouter = QLabel("Arrastre o adjunte archivo routers:")
-        self.labelCargarArchivoRouter.setGeometry(250,300,200,100)
         self.labelCargarArchivoRouter.setObjectName("labelCargarArchivoRouter")
-
-        self.layoutPrincipal.addWidget(self.labelCargarArchivoRouter)
-
-        self.lstbox_ = ListboxWidget(self)
-
-        self.layoutPrincipal.addWidget(self.lstbox_)
+        self.horizontalLayout.addWidget(self.labelCargarArchivoRouter)
         
-        self.botonCargarArchivoRouter = QPushButton()
+        self.botonCargarArchivoRouter = QPushButton(self.verticalLayoutWidget)
         self.botonCargarArchivoRouter.setObjectName("botonCargarArchivoRouter")
         self.botonCargarArchivoRouter.setText("Cargar archivo")
-        self.botonCargarArchivoRouter.setGeometry(350, 200, 200, 150)
-        self.botonCargarArchivoRouter.clicked.connect(lambda: self.getSelectedItem())
-        self.layoutPrincipal.addWidget(self.botonCargarArchivoRouter)
+        self.horizontalLayout.addWidget(self.botonCargarArchivoRouter)
 
+        # CARGO EL HORIZONTAL LAYOUT AL VERTICAL LAYOUT #
+        self.verticalLayout.addLayout(self.horizontalLayout)
+
+        # CREO Y AGREGO EL LISTBOX AL VERTICAL LAYOUT #
+        self.lstbox_ = ListboxWidget(self)
+        self.verticalLayout.addWidget(self.lstbox_)
+
+        # CREO Y AGREGO EL BACK BUTTON AL VERTICAL LAYOUT #
         self.backButton = QPushButton()
-        self.backButton.setGeometry(QtCore.QRect(380, 100, 71, 31))
         self.backButton.setObjectName("backButton")
         self.backButton.setText("Volver")
-        self.layoutPrincipal.addWidget(self.backButton)
-        self.backButton.clicked.connect(lambda: self.close())
+        self.verticalLayout.addWidget(self.backButton)
 
-        widgetLayout = QWidget()
-        widgetLayout.setLayout(self.layoutPrincipal)
-        self.setCentralWidget(widgetLayout)
+        MainWindow.setCentralWidget(self.centralwidget)
+
+        # CONNECTS #
+        self.botonCargarArchivoRouter.clicked.connect(lambda: self.getSelectedItem())
+        self.backButton.clicked.connect(lambda: self.secondWidgetWindow.close())
 
     def getSelectedItem(self):
         if len(self.lstbox_) == 0:
