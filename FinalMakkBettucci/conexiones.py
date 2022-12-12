@@ -26,4 +26,4 @@ class Conexion:
         return self.fechaYHora < other.fechaYHora
     
     def __str__(self):
-        return f"{self.fechaYHora} - {self.direccionIP} - {self.direccionMAC} - {self.activa} - {self.routerID} '\n'"
+        return f"{self.fechaYHora} - {self.direccionIP} - {self.direccionMAC} - {self.activa} - {self.routerID}"

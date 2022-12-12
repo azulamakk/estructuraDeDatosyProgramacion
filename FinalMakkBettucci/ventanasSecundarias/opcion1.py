@@ -55,7 +55,8 @@ class VentanaCargarMunicipio(QMainWindow):
         self.layoutPrincipal = QHBoxLayout() 
 
         self.labelCargarArchivoMuni = QLabel("Arrastre o adjunte archivo municipios: ")
-        self.labelCargarArchivoMuni = QLabel('''Las columnas de dicho archivo deben ser llamadas:
+        self.labelCargarArchivoMuni = QLabel('''
+        Las columnas de dicho archivo deben ser llamadas:
         id_procincia, id_departamento, id_municipio, municipio, departamento, provincia''')
         self.labelCargarArchivoMuni.setGeometry(250,300,200,100)
         self.labelCargarArchivoMuni.setObjectName("labelCargarArchivoMuni")

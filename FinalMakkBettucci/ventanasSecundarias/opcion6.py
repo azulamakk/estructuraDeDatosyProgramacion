@@ -145,7 +145,7 @@ class Ui_FormVerConexEntreFechas(QMainWindow):
 
     @QtCore.pyqtSlot(str)
     def on_value_changed(self,value):
-        self.textEdit.append("Conexion: {}".format(value))
+        self.textEdit.append(value)
 
     def asignarFechaInicio(self):
         self.fechaInicio = QDateTime(self.calendarInicio.selectedDate()).toPyDateTime()
@@ -165,8 +165,13 @@ class Ui_FormVerConexEntreFechas(QMainWindow):
         print('Fin: ',fechaHoraFin)
         nodoActual = Conexion.conexionesHistoricas.head
         while nodoActual != None:
-            if nodoActual.valor.fechaYHora > fechaHoraInicio and nodoActual.valor.fechaYHora < fechaHoraFin:
-                self.valueChanged.emit(str(nodoActual.valor))
+            if nodoActual.valor.fechaYHora < fechaHoraInicio:
+                nodoActual = nodoActual.prox
+                continue
+            if nodoActual.valor.fechaYHora > fechaHoraFin:
+                break
+
+            self.valueChanged.emit(str(nodoActual.valor))
             nodoActual = nodoActual.prox
 
     

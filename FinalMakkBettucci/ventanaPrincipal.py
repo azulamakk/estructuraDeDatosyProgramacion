@@ -11,18 +11,13 @@ from ventanasSecundarias.opcion9 import Ui_FormAgregarConexion
 from ventanasSecundarias.opcion10 import Ui_FormEliminarConexion
 import lecturaArchivos
 
-lecturaArchivos.cargarProvinciasyDptos('municipios.csv')
-lecturaArchivos.leerArchivoRouter('routers.csv')
-lecturaArchivos.leerArchivoConexiones('conexiones.csv')
+lecturaArchivos.cargarProvinciasyDptos('FinalMakkBettucci/municipios.csv')
+lecturaArchivos.leerArchivoRouter('FinalMakkBettucci/routers.csv')
+lecturaArchivos.leerArchivoConexiones('FinalMakkBettucci/conexiones.csv')
 
 class Ui_MainWindow(QtWidgets.QMainWindow):
 
     def setupUi(self, MainWindow):
-        # cssFile="TPFinalMakkBetucci/styles.css"
-
-        # with open(cssFile,"r") as css:
-        #     self.setStyleSheet(css.read())
-        
         MainWindow.setObjectName("MainWindow")
         self.setWindowIcon(QtGui.QIcon('logo.ico'))
         MainWindow.resize(621, 457)
@@ -198,6 +193,31 @@ class Ui_MainWindow(QtWidgets.QMainWindow):
 if __name__ == "__main__":
     import sys
     app = QtWidgets.QApplication(sys.argv)
+    style = '''
+    QFont{
+        font-size: 20px;
+        font-family: "Open-Sans";
+    }
+    QMainWindow{
+        background-color: #95D2EB;
+    }
+    QTextEdit{
+        background-color: #7FC4F0;
+        color: "black";
+    }
+    QLabel{
+        color: #1E3978;
+    }
+    QPushButton{
+        background-color: "grey";
+        color: "black";
+    }
+    QPushButton::enabled{
+        background-color: #224E79;
+        color: #75CFEB;
+    }
+    '''
+    app.setStyleSheet(style)
     MainWindow = QtWidgets.QMainWindow()
     ui = Ui_MainWindow()
     ui.setupUi(MainWindow)

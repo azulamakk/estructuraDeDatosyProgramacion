@@ -8,7 +8,7 @@ import json
 #Lectura del csv municipios
 def cargarProvinciasyDptos(pathMunicipios):
     prefijos_json = {}
-    with open('prefijos.json') as json_file:
+    with open('FinalMakkBettucci/prefijos.json') as json_file:
         prefijos_json = json.load(json_file)
     with open(pathMunicipios, encoding= 'unicode_escape') as csvFile:
         reader=csv.DictReader(csvFile)
@@ -90,8 +90,8 @@ def leerArchivoConexiones(pathConexiones):
                 i+=1        
                 conexion = Conexion(linea['Direccion IP'],linea['MAC Address'],linea['Fecha'],linea['Horario'],linea['Activa'],linea['Router ID'])
                 
-                if linea['Direccion IP'] in Router.diccionarioRouter and linea['Activa'] == '1':
-                    router = Router.diccionarioRouter[linea['Direccion IP']]
+                if linea['Router ID'] in Router.diccionarioRouter and linea['Activa'] == '1':
+                    router = Router.diccionarioRouter[linea['Router ID']]
 
                     if conexion.direccionMAC not in router.conexiones:
                         router.conexiones[conexion.direccionMAC] = conexion

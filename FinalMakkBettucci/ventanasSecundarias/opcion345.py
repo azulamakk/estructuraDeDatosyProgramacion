@@ -2,14 +2,14 @@ from PyQt5 import QtCore, QtWidgets
 from PyQt5.QtWidgets import QMessageBox, QPushButton
 import threading
 import sys
-import string
 
 # setting path
 sys.path.append('TPFinalMakkBettucci')
 
 # importing
 
-from routers import *
+from routers import Router
+from municipios import Provincia, Departamento, Municipio
 
 # Esta clase es para ejecutar la opcion 3,4 y 5
 class Ui_FormVerConexPorUbicacion(QtWidgets.QMainWindow):   
@@ -60,18 +60,28 @@ class Ui_FormVerConexPorUbicacion(QtWidgets.QMainWindow):
             self.backButton.setGeometry(133, 260, 357, 30)
             self.backButton.setText("Volver")
 
-            self.textEdit = QtWidgets.QTextEdit(self.verticalLayoutWidget)
-            self.textEdit.setObjectName("textEdit")
-            self.horizontalLayout.addWidget(self.textEdit)
-            self.textEdit.textChanged.connect(lambda: botonSeleccionar_enableConTexto(self))
+            self.textEditProv = QtWidgets.QTextEdit(self.verticalLayoutWidget)
+            self.textEditProv.setObjectName("textEditProv")
+            self.horizontalLayout.addWidget(self.textEditProv)
+            self.textEditProv.textChanged.connect(self.botonSeleccionar_enableConTextoProv)
 
             self.horizontalLayout.addWidget(self.pushButton)
 
         elif ubicacion == 'departamento':
-            self.label = QtWidgets.QLabel(self.verticalLayoutWidget)
-            self.label.setObjectName("label")
-            self.label.setText("Ingrese un departamento:")
-            self.horizontalLayout.addWidget(self.label)
+            labelProv = QtWidgets.QLabel(self.verticalLayoutWidget)
+            labelProv.setObjectName("labelProv")
+            labelProv.setText("Ingrese una provincia:")
+            self.horizontalLayout.addWidget(labelProv)
+
+            self.textEditProv = QtWidgets.QTextEdit(self.verticalLayoutWidget)
+            self.textEditProv.setObjectName("textEditProv")
+            self.textEditProv.textChanged.connect(self.botonSeleccionar_enableConTextoDpto)
+            self.horizontalLayout.addWidget(self.textEditProv)
+
+            labelDepto = QtWidgets.QLabel(self.verticalLayoutWidget)
+            labelDepto.setObjectName("labelDepto")
+            labelDepto.setText("Ingrese un departamento:")
+            self.horizontalLayout.addWidget(labelDepto)
             self.pushButton.clicked.connect(self.mostrarConexionesPorDepartamento)
 
             self.verticalLayout.addLayout(self.horizontalLayout)
@@ -85,18 +95,37 @@ class Ui_FormVerConexPorUbicacion(QtWidgets.QMainWindow):
             self.backButton.setGeometry(152, 260, 337, 30)
             self.backButton.setText("Volver")
 
-            self.textEdit = QtWidgets.QTextEdit(self.verticalLayoutWidget)
-            self.textEdit.setObjectName("textEdit")
-            self.horizontalLayout.addWidget(self.textEdit)
-            self.textEdit.textChanged.connect(lambda: botonSeleccionar_enableConTexto(self))
+            self.textEditDepto = QtWidgets.QTextEdit(self.verticalLayoutWidget)
+            self.textEditDepto.setObjectName("textEditDepto")
+            self.horizontalLayout.addWidget(self.textEditDepto)
+            self.textEditDepto.textChanged.connect(self.botonSeleccionar_enableConTextoDpto)
 
             self.horizontalLayout.addWidget(self.pushButton)
-
         elif ubicacion == 'municipio':
-            self.label = QtWidgets.QLabel(self.verticalLayoutWidget)
-            self.label.setObjectName("label")
-            self.label.setText("Ingrese un municipio:")
-            self.horizontalLayout.addWidget(self.label)
+            labelProv = QtWidgets.QLabel(self.verticalLayoutWidget)
+            labelProv.setObjectName("labelProv")
+            labelProv.setText("Ingrese una provincia:")
+            self.horizontalLayout.addWidget(labelProv)
+
+            self.textEditProv = QtWidgets.QTextEdit(self.verticalLayoutWidget)
+            self.textEditProv.setObjectName("textEditProv")
+            self.textEditProv.textChanged.connect(self.botonSeleccionar_enableConTextoMuni)
+            self.horizontalLayout.addWidget(self.textEditProv)
+
+            labelDepto = QtWidgets.QLabel(self.verticalLayoutWidget)
+            labelDepto.setObjectName("labelDepto")
+            labelDepto.setText("Ingrese un departamento:")
+            self.horizontalLayout.addWidget(labelDepto)
+
+            self.textEditDepto = QtWidgets.QTextEdit(self.verticalLayoutWidget)
+            self.textEditDepto.setObjectName("textEditDepto")
+            self.horizontalLayout.addWidget(self.textEditDepto)
+            self.textEditDepto.textChanged.connect(self.botonSeleccionar_enableConTextoMuni)
+
+            labelMuni = QtWidgets.QLabel(self.verticalLayoutWidget)
+            labelMuni.setObjectName("label")
+            labelMuni.setText("Ingrese un municipio:")
+            self.horizontalLayout.addWidget(labelMuni)
             self.pushButton.clicked.connect(self.mostrarConexionesPorMunicipio)
 
             self.verticalLayout.addLayout(self.horizontalLayout)
@@ -110,14 +139,13 @@ class Ui_FormVerConexPorUbicacion(QtWidgets.QMainWindow):
             self.backButton.setGeometry(128, 260, 361, 30)
             self.backButton.setText("Volver")
 
-            self.textEdit = QtWidgets.QTextEdit(self.verticalLayoutWidget)
-            self.textEdit.setObjectName("textEdit")
-            self.horizontalLayout.addWidget(self.textEdit)
-            self.textEdit.textChanged.connect(lambda: botonSeleccionar_enableConTexto(self))
+            self.textEditMuni = QtWidgets.QTextEdit(self.verticalLayoutWidget)
+            self.textEditMuni.setObjectName("textEdit")
+            self.horizontalLayout.addWidget(self.textEditMuni)
+            self.textEditMuni.textChanged.connect(self.botonSeleccionar_enableConTextoMuni)
 
             self.horizontalLayout.addWidget(self.pushButton)
 
-            
 
         Form.setCentralWidget(self.centralwidget)
 
@@ -125,14 +153,13 @@ class Ui_FormVerConexPorUbicacion(QtWidgets.QMainWindow):
 
         self.valueChanged.connect(self.on_value_changed)
         self.pushButton.clicked.connect(self.on_clicked)
+        self.pushButton.setEnabled(False)
+
 
         self.backButton.clicked.connect(lambda: self.secondWidgetWindow.close())
 
     @QtCore.pyqtSlot()
     def on_clicked(self):
-        #self.textEdit.clear()
-        # self.textEdit.setGeometry(QtCore.QRect(210, 150, 140, 100))
-
         if self.ubicacion == 'provincia':
             threading.Thread(target=self.mostrarConexionesPorProvincia, daemon=True).start()
         if self.ubicacion == 'departamento':
@@ -142,77 +169,120 @@ class Ui_FormVerConexPorUbicacion(QtWidgets.QMainWindow):
 
     @QtCore.pyqtSlot(str)
     def on_value_changed(self,value):
-        self.textEditOutput.append("Conexion: {}".format(value))
+        self.textEditOutput.append(value)
+        
 
     #Funcion que muestra las conexiones por provincia dada
     def mostrarConexionesPorProvincia(self):
-        idProvinciaIngresada  = self.textEdit.toPlainText().strip()
+        idProvinciaIngresada = self.textEditProv.toPlainText().strip()
         if idProvinciaIngresada not in Provincia.diccionarioProv:
             msg = QMessageBox()
             msg.setInformativeText("No existe la provincia ingresada")
             msg.exec_()
-        else:
-            for router in Router.diccionarioRouter.keys():
-                if idProvinciaIngresada == Router.diccionarioRouter[router].provinciaID:
-                    for conexion in Router.diccionarioRouter[router].conexiones.items():
-                        self.valueChanged.emit(str(conexion[1].routerID))
+            return
+
+        for router in Router.diccionarioRouter:
+            if idProvinciaIngresada == Router.diccionarioRouter[router].provinciaID:
+                for (_, conexion) in Router.diccionarioRouter[router].conexiones.items():
+                    self.valueChanged.emit("MAC: {}, IP: {}".format(conexion.direccionMAC, conexion.direccionIP))
 
 
     #Funcion que muestra las conexiones por departamento dado             
     def mostrarConexionesPorDepartamento(self):
-        idDepartamentoIngresado  = self.textEdit.toPlainText().strip()
-        # for provincia in Provincia.diccionarioProv.items():
-        #     if idDepartamentoIngresado not in provincia[1].diccionarioDptos.keys():
-        if idDepartamentoIngresado not in Departamento.setDepartamentos:
+        idProvIngresada = self.textEditProv.toPlainText().strip()
+
+        if idProvIngresada not in Provincia.diccionarioProv:
+            msg = QMessageBox()
+            msg.setInformativeText("No existe la provincia ingresada")
+            msg.exec_()
+            return
+        
+        prov = Provincia.diccionarioProv[idProvIngresada]
+        idDepartamentoIngresado = self.textEditDepto.toPlainText().strip()
+        if idDepartamentoIngresado not in prov.diccionarioDptos:
             msg = QMessageBox()
             msg.setInformativeText("No existe el departamento ingresado")
             msg.exec_()
-        else:
-            for router in Router.diccionarioRouter.keys():
-                if idDepartamentoIngresado == Router.diccionarioRouter[router].departamentoID:
-                    for conexion in Router.diccionarioRouter[router].conexiones.items():
-                        self.valueChanged.emit(str(conexion[1].routerID))
+            return
+
+        for routerId in Router.diccionarioRouter:
+            router = Router.diccionarioRouter[routerId]
+            if idDepartamentoIngresado == router.departamentoID and idProvIngresada == router.provinciaID:
+                for (_, conexion) in router.conexiones.items():
+                    self.valueChanged.emit("MAC: {}, IP: {}".format(conexion.direccionMAC, conexion.direccionIP))
 
     #Funcion que muestra las conexiones por municipio dado
     def mostrarConexionesPorMunicipio(self):
-        idMunicipioIngresado = self.textEdit.toPlainText().strip()
-        if idMunicipioIngresado not in Municipio.setMunicipios:
+        idProvIngresada = self.textEditProv.toPlainText().strip()
+        if idProvIngresada not in Provincia.diccionarioProv:
+            msg = QMessageBox()
+            msg.setInformativeText("No existe la provincia ingresada")
+            msg.exec_()
+            return
+        
+        prov = Provincia.diccionarioProv[idProvIngresada]
+        idDepartamentoIngresado = self.textEditDepto.toPlainText().strip()
+        if idDepartamentoIngresado not in prov.diccionarioDptos:
+            msg = QMessageBox()
+            msg.setInformativeText("No existe el departamento ingresado")
+            msg.exec_()
+            return
+        
+        depto = prov.diccionarioDptos[idDepartamentoIngresado]
+        idMunicipioIngresado = self.textEditMuni.toPlainText().strip()
+        if idMunicipioIngresado not in depto.diccionarioMunicipios:
             msg = QMessageBox()
             msg.setInformativeText("No existe el municipio ingresado")
             msg.exec_()
-        else:    
-            for router in Router.diccionarioRouter.keys():
-                if idMunicipioIngresado == Router.diccionarioRouter[router].municipioID:
-                    for conexion in Router.diccionarioRouter[router].conexiones.items():
-                        self.valueChanged.emit(str(conexion[1].routerID))
+            return
+          
+        for routerId in Router.diccionarioRouter.keys():
+            router = Router.diccionarioRouter[routerId]
+            if idMunicipioIngresado == router.municipioID and idDepartamentoIngresado == router.departamentoID and idProvIngresada == router.provinciaID:
+                for (_, conexion) in router.conexiones.items():
+                    self.valueChanged.emit("MAC: {}, IP: {}".format(conexion.direccionMAC, conexion.direccionIP))
 
-# Para que validar que no pueda apretar el boton seleccionar con un numero (prov, depto, muni)
-def botonSeleccionar_enableConTexto(self):  
-    text = self.textEdit.toPlainText().strip()
-    # texto = quitarTildes(text)
-    # textoFinal = string.capwords(texto)
-    #quitar tildes, hacer capitalize
-    if len(text) != 0:
-        try:
-            #El setProvincias/setDeptos/setMunicipios es extraido de la base de datos nuestra, o sea de las prov que existen en nuestro sistema por el momento
-            if text.isnumeric() == False and (text in Provincia.diccionarioProv.keys() or text in Departamento.setDepartamentos or text in Municipio.setMunicipios):
-                self.pushButton.setEnabled(True)
-            else:
+    # Para que validar que no pueda apretar el boton seleccionar con un numero (prov, depto, muni)
+    def botonSeleccionar_enableConTextoProv(self):  
+        text = self.textEditProv.toPlainText().strip()
+        if len(text) != 0:
+            try:
+                if text in Provincia.diccionarioProv:
+                    self.pushButton.setEnabled(True)
+                else:
+                    self.pushButton.setEnabled(False)
+            except:
                 self.pushButton.setEnabled(False)
+        else:
+            self.pushButton.setEnabled(False)
+
+    def botonSeleccionar_enableConTextoDpto(self):  
+        idProv = self.textEditProv.toPlainText().strip()
+        try:
+            if idProv in Provincia.diccionarioProv:
+                prov = Provincia.diccionarioProv[idProv]
+                idDepto = self.textEditDepto.toPlainText().strip()
+                if idDepto in prov.diccionarioDptos:
+                    self.pushButton.setEnabled(True)
+                    return
+            
+            self.pushButton.setEnabled(False)
         except:
             self.pushButton.setEnabled(False)
-    else:
-        self.pushButton.setEnabled(False)
 
-# Funcion para quitar tildes
-# def quitarTildes(texto):
-#         replacements = (
-#         ("á", "a"),
-#         ("é", "e"),
-#         ("í", "i"),
-#         ("ó", "o"),
-#         ("ú", "u"),
-#         )
-#         for a, b in replacements:
-#             texto = texto.replace(a, b).replace(a.upper(), b.upper())
-#         return texto
+    def botonSeleccionar_enableConTextoMuni(self):  
+        idProv = self.textEditProv.toPlainText().strip()
+        try:
+            if idProv in Provincia.diccionarioProv:
+                prov = Provincia.diccionarioProv[idProv]
+                idDepto = self.textEditDepto.toPlainText().strip()
+                if idDepto in prov.diccionarioDptos:
+                    depto = prov.diccionarioDptos[idDepto]
+                    idMuni = self.textEditMuni.toPlainText().strip()
+                    if idMuni in depto.diccionarioMunicipios:
+                        self.pushButton.setEnabled(True)
+                        return
+            
+            self.pushButton.setEnabled(False)
+        except:
+            self.pushButton.setEnabled(False)
