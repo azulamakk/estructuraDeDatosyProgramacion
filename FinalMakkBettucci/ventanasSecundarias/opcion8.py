@@ -1,10 +1,13 @@
 from PyQt5 import QtCore, QtGui, QtWidgets, QtGui
 from PyQt5.QtWidgets import QMessageBox, QCalendarWidget, QLabel, QWidget, QListWidget,QListWidgetItem, QHBoxLayout, QMainWindow,QPushButton,QApplication
-import sys,os
-import time
-import threading
 from PyQt5.QtCore import Qt,QUrl,QRect,QDateTime
-import lecturaArchivos, municipios, routers, conexiones
+
+import sys
+# setting path
+sys.path.append('TPFinalMakkBettucci')
+
+# importing
+from routers import Router
 
 # Esta clase es para ejecutar la opcion 8
 class Ui_FormEliminarRouter(QMainWindow):
@@ -53,6 +56,14 @@ class Ui_FormEliminarRouter(QMainWindow):
 
     def funcionEliminarRouter(self):            
         print(self.textEdit.toPlainText())
+        routerID = self.textEdit.toPlainText()
+        if routerID not in Router.diccionarioRouter:
+            msg = QMessageBox()
+            msg.setInformativeText("El router no existe")
+            msg.exec_()
+            return
+
+        del Router.diccionarioRouter[routerID]
         msg = QMessageBox()
         msg.setInformativeText("Router eliminado correctamente")
         msg.exec_()

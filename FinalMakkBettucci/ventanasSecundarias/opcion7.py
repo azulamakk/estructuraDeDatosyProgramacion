@@ -2,6 +2,13 @@ from PyQt5 import QtCore, QtWidgets
 from PyQt5.QtWidgets import QMessageBox, QMainWindow
 import re
 import threading
+import sys
+
+# setting path
+sys.path.append('TPFinalMakkBettucci')
+
+# importing
+from routers import Router
 
 # Esta clase es para ejecutar la opcion 7
 class Ui_FormAgregarRouter(QMainWindow):
@@ -15,6 +22,7 @@ class Ui_FormAgregarRouter(QMainWindow):
     def setupUi(self, MainWindow,secondWidgetWindow):
         self.secondWidgetWindow = secondWidgetWindow
         MainWindow.setObjectName("MainWindow")
+        MainWindow.setWindowTitle("Opcion ingresada: Agregar Router")
         MainWindow.resize(628, 649)
         self.centralwidget = QtWidgets.QWidget(MainWindow)
         self.centralwidget.setObjectName("centralwidget")
@@ -188,13 +196,13 @@ class Ui_FormAgregarRouter(QMainWindow):
             self.textEditLongitud.textChanged.connect(lambda: self.botonIngresoDatos.setEnabled(True) if isinstance(self.textEditLongitud,float) == False else self.botonIngresoDatos.setEnabled(False))
         
         #Valido que municipio ID tenga un patron tipo ABC123
-        self.textEditMuniID.textChanged.connect(lambda: self.botonSeleccionar_enableConAlfanumerico('^([A-Z]{3})([0-9]{3})',self.textEditMuniID))
+        self.textEditMuniID.textChanged.connect(lambda: self.botonSeleccionar_enableConAlfanumerico('^([A-Z]{3})([0-9]{3})', self.textEditMuniID))
         
         #Valido que provinciaID tenga un patron AR-X
-        self.textEditProvID.textChanged.connect(lambda: self.botonSeleccionar_enableConAlfanumerico('^([A-Z]{2})-([A-Z])',self.textEditProvID))
+        self.textEditProvID.textChanged.connect(lambda: self.botonSeleccionar_enableConAlfanumerico('^([A-Z]{2})-([A-Z])', self.textEditProvID))
         
         #Valido que dptoId tenga un patron de 4 numeros
-        self.textEditDeptoID.textChanged.connect(lambda: self.botonSeleccionar_enableConAlfanumerico('^([0-9]{4})',self.textEditDeptoID))
+        self.textEditDeptoID.textChanged.connect(lambda: self.botonSeleccionar_enableConAlfanumerico('^([0-9]{4})', self.textEditDeptoID))
         
         self.valueChanged.connect(self.on_value_changed)
         self.botonIngresoDatos.clicked.connect(self.on_clicked)
@@ -224,24 +232,23 @@ class Ui_FormAgregarRouter(QMainWindow):
         self.textEditOutput.append(value)
 
     def funcionAgregarRouter(self):
-
-        self.diccionarioObjetos['Id: '] = self.textEditID.toPlainText()
-        self.diccionarioObjetos['Identificador: '] = self.textEditIdentificador.toPlainText()
-        self.diccionarioObjetos['Ubicacion: '] = self.textEditUbicacion.toPlainText()
-        self.diccionarioObjetos['Latitud: '] = self.textEditLatitud.toPlainText()
-        self.diccionarioObjetos['Longitud: '] = self.textEditLongitud.toPlainText()
-        self.diccionarioObjetos['Municipio ID: '] = self.textEditMuniID.toPlainText()
-        self.diccionarioObjetos['Provincia ID: '] = self.textEditProvID.toPlainText()
-        self.diccionarioObjetos['Departamento ID: '] = self.textEditDeptoID.toPlainText()
-
-        for k,v in self.diccionarioObjetos.items():
-            linea = k + str(v)
-            print(linea)
-            self.valueChanged.emit(str(linea))
-
-        msg = QMessageBox()
-        msg.setInformativeText("Router agregado correctamente")
-        msg.exec_()
+        try:
+            id=int(self.textEditID.toPlainText())
+            identificador=self.textEditIdentificador.toPlainText()
+            ubicacion=self.textEditUbicacion.toPlainText()
+            latitud=float(self.textEditLatitud.toPlainText())
+            longitud=float(self.textEditLongitud.toPlainText())
+            municipioID=self.textEditMuniID.toPlainText()
+            provinciaID=self.textEditProvID.toPlainText()
+            departamentoID=self.textEditDeptoID.toPlainText()
+            router = Router(id,identificador,ubicacion,latitud,longitud,municipioID,provinciaID,departamentoID)
+            self.valueChanged.emit(str(router))
+            msg = QMessageBox()
+            msg.setInformativeText("Router agregado correctamente")
+            msg.exec_()
+        except Exception as e:
+            self.valueChanged.emit("Error al ingresar los datos")
+            self.valueChanged.emit(str(e))
 
     #Regex para activar o desactivar un boton cuando se intenta ingresar un router ID o direccion IP
     def botonSeleccionar_enableConAlfanumerico(self, pattern, textEdit):

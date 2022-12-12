@@ -216,6 +216,9 @@ if __name__ == "__main__":
         background-color: #224E79;
         color: #75CFEB;
     }
+    QMessageBox{
+        background-color: "white"
+    }
     '''
     app.setStyleSheet(style)
     MainWindow = QtWidgets.QMainWindow()

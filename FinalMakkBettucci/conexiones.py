@@ -1,6 +1,6 @@
 from datetime import datetime
 from listaEnlazada import ListaEnlazada
-from routers import *
+import routers
 
 class Conexion:
     # Set con macs registradas en todos los routers
@@ -9,6 +9,9 @@ class Conexion:
     conexionesHistoricas = ListaEnlazada()
 
     def __init__(self, direccionIP: str, direccionMAC: int, fecha, hora, activa: int, routerID: str):
+        if routerID not in routers.Router.diccionarioRouter:
+            raise Exception("Router no encontrado")
+
         self.direccionIP = direccionIP
         self.direccionMAC = direccionMAC
         self.fechaYHora = datetime.strptime(fecha + " " + hora, "%d/%m/%Y %H:%M:%S")

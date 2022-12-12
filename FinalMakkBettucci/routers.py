@@ -6,7 +6,7 @@ from queue import Queue
 class Router():
     diccionarioRouter: dict[str,'Router'] = dict()
     
-    def __init__(self, id:int, identificador:str, ubicacion, latitud:float, longitud:float, municipioID:str, provinciaID:str, departamentoID:int):
+    def __init__(self, id:int, identificador:str, ubicacion, latitud:float, longitud:float, municipioID:str, provinciaID:str, departamentoID: str):
         if provinciaID not in Provincia.diccionarioProv:
             raise Exception("Provincia no registrada")
         

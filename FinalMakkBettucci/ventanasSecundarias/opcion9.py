@@ -1,6 +1,14 @@
 from PyQt5 import QtCore, QtWidgets
 from PyQt5.QtWidgets import QMessageBox, QMainWindow
 
+import sys
+# setting path
+sys.path.append('TPFinalMakkBettucci')
+
+# importing
+from conexiones import Conexion
+from routers import Router
+
 # Esta clase es para ejecutar la opcion 9
 class Ui_FormAgregarConexion(QMainWindow):
     def __init__(self):
@@ -24,21 +32,13 @@ class Ui_FormAgregarConexion(QMainWindow):
 
         self.diccionarioObjetos = dict()
 
-        i = 0
-        cantidadDeCamposRouter = 6
-        while i < cantidadDeCamposRouter:
-            if i == 1:
-                self.agregarObjetos(i,'Ingresar direccion IP: ')
-            elif i == 2:
-                self.agregarObjetos(i,'Ingresar MAC Address: ')
-            elif i == 3:
-                self.agregarObjetos(i,'Fecha: ')
-            elif i == 4:
-                self.agregarObjetos(i,'Horario: ')
-            #quizas no hace falta esto, total toda conexion que agregas deberia estar activa, salvo que ya este completo el cupo de 20 conexiones por router
-            elif i == 5:
-                self.agregarObjetos(i,'Activa: ')
-            i += 1    
+        self.agregarObjetos('Direccion IP')
+        self.agregarObjetos('MAC Address')
+        self.agregarObjetos('Fecha')
+        self.agregarObjetos('Horario')
+        self.agregarObjetos('Activa')
+        self.agregarObjetos('Router ID')
+
 
         # Push button para seleccionar el ID escrito
         # Aca validar si no existe ya el router, blockear el boton de seleccionar o enviar un mensaje en rojo "eliga nu router no repetido"
@@ -53,27 +53,51 @@ class Ui_FormAgregarConexion(QMainWindow):
         self.pushButton.clicked.connect(lambda: self.funcionAgregarConexion())
 
         # Text box y su label para ingresar por teclado el router ID
-    def agregarObjetos(self,i,campo):
-        Hlayout = "horizontalLayout" + str(i)
-        self.Hlayout = QtWidgets.QHBoxLayout()
+    def agregarObjetos(self, campo):
+        Hlayout = QtWidgets.QHBoxLayout()
+        Hlayout.setObjectName("Hlayout{}".format(campo))
 
-        label = "label" + str(i)
-        self.label = QtWidgets.QLabel(self.verticalLayoutWidget)
-        self.label.setObjectName(campo)
-        self.label.setText(campo)
-        self.Hlayout.addWidget(self.label)
+        label = QtWidgets.QLabel(self.verticalLayoutWidget)
+        label.setObjectName(campo)
+        label.setText("{}:".format(campo))
+        Hlayout.addWidget(label)
 
-        textEdit = "textEdit" + str(i)
-        self.textEdit = QtWidgets.QTextEdit(self.verticalLayoutWidget)
-        self.textEdit.setObjectName("textEdit"+str(i))
-        self.Hlayout.addWidget(self.textEdit)        
+        textEdit = QtWidgets.QTextEdit(self.verticalLayoutWidget)
+        textEdit.setObjectName("textEdit{}".format(campo))
+        Hlayout.addWidget(textEdit)        
 
-        self.diccionarioObjetos[self.label.objectName()] = ''
-        self.verticalLayout.addLayout(self.Hlayout)
+        self.diccionarioObjetos[label.objectName()] = ''
+        self.verticalLayout.addLayout(Hlayout)
+
+        textEdit.textChanged.connect(lambda: self.funcionGuardarDatos(textEdit, label))
+    
+    def funcionGuardarDatos(self,textEdit,label):
+        self.diccionarioObjetos[label.objectName()] = textEdit.toPlainText()
 
     def funcionAgregarConexion(self):            
         for k,v in self.diccionarioObjetos.items():
-            print('{}{}'.format(k,v))
+            print('{}: {}'.format(k,v))
+        
+        ip = self.diccionarioObjetos['Direccion IP']
+        mac = self.diccionarioObjetos['MAC Address']
+        fecha = self.diccionarioObjetos['Fecha']
+        horario = self.diccionarioObjetos['Horario']
+        activa = self.diccionarioObjetos['Activa']
+        routerID = self.diccionarioObjetos['Router ID']
+        try:
+            if routerID not in Router.diccionarioRouter:
+                raise Exception("El router no existe")
+
+            conexion = Conexion(ip,mac,fecha,horario,activa,routerID)
+            router = Router.diccionarioRouter[routerID]
+            router.agregarConexion(conexion)
+            print(conexion)
+        except Exception as e:
+            print(e)
+            msg = QMessageBox()
+            msg.setInformativeText("Error al agregar la conexion " + str(e))
+            msg.exec_()
+            return
 
         msg = QMessageBox()
         msg.setInformativeText("Conexion agregada correctamente")

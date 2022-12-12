@@ -1,6 +1,13 @@
 from PyQt5 import QtCore,QtWidgets
 from PyQt5.QtWidgets import QMessageBox, QMainWindow
 
+import sys
+# setting path
+sys.path.append('TPFinalMakkBettucci')
+
+# importing
+from routers import Router
+
 # Esta clase es para ejecutar la opcion 10
 class Ui_FormEliminarConexion(QMainWindow):
     def __init__(self):
@@ -25,14 +32,23 @@ class Ui_FormEliminarConexion(QMainWindow):
         # Text box y su label para ingresar por teclado el router ID
         self.Hlayout = QtWidgets.QHBoxLayout()
 
-        self.label = QtWidgets.QLabel(self.verticalLayoutWidget)
-        self.label.setObjectName('labelIngresoDireccionIP')
-        self.label.setText('Ingresar direccion IP: ')
-        self.Hlayout.addWidget(self.label)
+        label = QtWidgets.QLabel(self.verticalLayoutWidget)
+        label.setObjectName('labelIngresoRouterID')
+        label.setText('Ingresar ID router: ')
+        self.Hlayout.addWidget(label)
 
-        self.textEdit = QtWidgets.QTextEdit(self.verticalLayoutWidget)
-        self.textEdit.setObjectName("textEdit")
-        self.Hlayout.addWidget(self.textEdit)        
+        self.textEditRouter = QtWidgets.QTextEdit(self.verticalLayoutWidget)
+        self.textEditRouter.setObjectName("textEditRouter")
+        self.Hlayout.addWidget(self.textEditRouter)     
+
+        label = QtWidgets.QLabel(self.verticalLayoutWidget)
+        label.setObjectName('labelIngresoMAC')
+        label.setText('Ingresar MAC: ')
+        self.Hlayout.addWidget(label)
+
+        self.textEditMAC = QtWidgets.QTextEdit(self.verticalLayoutWidget)
+        self.textEditMAC.setObjectName("textEditMAC")
+        self.Hlayout.addWidget(self.textEditMAC)      
 
         self.verticalLayout.addLayout(self.Hlayout)
 
@@ -47,7 +63,23 @@ class Ui_FormEliminarConexion(QMainWindow):
         self.pushButton.clicked.connect(lambda: self.funcionEliminarConexion())
 
     def funcionEliminarConexion(self):            
-        print(self.textEdit.toPlainText())
+        routerID = self.textEditRouter.toPlainText()
+        mac = self.textEditMAC.toPlainText()
+        if routerID not in Router.diccionarioRouter:
+            msg = QMessageBox()
+            msg.setInformativeText("El router ingresado no existe")
+            msg.exec_()
+            return
+        
+        router = Router.diccionarioRouter[routerID]
+        if mac not in router.conexiones:
+            msg = QMessageBox()
+            msg.setInformativeText("La MAC ingresada no existe")
+            msg.exec_()
+            return
+        
+        router.quitarConexion(mac)
+        
         msg = QMessageBox()
         msg.setInformativeText("Conexion eliminada correctamente")
         msg.exec_()
