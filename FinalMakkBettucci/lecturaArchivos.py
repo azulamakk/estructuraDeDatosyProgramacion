@@ -11,7 +11,7 @@ def cargarProvinciasyDptos(pathMunicipios):
     with open('FinalMakkBettucci/prefijos.json') as json_file:
         prefijos_json = json.load(json_file)
     with open(pathMunicipios, encoding= 'unicode_escape') as csvFile:
-        reader=csv.DictReader(csvFile, delimiter=';')
+        reader=csv.DictReader(csvFile, delimiter=',')
         i=0
         for linea in reader:
             try:
@@ -34,7 +34,7 @@ def leerArchivoRouter(pathRouters):
     #Lectura del csv routers
     with open(pathRouters, encoding='unicode-escape') as csvFile:
         # geolocator = Nominatim(user_agent="geoapiExercises")
-        reader=csv.DictReader(csvFile, delimiter=';')
+        reader=csv.DictReader(csvFile, delimiter=',')
         i=0
         for linea in reader:
             try:
@@ -82,13 +82,13 @@ def leerArchivoRouter(pathRouters):
 def leerArchivoConexiones(pathConexiones):
     #Lectura del csv conexiones y carga de conexiones al diccionario de conexiones y a los routers
     with open(pathConexiones, encoding='utf-8-sig') as csvFile:
-        reader=csv.DictReader(csvFile, delimiter=';')
+        reader=csv.DictReader(csvFile, delimiter=',')
         i=0
         for linea in reader:
             try:
-                i+=1        
+                i+=1
+
                 conexion = Conexion(linea['Direccion IP'],linea['MAC Address'],linea['Fecha'],linea['Horario'],linea['Activa'],linea['Router ID'])
-                
                 if linea['Router ID'] in Router.diccionarioRouter and linea['Activa'] == '1':
                     router = Router.diccionarioRouter[linea['Router ID']]
 

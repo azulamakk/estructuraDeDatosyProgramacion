@@ -63,11 +63,11 @@ class Ui_FormVerConexPorUbicacion(QtWidgets.QMainWindow):
             self.pushButtonProvincia.setGeometry(133, 100, 357, 25)
             self.pushButtonProvincia.setText("Seleccionar")
             
-            self.textEditOutputProvincia = QtWidgets.QTextEdit(self.centralwidget)
-            self.textEditOutputProvincia.setObjectName("textEditOutputProvincia")
-            self.textEditOutputProvincia.setPlaceholderText('Output textbox')
-            self.textEditOutputProvincia.setTabChangesFocus(True)
-            self.textEditOutputProvincia.setGeometry(133, 140, 357, 150)
+            self.textEditOutput = QtWidgets.QTextEdit(self.centralwidget)
+            self.textEditOutput.setObjectName("textEditOutput")
+            self.textEditOutput.setPlaceholderText('Output textbox')
+            self.textEditOutput.setTabChangesFocus(True)
+            self.textEditOutput.setGeometry(133, 140, 357, 150)
 
             self.backButtonProvincia = QPushButton(self.centralwidget)
             self.backButtonProvincia.setObjectName("backButtonProvincia")

@@ -37,7 +37,7 @@ class Ui_FormEliminarConexion(QMainWindow):
 
         self.textEditRouter = QtWidgets.QTextEdit(self.verticalLayoutWidget)
         self.textEditRouter.setObjectName("textEditRouter")
-        self.textEditRouter.setPlaceholderText('el formato esperado debe ser 3 letras mayusculas seguidas de 3 numeros, un - y 2 numeros')
+        self.textEditRouter.setPlaceholderText('ABC123-01')
         self.textEditRouter.setTabChangesFocus(True)
         self.horizontalLayoutRouter.addWidget(self.textEditRouter)     
 
@@ -53,7 +53,7 @@ class Ui_FormEliminarConexion(QMainWindow):
 
         self.textEditMAC = QtWidgets.QTextEdit(self.verticalLayoutWidget)
         self.textEditMAC.setObjectName("textEditMAC")
-        self.textEditMAC.setPlaceholderText('el formato esperado debe ser una cadena de 7 numeros')
+        self.textEditMAC.setPlaceholderText('0000000')
         self.textEditMAC.setTabChangesFocus(True)
         self.horizontalLayoutMAC.addWidget(self.textEditMAC)      
 

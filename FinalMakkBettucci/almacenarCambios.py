@@ -6,7 +6,7 @@ import csv
 pathMuni = "FinalMakkBettucci/municipios.csv"
 def actualizarArchivoMuni(pathMuni):
     with open(pathMuni, "w") as archivo:
-        writer = csv.writer(archivo, delimiter=';',quotechar='"', quoting=csv.QUOTE_MINIMAL)
+        writer = csv.writer(archivo, delimiter=',',quotechar='"', quoting=csv.QUOTE_MINIMAL)
         writer.writerow(['municipio_id','provincia_id','id_departamento','municipio','provincia','departamento'])
         for provId in Provincia.diccionarioProv:
             prov = Provincia.diccionarioProv[provId]
@@ -20,7 +20,7 @@ def actualizarArchivoMuni(pathMuni):
 pathRouter = "FinalMakkBettucci/routers.csv"
 def actualizarArchivoRouters(pathRouter):
     with open(pathRouter, "w") as archivo:
-        writer = csv.writer(archivo, delimiter=';',quotechar='"', quoting=csv.QUOTE_MINIMAL)
+        writer = csv.writer(archivo, delimiter=',',quotechar='"', quoting=csv.QUOTE_MINIMAL)
         writer.writerow(['id','identificador','ubicacion','latitud','longitud','municipio_id','provincia_id','id_departamento'])
         for routerId in Router.diccionarioRouter:
             router = Router.diccionarioRouter[routerId]
@@ -30,12 +30,21 @@ def actualizarArchivoRouters(pathRouter):
 pathConexiones = "FinalMakkBettucci/conexiones.csv"
 def actualizarArchivoConexiones(pathConexiones):
     with open(pathConexiones, "w") as archivo:
-        writer = csv.writer(archivo, delimiter=';',quotechar='"', quoting=csv.QUOTE_MINIMAL)
+        writer = csv.writer(archivo, delimiter=',',quotechar='"', quoting=csv.QUOTE_MINIMAL)
         writer.writerow(['Router ID','MAC Address','Fecha','Horario','Activa','Direccion IP'])
-        for routerId in Router.diccionarioRouter:
-            router = Router.diccionarioRouter[routerId]
-            for conexionId in router.conexiones:
-                conexion = router.conexiones[conexionId]
-                fecha, hora = str(conexion.fechaYHora).split(" ")
-                writer.writerow([conexion.direccionIP, conexion.direccionMAC, fecha, hora, conexion.activa, conexion.routerID])
+        
+        nodoActual = Conexion.conexionesHistoricas.head
+        
+        while nodoActual != None:
+            fecha, hora = nodoActual.fechaYHora.strftime("%d/%m/%Y %H:%M:%S").split(" ")
+            writer.writerow([nodoActual.routerID, nodoActual.direccionMAC, fecha, hora, nodoActual.activa, nodoActual.direccionIP])
+              
+            nodoActual = nodoActual.prox
+
+        # for conexion in Conexion.conexionesHistoricas:
+        #     router = Conexion.conexionesHistoricas[conexion]
+        #     for conexionId in router.conexiones:
+        #         conexion = router.conexiones[conexionId]
+        #         fecha, hora = conexion.fechaYHora.strftime("%d/%m/%Y %H:%M:%S").split(" ")
+        #         writer.writerow([conexion.routerID, conexion.direccionMAC, fecha, hora, conexion.activa, conexion.direccionIP])
     print("Archivo de conexiones actualizado")

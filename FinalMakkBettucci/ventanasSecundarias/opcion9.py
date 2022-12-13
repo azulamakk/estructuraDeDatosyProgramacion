@@ -23,7 +23,7 @@ class Ui_FormAgregarConexion(QMainWindow):
         self.centralwidget = QtWidgets.QWidget(Form)
 
         self.verticalLayoutWidget = QtWidgets.QWidget(self.centralwidget)
-        self.verticalLayoutWidget.setGeometry(QtCore.QRect(60, 20, 421, 233))
+        self.verticalLayoutWidget.setGeometry(QtCore.QRect(60, 20, 421, 280))
 
         self.verticalLayout = QtWidgets.QVBoxLayout(self.verticalLayoutWidget)
         self.verticalLayout.setContentsMargins(0,0,0,0)
@@ -73,17 +73,17 @@ class Ui_FormAgregarConexion(QMainWindow):
         textEdit.setTabChangesFocus(True)
 
         if campo == 'Direccion IP':
-            textEdit.setPlaceholderText('el formato esperado debe ser del estilo ABC123-01')
+            textEdit.setPlaceholderText('ABC123-01')
         elif campo == 'MAC Address':
-            textEdit.setPlaceholderText('el formato esperado debe ser una cadena de 7 numeros')
+            textEdit.setPlaceholderText('0000000')
         elif campo == 'Fecha':
-            textEdit.setPlaceholderText('el formato esperado debe ser dd/mm/aaaa')
+            textEdit.setPlaceholderText('dd/mm/aaaa')
         elif campo == 'Horario':
-            textEdit.setPlaceholderText('el formato esperado debe ser hh:mm:ss')
+            textEdit.setPlaceholderText('hh:mm:ss')
         elif campo == 'Activa':
-            textEdit.setPlaceholderText('el formato esperado debe ser 0 o 1')
+            textEdit.setPlaceholderText('0 o 1')
         else: #Router ID
-            textEdit.setPlaceholderText('el formato esperado debe ser del estilo ABC123-01')
+            textEdit.setPlaceholderText('ABC123-01')
 
         Hlayout.addWidget(textEdit)        
 

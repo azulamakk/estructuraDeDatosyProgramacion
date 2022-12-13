@@ -44,7 +44,7 @@ class Ui_FormAgregarRouter(QMainWindow):
 
         self.textEditID = QtWidgets.QTextEdit(self.verticalLayoutWidget)
         self.textEditID.setObjectName("textEditID")
-        self.textEditID.setPlaceholderText('el formato ingresado debe ser una cadena de 3 o 4 numeros')
+        self.textEditID.setPlaceholderText('000/0000')
         self.textEditID.setTabChangesFocus(True)
         self.horizontalLayout_9.addWidget(self.textEditID)
 
@@ -61,7 +61,7 @@ class Ui_FormAgregarRouter(QMainWindow):
 
         self.textEditIdentificador = QtWidgets.QTextEdit(self.verticalLayoutWidget)
         self.textEditIdentificador.setObjectName("textEdit")
-        self.textEditIdentificador.setPlaceholderText('el formato ingresado debe ser 3 letras mayusculas, seguidas de 3 numeros, un - y 2 numeros')
+        self.textEditIdentificador.setPlaceholderText('ABC123-01')
         self.textEditIdentificador.setTabChangesFocus(True)
         self.horizontalLayout.addWidget(self.textEditIdentificador)
 
@@ -78,7 +78,7 @@ class Ui_FormAgregarRouter(QMainWindow):
 
         self.textEditUbicacion = QtWidgets.QTextEdit(self.verticalLayoutWidget)
         self.textEditUbicacion.setObjectName("textEditUbicacion")
-        self.textEditUbicacion.setPlaceholderText('el formato esperado es un texto de 1 o mas palabras o nombres')
+        self.textEditUbicacion.setPlaceholderText('XXXXX')
         self.textEditUbicacion.setTabChangesFocus(True)
         self.horizontalLayout_8.addWidget(self.textEditUbicacion)
 
@@ -95,7 +95,7 @@ class Ui_FormAgregarRouter(QMainWindow):
 
         self.textEditLatitud = QtWidgets.QTextEdit(self.verticalLayoutWidget)
         self.textEditLatitud.setObjectName("textEditLatitud")
-        self.textEditLatitud.setPlaceholderText('el formato esperado debe ser un numero decimal del tipo (-)XX.XXXXXX con maximo 6 decimales')
+        self.textEditLatitud.setPlaceholderText('(-)XX.XXXXXX')
         self.textEditLatitud.setTabChangesFocus(True)
         self.horizontalLayout_10.addWidget(self.textEditLatitud)
 
@@ -112,7 +112,7 @@ class Ui_FormAgregarRouter(QMainWindow):
 
         self.textEditLongitud = QtWidgets.QTextEdit(self.verticalLayoutWidget)
         self.textEditLongitud.setObjectName("textEditLongitud")
-        self.textEditLongitud.setPlaceholderText('el formato esperado debe ser un numero decimal del tipo (-)XX.XXXXXX con maximo 6 decimales')
+        self.textEditLongitud.setPlaceholderText('(-)XX.XXXXXX')
         self.textEditLongitud.setTabChangesFocus(True)
         self.horizontalLayout_11.addWidget(self.textEditLongitud)
 
@@ -129,7 +129,7 @@ class Ui_FormAgregarRouter(QMainWindow):
 
         self.textEditMuniID = QtWidgets.QTextEdit(self.verticalLayoutWidget)
         self.textEditMuniID.setObjectName("textEditMuniID")
-        self.textEditMuniID.setPlaceholderText('el formato esperado debe ser 3 letras mayusculas seguidas de 3 numeros')
+        self.textEditMuniID.setPlaceholderText('ABC123')
         self.textEditMuniID.setTabChangesFocus(True)
         self.horizontalLayout_12.addWidget(self.textEditMuniID)
 
@@ -146,7 +146,7 @@ class Ui_FormAgregarRouter(QMainWindow):
 
         self.textEditProvID = QtWidgets.QTextEdit(self.verticalLayoutWidget)
         self.textEditProvID.setObjectName("textEditProvID")
-        self.textEditProvID.setPlaceholderText('el formato esperado debe ser AR-[A-Z]')
+        self.textEditProvID.setPlaceholderText('AR-[A-Z]')
         self.textEditProvID.setTabChangesFocus(True)
         self.horizontalLayout_13.addWidget(self.textEditProvID)
 
@@ -163,7 +163,7 @@ class Ui_FormAgregarRouter(QMainWindow):
 
         self.textEditDeptoID = QtWidgets.QTextEdit(self.verticalLayoutWidget)
         self.textEditDeptoID.setObjectName("textEditDeptoID")
-        self.textEditDeptoID.setPlaceholderText('el formato esperado debe ser una cadena de 4 numeros')
+        self.textEditDeptoID.setPlaceholderText('0000')
         self.textEditDeptoID.setTabChangesFocus(True)
         self.horizontalLayout_14.addWidget(self.textEditDeptoID)
     

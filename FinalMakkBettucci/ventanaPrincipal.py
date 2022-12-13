@@ -58,11 +58,12 @@ class Ui_MainWindow(QtWidgets.QMainWindow):
         self.retranslateUi(MainWindow)
         QtCore.QMetaObject.connectSlotsByName(MainWindow)
 
+        self.opcionIndicada = -1
         self.botonSeleccionarOpcion.setEnabled(False)
         self.textEditIngresoOpcion.textChanged.connect(self.capturarOpcion)
+        self.botonSeleccionarOpcion.clicked.connect(self.abrirSeleccionada)
 
     def capturarOpcion(self):
-
         texto = self.textEditIngresoOpcion.toPlainText()
         if len(texto) > 0:
             if texto.isnumeric() == True:
@@ -70,37 +71,43 @@ class Ui_MainWindow(QtWidgets.QMainWindow):
                     opcionIndicada = int(texto)
                     if opcionIndicada in range(1,12):
                         self.botonSeleccionarOpcion.setEnabled(True)
+                        self.opcionIndicada = int(texto)
                     else:
                         self.botonSeleccionarOpcion.setEnabled(False)
+                        self.opcionIndicada = -1
                 except:
                     self.botonSeleccionarOpcion.setEnabled(False)
+                    self.opcionIndicada = -1
         else:
             self.botonSeleccionarOpcion.setEnabled(False)
-        
-        if texto.isnumeric() == True:
-            opcionIndicada = int(texto)
-            if opcionIndicada == 1:
-                self.botonSeleccionarOpcion.clicked.connect(self.ventanaLeerArchivoMuni)
-            elif opcionIndicada == 2:
-                self.botonSeleccionarOpcion.clicked.connect(self.ventanaLeerArchivoRouters)
-            elif opcionIndicada == 3:
-                self.botonSeleccionarOpcion.clicked.connect(self.verConexionesPorProvincia)
-            elif opcionIndicada == 4:
-                self.botonSeleccionarOpcion.clicked.connect(self.verConexionesPorDepartamento)
-            elif opcionIndicada == 5:
-                self.botonSeleccionarOpcion.clicked.connect(self.verConexionesPorMunicipio)
-            elif opcionIndicada == 6:
-                self.botonSeleccionarOpcion.clicked.connect(self.verConexionesEntreFechas)
-            elif opcionIndicada == 7:
-                self.botonSeleccionarOpcion.clicked.connect(self.agregarRouter)
-            elif opcionIndicada == 8:
-                self.botonSeleccionarOpcion.clicked.connect(self.eliminarRouter)
-            elif opcionIndicada == 9:
-                self.botonSeleccionarOpcion.clicked.connect(self.agregarConexion)
-            elif opcionIndicada == 10:
-                self.botonSeleccionarOpcion.clicked.connect(self.eliminarConexion)
-            elif opcionIndicada == 11:
-                self.botonSeleccionarOpcion.clicked.connect(self.guardarYCerrar) 
+            self.opcionIndicada = -1
+                    
+
+    def abrirSeleccionada(self):
+        print(self.opcionIndicada)
+        if self.opcionIndicada == 1:
+            self.ventanaLeerArchivoMuni()
+        elif self.opcionIndicada == 2:
+            self.ventanaLeerArchivoRouters()
+        elif self.opcionIndicada == 3:
+            self.verConexionesPorProvincia()
+        elif self.opcionIndicada == 4:
+            self.verConexionesPorDepartamento()
+        elif self.opcionIndicada == 5:
+            self.verConexionesPorMunicipio()
+        elif self.opcionIndicada == 6:
+            self.verConexionesEntreFechas()
+        elif self.opcionIndicada == 7:
+            self.agregarRouter()
+        elif self.opcionIndicada == 8:
+            self.eliminarRouter()
+        elif self.opcionIndicada == 9:
+            self.agregarConexion()
+        elif self.opcionIndicada == 10:
+            self.eliminarConexion()
+        elif self.opcionIndicada == 11:
+            self.guardarYCerrar() 
+
 
     #Cargar archivo municipios
     def ventanaLeerArchivoMuni(self):
@@ -111,8 +118,10 @@ class Ui_MainWindow(QtWidgets.QMainWindow):
 
     #Cargar archivo routers
     def ventanaLeerArchivoRouters(self):
-        demo = Ui_FormRouter()
-        demo.show()
+        self.Form = QtWidgets.QMainWindow()
+        self.ui = Ui_FormRouter()
+        self.ui.setupUi(self.Form,self.Form)
+        self.Form.show()
     
     #Ver N° de conexiones por provincia dada 
     def verConexionesPorProvincia(self):

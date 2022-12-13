@@ -18,11 +18,15 @@ class ListaEnlazada:
             return
         
         anterior = self.head
+        if valor < anterior.valor:
+            self.head = Nodo(valor, anterior)
+            return
+
         actual = anterior.prox
 
         while actual != None and actual.valor < valor:
             anterior = actual
-            actual = actual.prox
+            actual = anterior.prox
         
         anterior.prox = Nodo(valor, actual)
 
@@ -32,6 +36,8 @@ class ListaEnlazada:
         while actual != None:
             res += str(actual.valor) + ", "
             actual = actual.prox
+
         return res[:-2]
+
     def __repr__(self):
         return self.__str__()

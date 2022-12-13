@@ -164,6 +164,8 @@ class Ui_FormVerConexEntreFechas(QMainWindow):
     def mostrarConexionesEntreFechas(self, fechaHoraInicio, fechaHoraFin):
         print('Inicio: ',fechaHoraInicio)
         print('Fin: ',fechaHoraFin)
+
+        self.textEdit.clear()
         nodoActual = Conexion.conexionesHistoricas.head
         
         while nodoActual != None:
@@ -171,7 +173,8 @@ class Ui_FormVerConexEntreFechas(QMainWindow):
                 nodoActual = nodoActual.prox
                 continue
             if nodoActual.valor.fechaYHora > fechaHoraFin:
-                break            
+                break
+              
             self.valueChanged.emit(str(nodoActual.valor))
             nodoActual = nodoActual.prox
 

@@ -40,7 +40,7 @@ class Ui_FormEliminarRouter(QMainWindow):
 
         self.textEdit = QtWidgets.QTextEdit(self.verticalLayoutWidget)
         self.textEdit.setObjectName("textEdit")
-        self.textEdit.setPlaceholderText('el formato esperado debe ser 3 letras mayusculas seguidas de 3 numeros, un - y 2 numeros')
+        self.textEdit.setPlaceholderText('ABC123-01')
         self.textEdit.setTabChangesFocus(True)
         self.Hlayout.addWidget(self.textEdit)        
 
