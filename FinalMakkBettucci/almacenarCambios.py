@@ -36,8 +36,9 @@ def actualizarArchivoConexiones(pathConexiones):
         nodoActual = Conexion.conexionesHistoricas.head
         
         while nodoActual != None:
-            fecha, hora = nodoActual.fechaYHora.strftime("%d/%m/%Y %H:%M:%S").split(" ")
-            writer.writerow([nodoActual.routerID, nodoActual.direccionMAC, fecha, hora, nodoActual.activa, nodoActual.direccionIP])
+            conexion = nodoActual.valor
+            fecha, hora = conexion.fechaYHora.strftime("%d/%m/%Y %H:%M:%S").split(" ")
+            writer.writerow([conexion.routerID, conexion.direccionMAC, fecha, hora, conexion.activa, conexion.direccionIP])
               
             nodoActual = nodoActual.prox
 

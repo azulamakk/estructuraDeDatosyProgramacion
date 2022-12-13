@@ -1,4 +1,5 @@
 from PyQt5.QtWidgets import QMessageBox, QLabel, QWidget,QListWidgetItem, QHBoxLayout, QMainWindow,QPushButton
+from PyQt5.QtGui import QFont
 from PyQt5 import QtCore, QtWidgets
 from ventanasSecundarias.opcion1 import ListboxWidget
 import sys
@@ -37,7 +38,13 @@ class Ui_FormRouter(QMainWindow):
 
         # CREO Y AGREGO EL LABEL AL HORIZONTAL LAYOUT #
         self.labelCargarArchivoRouter = QLabel(self.verticalLayoutWidget)
-        self.labelCargarArchivoRouter = QLabel("Arrastre o adjunte archivo routers:")
+        self.labelCargarArchivoRouter = QLabel("Arrastre o adjunte archivo routers: ")
+        self.labelCargarArchivoRouter = QLabel('''
+        Las columnas de dicho archivo deben ser llamadas:
+        id, identificador, ubicacion, latitud, 
+        longitud, municipioID, provinciaID, departamentoID''')
+        font = QFont("Calibri", pointSize=14, weight=QFont.Medium, italic=False)
+        self.labelCargarArchivoRouter.setFont(font)
         self.labelCargarArchivoRouter.setObjectName("labelCargarArchivoRouter")
         self.horizontalLayout.addWidget(self.labelCargarArchivoRouter)
         

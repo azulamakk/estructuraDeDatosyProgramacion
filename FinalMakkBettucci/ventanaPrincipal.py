@@ -1,6 +1,8 @@
 from PyQt5 import QtCore, QtWidgets
 from PyQt5 import QtGui
-from PyQt5.QtWidgets import QApplication
+from PyQt5.QtGui import QFont, QFontDatabase
+from PyQt5.QtWidgets import QApplication, QLabel
+from PyQt5.QtCore import Qt, QDir
 from ventanasSecundarias.opcion1 import VentanaCargarMunicipio
 from ventanasSecundarias.opcion2 import Ui_FormRouter
 from ventanasSecundarias.opcion345 import Ui_FormVerConexPorUbicacion
@@ -20,7 +22,6 @@ class Ui_MainWindow(QtWidgets.QMainWindow):
 
     def setupUi(self, MainWindow):
         MainWindow.setObjectName("MainWindow")
-        self.setWindowIcon(QtGui.QIcon('FinalMakkBettucci/logo.ico'))
         MainWindow.resize(621, 457)
 
         self.centralwidget = QtWidgets.QWidget(MainWindow)
@@ -193,28 +194,28 @@ class Ui_MainWindow(QtWidgets.QMainWindow):
         self.botonSeleccionarOpcion.setText(_translate("MainWindow", "Seleccionar"))
         self.ingreseOpcionLabel.setText(_translate("MainWindow", "Ingrese una opción:"))
         self.labelSaludo.setText(_translate("MainWindow", "Bienvenidos al Sistema de Información de País Digital"))
+        font1 = QFont("Calibri", pointSize=18, weight=QFont.Medium, italic=True)
+        self.labelSaludo.setFont(font1)
         self.label.setText(_translate("MainWindow", '''
         1. Cargar nuevo archivo de municipios
         2. Cargar nuevo archivo de puntos de acceso
         3. Ver N° de conexiones por provincia dada
         4. Ver N° de conexiones por departamento dado
         5. Ver N° de conexiones por municipio dado
-        6. Ver N° de conexiones totales en el pais entre 2 fechas y horas dadas
+        6. Ver N° de conexiones en el pais entre 2 fechas y horas dadas
         7. Agregar un punto de acceso
         8. Dar de baja un punto de acceso
         9. Agregar conexiones
         10. Quitar conexiones
         11. Cerrar y guardar cambios'''))
+        font2 = QFont("Calibri", pointSize=14, weight=QFont.Medium, italic=False)
+        self.label.setFont(font2)
 
     #Main
 if __name__ == "__main__":
     import sys
     app = QtWidgets.QApplication(sys.argv)
     style = '''
-    QFont{
-        font-size: 20px;
-        font-family: "Open-Sans";
-    }
     QMainWindow{
         background-color: #95D2EB;
     }

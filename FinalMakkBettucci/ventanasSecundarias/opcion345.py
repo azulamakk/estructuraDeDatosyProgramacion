@@ -50,7 +50,7 @@ class Ui_FormVerConexPorUbicacion(QtWidgets.QMainWindow):
 
             self.textEditProv = QtWidgets.QTextEdit(self.verticalLayoutWidget)
             self.textEditProv.setObjectName("textEditProvincia")
-            self.textEditProv.setPlaceholderText('el formato ingresado debe ser AR-[A-Z]')
+            self.textEditProv.setPlaceholderText('AR-[A-Z]')
             self.textEditProv.setTabChangesFocus(True)
             self.horizontalLayoutProvincia.addWidget(self.textEditProv)
 
@@ -108,7 +108,7 @@ class Ui_FormVerConexPorUbicacion(QtWidgets.QMainWindow):
 
             self.textEditProv = QtWidgets.QTextEdit(self.verticalLayoutWidget)
             self.textEditProv.setObjectName("textEditProv")
-            self.textEditProv.setPlaceholderText('el formato ingresado deber ser AR-[A-Z]')
+            self.textEditProv.setPlaceholderText('AR-[A-Z]')
             self.textEditProv.setTabChangesFocus(True)
             self.horizontalLayoutProv.addWidget(self.textEditProv)
 
@@ -124,7 +124,7 @@ class Ui_FormVerConexPorUbicacion(QtWidgets.QMainWindow):
 
             self.textEditDepto = QtWidgets.QTextEdit(self.verticalLayoutWidget)
             self.textEditDepto.setObjectName("textEditDepto")
-            self.textEditDepto.setPlaceholderText('el formato ingresado debe ser 4 numeros y debe pertenecer a la provincia elegida')
+            self.textEditDepto.setPlaceholderText('0000')
             self.textEditDepto.setTabChangesFocus(True)
             self.horizontalLayoutDepartamento.addWidget(self.textEditDepto)
 
@@ -188,7 +188,7 @@ class Ui_FormVerConexPorUbicacion(QtWidgets.QMainWindow):
 
             self.textEditProv = QtWidgets.QTextEdit(self.verticalLayoutWidget)
             self.textEditProv.setObjectName("textEditProv")
-            self.textEditProv.setPlaceholderText('el formato ingresado deber ser AR-[A-Z]')
+            self.textEditProv.setPlaceholderText('AR-[A-Z]')
             self.textEditProv.setTabChangesFocus(True)
             self.horizontalLayoutProvincia.addWidget(self.textEditProv)
 
@@ -204,7 +204,7 @@ class Ui_FormVerConexPorUbicacion(QtWidgets.QMainWindow):
 
             self.textEditDepto = QtWidgets.QTextEdit(self.verticalLayoutWidget)
             self.textEditDepto.setObjectName("textEditDepto")
-            self.textEditDepto.setPlaceholderText('el formato ingresado debe ser 4 numeros y debe pertenecer a la provincia elegida')
+            self.textEditDepto.setPlaceholderText('0000')
             self.textEditDepto.setTabChangesFocus(True)
             self.horizontalLayoutDepartamento.addWidget(self.textEditDepto)
 
@@ -220,7 +220,7 @@ class Ui_FormVerConexPorUbicacion(QtWidgets.QMainWindow):
 
             self.textEditMuni = QtWidgets.QTextEdit(self.verticalLayoutWidget)
             self.textEditMuni.setObjectName("textEdit")
-            self.textEditMuni.setPlaceholderText('el formato ingresado debe ser del tipo ABC123-01 y debe pertenecer al departamento elegido')
+            self.textEditMuni.setPlaceholderText('ABC123-01')
             self.textEditMuni.setTabChangesFocus(True)
             self.horizontalLayoutMunicipio.addWidget(self.textEditMuni)
 
@@ -292,11 +292,15 @@ class Ui_FormVerConexPorUbicacion(QtWidgets.QMainWindow):
             msg.setInformativeText("No existe la provincia ingresada")
             msg.exec_()
             return
-
+        cantProv=0
         for router in Router.diccionarioRouter:
             if idProvinciaIngresada == Router.diccionarioRouter[router].provinciaID:
                 for (_, conexion) in Router.diccionarioRouter[router].conexiones.items():
+                    cantProv+=1
                     self.valueChanged.emit("MAC: {}, IP: {}".format(conexion.direccionMAC, conexion.direccionIP))
+        msg = QMessageBox()
+        msg.setInformativeText("Cantidad total de conexiones de provincia {}: {}".format(idProvinciaIngresada,cantProv))
+        msg.exec_()
 
     #Funcion que muestra las conexiones por departamento dado             
     def mostrarConexionesPorDepartamento(self):
@@ -316,11 +320,17 @@ class Ui_FormVerConexPorUbicacion(QtWidgets.QMainWindow):
             msg.exec_()
             return
 
+        cantDpto = 0
         for routerId in Router.diccionarioRouter:
             router = Router.diccionarioRouter[routerId]
             if idDepartamentoIngresado == router.departamentoID and idProvIngresada == router.provinciaID:
                 for (_, conexion) in router.conexiones.items():
+                    cantDpto+=1
                     self.valueChanged.emit("MAC: {}, IP: {}".format(conexion.direccionMAC, conexion.direccionIP))
+        msg = QMessageBox()
+        msg.setInformativeText("Cantidad total de conexiones de departamento {}: {}".format(idDepartamentoIngresado,cantDpto))
+        msg.exec_()
+                    
 
     #Funcion que muestra las conexiones por municipio dado
     def mostrarConexionesPorMunicipio(self):
@@ -346,12 +356,17 @@ class Ui_FormVerConexPorUbicacion(QtWidgets.QMainWindow):
             msg.setInformativeText("No existe el municipio ingresado")
             msg.exec_()
             return
-          
+        
+        cantMuni = 0
         for routerId in Router.diccionarioRouter.keys():
             router = Router.diccionarioRouter[routerId]
             if idMunicipioIngresado == router.municipioID and idDepartamentoIngresado == router.departamentoID and idProvIngresada == router.provinciaID:
                 for (_, conexion) in router.conexiones.items():
+                    cantMuni+=1
                     self.valueChanged.emit("MAC: {}, IP: {}".format(conexion.direccionMAC, conexion.direccionIP))
+        msg = QMessageBox()
+        msg.setInformativeText("Cantidad total de conexiones de departamento {}: {}".format(idDepartamentoIngresado,cantMuni))
+        msg.exec_()
 
     # Para que validar que no pueda apretar el boton seleccionar con un numero (prov, depto, muni)
     def botonSeleccionar_enableConTextoProv(self,boton):  

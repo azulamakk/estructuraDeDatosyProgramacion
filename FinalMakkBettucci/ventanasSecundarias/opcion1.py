@@ -1,5 +1,6 @@
 from PyQt5.QtWidgets import QMessageBox, QLabel, QWidget, QListWidget,QListWidgetItem, QVBoxLayout, QHBoxLayout, QMainWindow,QPushButton
 from PyQt5.QtCore import Qt
+from PyQt5.QtGui import QFont
 from PyQt5 import QtWidgets
 from PyQt5 import QtCore
 import sys
@@ -79,7 +80,10 @@ class VentanaCargarMunicipio(QMainWindow):
         self.labelCargarArchivoMuni = QLabel("Arrastre o adjunte archivo municipios: ")
         self.labelCargarArchivoMuni = QLabel('''
         Las columnas de dicho archivo deben ser llamadas:
-        id_procincia, id_departamento, id_municipio, municipio, departamento, provincia''')
+        id_provincia, id_departamento
+        id_municipio, municipio, departamento, provincia''')
+        font = QFont("Calibri", pointSize=14, weight=QFont.Medium, italic=False)
+        self.labelCargarArchivoMuni.setFont(font)
         self.labelCargarArchivoMuni.setObjectName("labelCargarArchivoMuni")
         self.horizontalLayout.addWidget(self.labelCargarArchivoMuni)
         
