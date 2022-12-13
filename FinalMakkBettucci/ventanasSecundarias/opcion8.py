@@ -1,7 +1,7 @@
 from PyQt5 import QtCore, QtGui, QtWidgets, QtGui
 from PyQt5.QtWidgets import QMessageBox, QCalendarWidget, QLabel, QWidget, QListWidget,QListWidgetItem, QHBoxLayout, QMainWindow,QPushButton,QApplication
 from PyQt5.QtCore import Qt,QUrl,QRect,QDateTime
-
+import re
 import sys
 # setting path
 sys.path.append('TPFinalMakkBettucci')
@@ -40,6 +40,8 @@ class Ui_FormEliminarRouter(QMainWindow):
 
         self.textEdit = QtWidgets.QTextEdit(self.verticalLayoutWidget)
         self.textEdit.setObjectName("textEdit")
+        self.textEdit.setPlaceholderText('el formato esperado debe ser 3 letras mayusculas seguidas de 3 numeros, un - y 2 numeros')
+        self.textEdit.setTabChangesFocus(True)
         self.Hlayout.addWidget(self.textEdit)        
 
         self.verticalLayout.addLayout(self.Hlayout)
@@ -60,20 +62,22 @@ class Ui_FormEliminarRouter(QMainWindow):
         Form.setCentralWidget(self.centralwidget)
         QtCore.QMetaObject.connectSlotsByName(Form)
 
+        self.pushButton.setEnabled(False)
+        self.textEdit.textChanged.connect(lambda: self.botonSeleccionar_enableConAlfanumerico('^([A-Z]{3})([0-9]{3})-([0-9]{2})', self.textEdit))
         self.pushButton.clicked.connect(lambda: self.funcionEliminarRouter())
 
-    # def botonSeleccionar_enableConAlfanumerico(self, pattern, textEdit):
-    #     text = textEdit.toPlainText()
-    #     if len(text) != 0:
-    #         try:
-    #             if re.fullmatch(pattern,text):
-    #                 self.botonIngresoDatos.setEnabled(True)
-    #             else:
-    #                 self.botonIngresoDatos.setEnabled(False)
-    #         except:
-    #             self.botonIngresoDatos.setEnabled(False)
-    #     else:
-    #         self.botonIngresoDatos.setEnabled(False)
+    def botonSeleccionar_enableConAlfanumerico(self, pattern, textEdit):
+        text = textEdit.toPlainText()
+        if len(text) != 0:
+            try:
+                if re.fullmatch(pattern,text):
+                    self.pushButton.setEnabled(True)
+                else:
+                    self.pushButton.setEnabled(False)
+            except:
+                self.pushButton.setEnabled(False)
+        else:
+            self.pushButton.setEnabled(False)
 
 
     def funcionEliminarRouter(self):            

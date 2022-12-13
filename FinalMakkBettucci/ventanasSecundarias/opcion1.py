@@ -15,8 +15,8 @@ class ListboxWidget(QListWidget):
     def __init__(self,parent=None):
         super().__init__(parent)
         self.setAcceptDrops(True)
-        self.setGeometry(200,200,100,100)   
-
+        self.setGeometry(200,200,100,100)  
+    
     def dragEnterEvent(self,event):
         if event.mimeData().hasUrls():
             event.accept()
@@ -50,7 +50,7 @@ class ListboxWidget(QListWidget):
 class VentanaCargarMunicipio(QMainWindow):
     def __init__(self):
         super().__init__()
-        self.secondWidgetWindow = None
+        self.secondWidgetWindow = None    
     
     def setupUi(self, MainWindow,secondWidgetWindow):
 

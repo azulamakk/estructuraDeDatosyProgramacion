@@ -22,7 +22,7 @@ class Ui_FormEliminarConexion(QMainWindow):
         self.centralwidget = QtWidgets.QWidget(Form)
 
         self.verticalLayoutWidget = QtWidgets.QWidget(self.centralwidget)
-        self.verticalLayoutWidget.setGeometry(QtCore.QRect(60, 30, 435, 130))
+        self.verticalLayoutWidget.setGeometry(QtCore.QRect(60, 30, 435, 150))
 
         self.verticalLayout = QtWidgets.QVBoxLayout(self.verticalLayoutWidget)
         self.verticalLayout.setContentsMargins(0,0,0,0)
@@ -37,6 +37,8 @@ class Ui_FormEliminarConexion(QMainWindow):
 
         self.textEditRouter = QtWidgets.QTextEdit(self.verticalLayoutWidget)
         self.textEditRouter.setObjectName("textEditRouter")
+        self.textEditRouter.setPlaceholderText('el formato esperado debe ser 3 letras mayusculas seguidas de 3 numeros, un - y 2 numeros')
+        self.textEditRouter.setTabChangesFocus(True)
         self.horizontalLayoutRouter.addWidget(self.textEditRouter)     
 
         self.verticalLayout.addLayout(self.horizontalLayoutRouter)
@@ -51,6 +53,8 @@ class Ui_FormEliminarConexion(QMainWindow):
 
         self.textEditMAC = QtWidgets.QTextEdit(self.verticalLayoutWidget)
         self.textEditMAC.setObjectName("textEditMAC")
+        self.textEditMAC.setPlaceholderText('el formato esperado debe ser una cadena de 7 numeros')
+        self.textEditMAC.setTabChangesFocus(True)
         self.horizontalLayoutMAC.addWidget(self.textEditMAC)      
 
         self.verticalLayout.addLayout(self.horizontalLayoutMAC)

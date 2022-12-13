@@ -94,6 +94,8 @@ class Ui_FormVerConexEntreFechas(QMainWindow):
         self.textEdit = QtWidgets.QTextEdit()
         self.textEdit.setGeometry(QtCore.QRect(380, 130, 100, 100))
         self.textEdit.setObjectName("textEdit")
+        self.textEdit.setPlaceholderText('Output textbox')
+        self.textEdit.setTabChangesFocus(True)
         self.verticalLayout.addWidget(self.textEdit)
 
         #Boton para volver al menu principal

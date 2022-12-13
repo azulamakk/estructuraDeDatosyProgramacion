@@ -14,6 +14,7 @@ from municipios import Provincia, Departamento, Municipio
 # Esta clase es para ejecutar la opcion 3,4 y 5
 class Ui_FormVerConexPorUbicacion(QtWidgets.QMainWindow):   
     valueChanged = QtCore.pyqtSignal(str)
+
     def __init__(self):
         super().__init__()
         self.secondWidgetWindow = None
@@ -49,6 +50,8 @@ class Ui_FormVerConexPorUbicacion(QtWidgets.QMainWindow):
 
             self.textEditProv = QtWidgets.QTextEdit(self.verticalLayoutWidget)
             self.textEditProv.setObjectName("textEditProvincia")
+            self.textEditProv.setPlaceholderText('el formato ingresado debe ser AR-[A-Z]')
+            self.textEditProv.setTabChangesFocus(True)
             self.horizontalLayoutProvincia.addWidget(self.textEditProv)
 
             self.verticalLayout.addLayout(self.horizontalLayoutProvincia)
@@ -62,6 +65,8 @@ class Ui_FormVerConexPorUbicacion(QtWidgets.QMainWindow):
             
             self.textEditOutputProvincia = QtWidgets.QTextEdit(self.centralwidget)
             self.textEditOutputProvincia.setObjectName("textEditOutputProvincia")
+            self.textEditOutputProvincia.setPlaceholderText('Output textbox')
+            self.textEditOutputProvincia.setTabChangesFocus(True)
             self.textEditOutputProvincia.setGeometry(133, 140, 357, 150)
 
             self.backButtonProvincia = QPushButton(self.centralwidget)
@@ -73,14 +78,13 @@ class Ui_FormVerConexPorUbicacion(QtWidgets.QMainWindow):
 
             ## CONNECTS ##
             QtCore.QMetaObject.connectSlotsByName(Form)
-            self.textEditProv.textChanged.connect(self.botonSeleccionar_enableConTextoProv)
+            self.textEditProv.textChanged.connect(lambda: self.botonSeleccionar_enableConTextoProv(self.pushButtonProvincia))
 
             self.valueChanged.connect(self.on_value_changed)
             self.pushButtonProvincia.clicked.connect(self.on_clicked)
 
             self.backButtonProvincia.clicked.connect(lambda: self.secondWidgetWindow.close())
             
-
         elif ubicacion == 'departamento':
 
             self.verticalLayoutWidget = QtWidgets.QWidget(self.centralwidget)
@@ -104,6 +108,8 @@ class Ui_FormVerConexPorUbicacion(QtWidgets.QMainWindow):
 
             self.textEditProv = QtWidgets.QTextEdit(self.verticalLayoutWidget)
             self.textEditProv.setObjectName("textEditProv")
+            self.textEditProv.setPlaceholderText('el formato ingresado deber ser AR-[A-Z]')
+            self.textEditProv.setTabChangesFocus(True)
             self.horizontalLayoutProv.addWidget(self.textEditProv)
 
             # SEGUNDO ARMAMOS EL HORIZONTAL LAYOUT CON EL INGRESO DE DEPARTAMENTO #
@@ -118,6 +124,8 @@ class Ui_FormVerConexPorUbicacion(QtWidgets.QMainWindow):
 
             self.textEditDepto = QtWidgets.QTextEdit(self.verticalLayoutWidget)
             self.textEditDepto.setObjectName("textEditDepto")
+            self.textEditDepto.setPlaceholderText('el formato ingresado debe ser 4 numeros y debe pertenecer a la provincia elegida')
+            self.textEditDepto.setTabChangesFocus(True)
             self.horizontalLayoutDepartamento.addWidget(self.textEditDepto)
 
             # AÑADIMOS EL HORIZONTAL LAYOUT DE  DEPARTAMENTO Y PROVINCIA AL VERTICAL LAYOUT #
@@ -135,6 +143,8 @@ class Ui_FormVerConexPorUbicacion(QtWidgets.QMainWindow):
             self.textEditOutput = QtWidgets.QTextEdit(self.centralwidget)
             self.textEditOutput.setObjectName("textEditOutput")
             self.textEditOutput.setGeometry(152, 190, 337, 150)
+            self.textEditOutput.setPlaceholderText('Output textbox')
+            self.textEditOutput.setTabChangesFocus(True)
 
             self.backButtonDepartamento = QPushButton(self.centralwidget)
             self.backButtonDepartamento.setObjectName("backButton")
@@ -146,8 +156,8 @@ class Ui_FormVerConexPorUbicacion(QtWidgets.QMainWindow):
             ## CONNECTS ##
             QtCore.QMetaObject.connectSlotsByName(Form)
 
-            self.textEditProv.textChanged.connect(self.botonSeleccionar_enableConTextoProv)
-            self.textEditDepto.textChanged.connect(self.botonSeleccionar_enableConTextoDpto)
+            self.textEditProv.textChanged.connect(lambda: self.botonSeleccionar_enableConTextoProv(self.pushButtonDepartamento))
+            self.textEditDepto.textChanged.connect(lambda: self.botonSeleccionar_enableConTextoDpto(self.pushButtonDepartamento))
             
             self.valueChanged.connect(self.on_value_changed)
             self.pushButtonDepartamento.clicked.connect(self.on_clicked)
@@ -157,7 +167,7 @@ class Ui_FormVerConexPorUbicacion(QtWidgets.QMainWindow):
         elif ubicacion == 'municipio':
 
             self.verticalLayoutWidget = QtWidgets.QWidget(self.centralwidget)
-            self.verticalLayoutWidget.setGeometry(QtCore.QRect(20, 40, 550, 100))
+            self.verticalLayoutWidget.setGeometry(QtCore.QRect(20, 40, 550, 120))
             self.verticalLayoutWidget.setObjectName("verticalLayoutWidget")
             
             self.verticalLayout = QtWidgets.QVBoxLayout(self.verticalLayoutWidget)
@@ -178,6 +188,8 @@ class Ui_FormVerConexPorUbicacion(QtWidgets.QMainWindow):
 
             self.textEditProv = QtWidgets.QTextEdit(self.verticalLayoutWidget)
             self.textEditProv.setObjectName("textEditProv")
+            self.textEditProv.setPlaceholderText('el formato ingresado deber ser AR-[A-Z]')
+            self.textEditProv.setTabChangesFocus(True)
             self.horizontalLayoutProvincia.addWidget(self.textEditProv)
 
             # SEGUNDO ARMAMOS EL HORIZONTAL LAYOUT CON EL INGRESO DE DEPARTAMENTO #
@@ -192,6 +204,8 @@ class Ui_FormVerConexPorUbicacion(QtWidgets.QMainWindow):
 
             self.textEditDepto = QtWidgets.QTextEdit(self.verticalLayoutWidget)
             self.textEditDepto.setObjectName("textEditDepto")
+            self.textEditDepto.setPlaceholderText('el formato ingresado debe ser 4 numeros y debe pertenecer a la provincia elegida')
+            self.textEditDepto.setTabChangesFocus(True)
             self.horizontalLayoutDepartamento.addWidget(self.textEditDepto)
 
             # TERCERO ARMAMOS EL HORIZONTAL LAYOUT CON EL INGRESO DE MUNICIPIO #
@@ -206,6 +220,8 @@ class Ui_FormVerConexPorUbicacion(QtWidgets.QMainWindow):
 
             self.textEditMuni = QtWidgets.QTextEdit(self.verticalLayoutWidget)
             self.textEditMuni.setObjectName("textEdit")
+            self.textEditMuni.setPlaceholderText('el formato ingresado debe ser del tipo ABC123-01 y debe pertenecer al departamento elegido')
+            self.textEditMuni.setTabChangesFocus(True)
             self.horizontalLayoutMunicipio.addWidget(self.textEditMuni)
 
             # AGREGAMOS LOS HORIZONTAL LAYOUTS AL VERTICAL LAYOUT #
@@ -217,30 +233,43 @@ class Ui_FormVerConexPorUbicacion(QtWidgets.QMainWindow):
 
             self.pushButtonMunicipio = QtWidgets.QPushButton(self.centralwidget)
             self.pushButtonMunicipio.setObjectName("pushButton")
-            self.pushButtonMunicipio.setGeometry(128, 150, 361, 30)
+            self.pushButtonMunicipio.setGeometry(128, 170, 361, 30)
             self.pushButtonMunicipio.setText("Seleccionar")
 
             self.textEditOutput = QtWidgets.QTextEdit(self.centralwidget)
             self.textEditOutput.setObjectName("textEditOutput")
-            self.textEditOutput.setGeometry(128, 190, 361, 150)
+            self.textEditOutput.setGeometry(128, 210, 361, 150)
+            self.textEditOutput.setTabChangesFocus(True)
+            self.textEditOutput.setPlaceholderText('Output textbox')
 
             self.backButtonMunicipio = QPushButton(self.centralwidget)
             self.backButtonMunicipio.setObjectName("backButtonMunicipio")
-            self.backButtonMunicipio.setGeometry(128, 350, 361, 30)
+            self.backButtonMunicipio.setGeometry(128, 370, 361, 30)
             self.backButtonMunicipio.setText("Volver")
 
             Form.setCentralWidget(self.centralwidget)
 
             ## CONNECTS ##
-            self.textEditProv.textChanged.connect(self.botonSeleccionar_enableConTextoProv)
-            self.textEditDepto.textChanged.connect(self.botonSeleccionar_enableConTextoDpto)
-            self.textEditMuni.textChanged.connect(self.botonSeleccionar_enableConTextoMuni)
+            self.textEditProv.textChanged.connect(lambda: self.botonSeleccionar_enableConTextoProv(self.pushButtonMunicipio))
+            self.textEditDepto.textChanged.connect(lambda: self.botonSeleccionar_enableConTextoDpto(self.pushButtonMunicipio))
+            self.textEditMuni.textChanged.connect(lambda: self.botonSeleccionar_enableConTextoMuni(self.pushButtonMunicipio))
 
             QtCore.QMetaObject.connectSlotsByName(Form)
             self.valueChanged.connect(self.on_value_changed)
             self.pushButtonMunicipio.clicked.connect(self.on_clicked)
 
+            # self.textEditProv.installEventFilter(self)
+            # self.textEditDepto.installEventFilter(self)
+            # self.textEditMuni.installEventFilter(self)
+
             self.backButtonMunicipio.clicked.connect(lambda: self.secondWidgetWindow.close())
+
+    # def eventFilter(self, obj, event):
+    #     if event.type() == QtCore.QEvent.KeyPress and obj is self.textEditMuni:
+    #         if event.key() == QtCore.Qt.Key_Return and self.textEditMuni.hasFocus():
+    #             print('Enter pressed')
+    #             self.mostrarConexionesPorMunicipio()
+    #     return super().eventFilter(obj, event)
 
     @QtCore.pyqtSlot()
     def on_clicked(self):
@@ -255,7 +284,6 @@ class Ui_FormVerConexPorUbicacion(QtWidgets.QMainWindow):
     def on_value_changed(self,value):
         self.textEditOutput.append(value)
         
-
     #Funcion que muestra las conexiones por provincia dada
     def mostrarConexionesPorProvincia(self):
         idProvinciaIngresada = self.textEditProv.toPlainText().strip()
@@ -269,7 +297,6 @@ class Ui_FormVerConexPorUbicacion(QtWidgets.QMainWindow):
             if idProvinciaIngresada == Router.diccionarioRouter[router].provinciaID:
                 for (_, conexion) in Router.diccionarioRouter[router].conexiones.items():
                     self.valueChanged.emit("MAC: {}, IP: {}".format(conexion.direccionMAC, conexion.direccionIP))
-
 
     #Funcion que muestra las conexiones por departamento dado             
     def mostrarConexionesPorDepartamento(self):
@@ -327,34 +354,34 @@ class Ui_FormVerConexPorUbicacion(QtWidgets.QMainWindow):
                     self.valueChanged.emit("MAC: {}, IP: {}".format(conexion.direccionMAC, conexion.direccionIP))
 
     # Para que validar que no pueda apretar el boton seleccionar con un numero (prov, depto, muni)
-    def botonSeleccionar_enableConTextoProv(self):  
+    def botonSeleccionar_enableConTextoProv(self,boton):  
         text = self.textEditProv.toPlainText().strip()
         if len(text) != 0:
             try:
                 if text in Provincia.diccionarioProv:
-                    self.pushButton.setEnabled(True)
+                    boton.setEnabled(True)
                 else:
-                    self.pushButton.setEnabled(False)
+                    boton.setEnabled(False)
             except:
-                self.pushButton.setEnabled(False)
+                boton.setEnabled(False)
         else:
-            self.pushButton.setEnabled(False)
+            boton.setEnabled(False)
 
-    def botonSeleccionar_enableConTextoDpto(self):  
+    def botonSeleccionar_enableConTextoDpto(self,boton):  
         idProv = self.textEditProv.toPlainText().strip()
         try:
             if idProv in Provincia.diccionarioProv:
                 prov = Provincia.diccionarioProv[idProv]
                 idDepto = self.textEditDepto.toPlainText().strip()
                 if idDepto in prov.diccionarioDptos:
-                    self.pushButton.setEnabled(True)
+                    boton.setEnabled(True)
                     return
             
-            self.pushButton.setEnabled(False)
+            boton.setEnabled(False)
         except:
-            self.pushButton.setEnabled(False)
+            boton.setEnabled(False)
 
-    def botonSeleccionar_enableConTextoMuni(self):  
+    def botonSeleccionar_enableConTextoMuni(self,boton):  
         idProv = self.textEditProv.toPlainText().strip()
         try:
             if idProv in Provincia.diccionarioProv:
@@ -364,9 +391,9 @@ class Ui_FormVerConexPorUbicacion(QtWidgets.QMainWindow):
                     depto = prov.diccionarioDptos[idDepto]
                     idMuni = self.textEditMuni.toPlainText().strip()
                     if idMuni in depto.diccionarioMunicipios:
-                        self.pushButton.setEnabled(True)
+                        boton.setEnabled(True)
                         return
             
-            self.pushButton.setEnabled(False)
+            boton.setEnabled(False)
         except:
-            self.pushButton.setEnabled(False)
+            boton.setEnabled(False)
