@@ -7,6 +7,7 @@ sys.path.append('TPFinalMakkBettucci')
 
 # importing
 from routers import Router
+from conexiones import Conexion
 
 # Esta clase es para ejecutar la opcion 10
 class Ui_FormEliminarConexion(QMainWindow):
