@@ -57,7 +57,7 @@ class VentanaCargarMunicipio(QMainWindow):
 
         self.secondWidgetWindow = secondWidgetWindow
         MainWindow.setObjectName("MainWindow")
-        MainWindow.setWindowTitle("Opcion ingresada: Agregar Router")
+        MainWindow.setWindowTitle("Opcion ingresada: Agregar Municipio")
         MainWindow.resize(700, 500)
         self.centralwidget = QtWidgets.QWidget(MainWindow)
         self.centralwidget.setObjectName("centralwidget")

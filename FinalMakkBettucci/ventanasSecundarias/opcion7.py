@@ -228,7 +228,6 @@ class Ui_FormAgregarRouter(QMainWindow):
 
     def retranslateUi(self, MainWindow):
         _translate = QtCore.QCoreApplication.translate
-        MainWindow.setWindowTitle(_translate("MainWindow", "MainWindow"))
         self.labelIngresoMuniID.setText(_translate("MainWindow", "Ingresar municipio ID:"))
         self.labelIngresoLongitud.setText(_translate("MainWindow", "Ingresar longitud:"))
         self.botonIngresoDatos.setText(_translate("MainWindow", "Ingresar datos del router nuevo"))
@@ -264,8 +263,9 @@ class Ui_FormAgregarRouter(QMainWindow):
             msg.setInformativeText("Router agregado correctamente")
             msg.exec_()
         except Exception as e:
-            self.valueChanged.emit("Error al ingresar los datos")
-            self.valueChanged.emit(str(e))
+            msg = QMessageBox()
+            msg.setInformativeText("Error al agregar el router")
+            msg.exec_()
 
     #Regex para activar o desactivar un boton cuando se intenta ingresar un router ID o direccion IP
     def botonSeleccionar_enableConAlfanumerico(self, pattern, textEdit):

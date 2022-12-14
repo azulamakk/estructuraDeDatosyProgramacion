@@ -328,7 +328,7 @@ class Ui_FormVerConexPorUbicacion(QtWidgets.QMainWindow):
                     cantDpto+=1
                     self.valueChanged.emit("MAC: {}, IP: {}".format(conexion.direccionMAC, conexion.direccionIP))
         msg = QMessageBox()
-        msg.setInformativeText("Cantidad total de conexiones de departamento {}: {}".format(idDepartamentoIngresado,cantDpto))
+        msg.setInformativeText("Cantidad total de conexiones de departamento {} de provincia {}: {}".format(idDepartamentoIngresado,idProvIngresada,cantDpto))
         msg.exec_()
                     
 
@@ -365,7 +365,7 @@ class Ui_FormVerConexPorUbicacion(QtWidgets.QMainWindow):
                     cantMuni+=1
                     self.valueChanged.emit("MAC: {}, IP: {}".format(conexion.direccionMAC, conexion.direccionIP))
         msg = QMessageBox()
-        msg.setInformativeText("Cantidad total de conexiones de departamento {}: {}".format(idDepartamentoIngresado,cantMuni))
+        msg.setInformativeText("Cantidad total de conexiones de municipio {}, departamento {}, provincia {}: {}".format(idMunicipioIngresado,idDepartamentoIngresado, idProvIngresada,cantMuni))
         msg.exec_()
 
     # Para que validar que no pueda apretar el boton seleccionar con un numero (prov, depto, muni)

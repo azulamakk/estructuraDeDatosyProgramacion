@@ -41,8 +41,8 @@ class Ui_FormRouter(QMainWindow):
         self.labelCargarArchivoRouter = QLabel("Arrastre o adjunte archivo routers: ")
         self.labelCargarArchivoRouter = QLabel('''
         Las columnas de dicho archivo deben ser llamadas:
-        id, identificador, ubicacion, latitud, 
-        longitud, municipioID, provinciaID, departamentoID''')
+        id, identificador, ubicacion, latitud, longitud,
+        municipio_id, provincia_id, departamento_id''')
         font = QFont("Calibri", pointSize=14, weight=QFont.Medium, italic=False)
         self.labelCargarArchivoRouter.setFont(font)
         self.labelCargarArchivoRouter.setObjectName("labelCargarArchivoRouter")
@@ -82,7 +82,6 @@ class Ui_FormRouter(QMainWindow):
             item = QListWidgetItem(self.lstbox_.currentItem())
             pathRouter = item.text()
             leerArchivoRouter(pathRouter)
-            leerArchivoConexiones('conexiones.csv')
             msg = QMessageBox()
             msg.setInformativeText("Archivo cargado correctamente")
             msg.exec_()
