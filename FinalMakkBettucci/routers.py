@@ -43,13 +43,6 @@ class Router():
             self.colaConexionesPendientes.put_nowait(conexion)
 
     def quitarConexion(self, direccionMAC: int):
-        nodoActual = Conexion.conexionesHistoricas.head
-        
-        while nodoActual != None:
-            if nodoActual.valor.direccionMAC == direccionMAC:
-                nodoActual.valor.activa = 0
-
-        nodoActual = nodoActual.prox
         if direccionMAC in self.conexiones:
             self.conexiones[direccionMAC].activa = 0
             del self.conexiones[direccionMAC]
