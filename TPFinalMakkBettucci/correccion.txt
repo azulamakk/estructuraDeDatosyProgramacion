@@ -1,0 +1,15 @@
+Hola Azul y Agustin,
+
+Espero que estén muy bien. Les escribo por el final de Estructura de Datos y Programación. A continuación les dejo los comentarios:
+
+- Bien el uso de menús y botones en general, por ahí al tener una interfaz gráfica en vez de que el usuario tenga que poner la opción cada opción podría ser un botón en sí.
+-Bien el uso de ventanas y los mensajes a los usuarios.
+-En las conexiones se podía conectar otra MAC al mismo router sin tener que desconectar previamente. Para la dirección IP tomaba un id que le pasaba el usuario
+-Bien las clases creadas y tomar la clase conexion como la única necesaria para establecer la conexión sin importar el dispositivo
+- Bien la persistencia de datos y la eliminación/creación de nuevos municipios por pantalla
+- Bien la presentación en general contando cómo hicieron su solución y los problemas que tuvieron y cómo los solucionaron; teniendo en cuenta problemas de escalabilidad y el manejo de los datos.
+
+La nota de su final es 9. 
+Muy buen trabajo chicos.
+
+Saludos
